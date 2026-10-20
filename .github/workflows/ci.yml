@@ -42,10 +42,29 @@ jobs:
             python -m mojibake_forensics "$cmd" --help > /dev/null
           done
           set +e
-          python -m mojibake_forensics attr --text "é›…" --json
+          python -m mojibake_forensics attr --text "é›…" --json > /dev/null
           code=$?
           set -e
-          test "$code" -eq 4
+          test "$code" -eq 0
+          set +e
+          python -m mojibake_forensics file --path missing.bin --json > /dev/null
+          code=$?
+          set -e
+          test "$code" -eq 2
+
+      - name: Bench golden
+        run: python bench/run.py --check
+
+      - name: Fixture drift
+        shell: bash
+        run: |
+          set -e
+          for g in $(find data/fixtures -name gen.py | sort); do
+            python "$g" --check
+          done
+
+      - name: Release gate (pre-tag)
+        run: python tools/check_release.py --pre-tag
 
       - name: Layout gate mutation selftest
         if: runner.os == 'Linux' && matrix.python == '3.12'

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mojibake-forensics"
-version = "0.1.0.dev0"
+version = "0.1.0"
 description = "Proof-carrying mojibake attribution for already-decoded strings (CJK-first, local-only)"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -12,7 +12,7 @@ license = { text = "MIT" }
 authors = [{ name = "yuluo554" }]
 keywords = ["mojibake", "encoding", "forensics", "cjk", "cli"]
 classifiers = [
-  "Development Status :: 2 - Pre-Alpha",
+  "Development Status :: 3 - Alpha",
   "Environment :: Console",
   "Intended Audience :: Developers",
   "License :: OSI Approved :: MIT License",
@@ -28,6 +28,11 @@ classifiers = [
 
 [project.optional-dependencies]
 dev = ["pytest>=7,<9", "build>=0.10"]
+
+[project.urls]
+Homepage = "https://github.com/yuluo554/10-20-mojibake-forensics"
+Repository = "https://github.com/yuluo554/10-20-mojibake-forensics"
+Issues = "https://github.com/yuluo554/10-20-mojibake-forensics/issues"
 
 [project.scripts]
 forensics = "mojibake_forensics.cli:main"

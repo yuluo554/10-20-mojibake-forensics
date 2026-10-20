@@ -6,7 +6,7 @@ The public contract for schema and exit codes lives in ``report.py``; the
 frozen encoder/decoder sets live in ``codecs_table.py``.
 """
 
-__version__ = "0.1.0.dev0"
+__version__ = "0.1.0"
 
 SCHEMA = "mojibake-forensics/1"
 

@@ -1,6 +1,6 @@
 # Mojibake Forensics · 乱码尸检
 
-> 版本：`0.1.0.dev0` · 纯本地 Python CLI · 零网络 · 零模型 · 标准库编码表
+> 版本：`0.1.0` · 纯本地 Python CLI · 零网络 · 零模型 · 标准库编码表
 
 **乱码尸检**回答的问题不是"这段字节是什么编码"，而是：**手里这个已经解坏的 `str`，是被哪一步 `encode` / `decode` 转坏的？还能不能回去？哪一步不可逆？**
 
@@ -33,7 +33,7 @@
 需要 Python ≥ 3.8，运行时**零第三方依赖**。
 
 ```bash
-python -m pip install -e .
+python -m pip install .
 forensics --help
 ```
 
@@ -68,8 +68,9 @@ forensics explain --text "é›…é›…" --pick 1 --vs 2
 # 3) 判死：不可逆类只报 LOST + 丢失点，不猜字
 forensics recover --text "锟斤拷" --pick 1
 
-# 4) CI 门禁：干净语料零报告；有新增命中则退出码非 0
-forensics scan --dir ./corpus --baseline ./clean-corpus.json --format json
+# 4) CI 门禁：干净语料零报告（退出码 0）；污染语料有新增（退出码 1）
+forensics scan --dir data/fixtures/scan/clean --baseline data/fixtures/scan/clean-corpus.json --format json
+forensics scan --dir data/fixtures/scan/polluted --baseline data/fixtures/scan/clean-corpus.json --format json
 ```
 
 > 五个子命令全部可直接运行（链深上限 3；`--top` 只影响展示）：`attr` 自 M2、`explain` 自 M3、`recover` 自 M4、`file` / `scan` 自 M5 起。`file` 与 `scan` 全程只读。

@@ -7,7 +7,7 @@
 - **交付形态**：**纯本地 Python CLI**（标准库编码表，零外部数据、零网络、无模型）。唯一形态，不设备选。
 - **发布**：GitHub 公开仓库，v0.1.0（**tag + Release 附产物 + 发布留档**三件套）。
 - **查证基准日**：2026-10-20。
-- **状态**：M0 / M1 / M2 / M3 / M4 / M5 完成（题目定稿 + 方法论装订 + 可运行骨架 + 数据先行 + `attr` 归因 + `explain` 证明 + `recover` 判定 + `file` 管道与 `scan` 门禁）；M6 待开工（发布）。
+- **状态**：M0 / M1 / M2 / M3 / M4 / M5 完成（题目定稿 + 方法论装订 + 可运行骨架 + 数据先行 + `attr` 归因 + `explain` 证明 + `recover` 判定 + `file` 管道与 `scan` 门禁）；M6 发布中（tag 前准备）。
 
 ## 文档索引表
 
@@ -28,7 +28,7 @@
 | `plan/HANDOFF-M4.md` | M3 → M4 交接单（七节，含当前事实·状态不变量） | ✅ v1 |
 | `plan/HANDOFF-M5.md` | M4 → M5 交接单（七节，含当前事实·状态不变量） | ✅ v1 |
 | `plan/HANDOFF-M6.md` | M5 → M6 交接单（七节，含当前事实·状态不变量） | ✅ v1 |
-| `plan/RELEASE-M6.md` | 发布留档（tag 时点事实 / tag 后追加事实分栏） | ⬜ 待 M6 |
+| `plan/RELEASE-M6.md` | 发布留档（tag 时点事实 / tag 后追加事实分栏） | 🟡 tag 前事实已落盘 |
 
 > 索引状态列随里程碑同步翻转；不得在一处标 ✅ 而在另一处标 ⬜。
 
@@ -62,6 +62,7 @@
 | 2026-10-20 | **M3 `explain` 落地：证明 + 对照 + 退出码 4 退役（explain）** | ①`explain` 不重新枚举：复用 `attr.search` 的已排序候选（`Chain` 仍是唯一中间表示，`plan/02` 口径不破）。②逐步重放每步独立复算：记录的输入/输出与重放状态比对，第一处不一致停在 `failed_step`（1 起），`failure` 带 `reason` + 偏移。③`status="ok"`（verify 全绿）/ `"verify_failed"`（任一步失败，退出码 1）/ `"no_candidate"`（退出码 1，不伪造证明）。④`--vs` 缺省取 top-2 中的另一条（pick 1↔2，其余取 1）；`divergence` 只陈述第一处差异（`kind=step|bytes|text|depth|none`），**不判断优劣**；候选不足两条 → `no_second_candidate`。⑤`--pick`/`--vs` 越界 → 退出码 2（`pick_out_of_range`/`vs_out_of_range`）；`--all` 与 `--vs` 互斥。⑥独立重放脚本 `tests/independent_replay.py`：只用标准库 + 报告自身字段复算，不 import 工具内部状态。⑦`explain` 不再返回退出码 4（常量保留给 `recover`/`file`/`scan`）。 |
 | 2026-10-20 | **M4 `recover` 落地：确定性还原 + 不可逆判死 + 退出码 4 退役（recover）** | ①判定顺序固定（`plan/03` §5.2）：先判不可逆五类——`U+FFFD` → `LOST(replacement_char)` + 偏移；`锟斤拷` → `LOST(kun_jin_kao)` + `EF BF BD` 重复位置；`烫烫烫`/`屯屯屯` → `NOT_MOJIBAKE(msvc_fill)`；`?` → `LOST(encode_truncated)` + 偏移；判死后不再重放。②`silent_drop` 只在有出处证据（原文对照）时可判，CLI 面只有已解坏的 str → 不伪造该判定（fixture `requires_provenance` 口径一致）。③`RECOVERED` 必过 verify：按 `--pick` 取 `attr.search` 已排序候选（不重新枚举），复用 explain 的 `replay_chain` 逐步双向比对；失败降级 `LOST(verify_failed)`，绝不输出未经验证的修复。④`--pick` 必填（缺省 → 退出码 2 `missing_pick`）；越界 → 退出码 2 `pick_out_of_range`；`--out` 与 `--file` 输入同路径 → 退出码 2 `out_overwrites_input`；永不覆盖输入。⑤`recover` 不再返回退出码 4（常量保留给 `file`/`scan`，M5 结束前删）。⑥`no_candidate` → `LOST(reason=no_candidate)` + `depth_limit_reached`，不猜字。 |
 | 2026-10-20 | **M5 `file` + `scan` 落地：退出码 4 全面退役（常量删除）** | ①`file` 只读二进制诊断：BOM 嗅探（UTF-8/16LE/16BE/32 先后）+ `bom_conflict` 证据分节、UTF-16 奇字节数 + 错位一字节证据（`shifted_text`，不自动改）、zip 中央目录名（`flag_bits & 0x800` 判 UTF-8；无标志列 CP437/UTF-8 双解释，工具不选择；不解压成员）、`--preset csv-excel-win` 报 cp1252/gbk/shift_jis 可解码性 + 分隔符嗅探；文件不存在退出码 2。②`scan` 命中判据 = K9（`readability(line)<0.5` + 候选 `≥0.8` + gain `≥0.3`），候选走 `attr.search` 不重新枚举；分桶 new/baselined/stale；坏基线退出码 2 零产出；全程只读，干净语料 0 报告 0 改动。③**`EXIT_NOT_READY` 常量删除**：常量 / CLI / 测试 / 文档四处同步，退出码只剩 0/1/2/3。④新增 `tests/test_file.py`、`tests/test_scan.py` 各 12 条；双解释器全绿；bench `--check` 逐字节一致。 |
+| 2026-10-20 | **M6 发布：默认值执行 + 手工源码包 + 先验后 tag** | 用户未另行表态，按 `plan/06` P1/P2/P7 默认值执行：许可证 MIT（`LICENSE` 已落）、仓库公开、附件为手工源码包（`git archive` + `gzip -9n` + `SHA256SUMS`）。发布顺序固定为「测试绿 → 版本号 0.1.0 → 源码包 → 干净环境验证 → tag → Release → 校验和」；tag 后事实回填 `plan/RELEASE-M6.md` 第二栏并另起提交，tag 对象不追写。CI 无远端期间只写“本地等价校验，未接远端，CI 待首推验证”，首推后据实回填 run id。 |
 | 2026-10-20 | **M1 探针落地与数字复核（一次性脚本 → 可复算基准）** | 出题前的一次性脚本未入仓，`bench/run.py` 成为唯一可复算实现并冻结 `bench/golden/attr.json`。复跑：minimal（depth 1，按结果去重）候选中位 **7** / 均值 **6.421053** / 最大 **10**；expanded（depth ≤ 2）中位 **33** / 最大 **57**；唯一解 **0/57**；真答案入集 **57/57**（minimal 与 expanded 均 100%）；真答案排第一 **34/57（minimal）/ 30/57（expanded）**。`data/README.md` §1.3 的 4 / 4.5 / 11 与 79% / 93% 保留为历史记录，不再作为可复算口径。**定性结论不变**：多解是常态、真答案不漏、排序不完美。另更正：出题期描述"6 个解码器"与冻结 `DECODERS`（7 个）不一致，M1 按代码集合复算。 |
 
 ## 弃选项汇总（速查）
