@@ -31,7 +31,7 @@
 | 步骤 | 做法 | 结果 |
 |---|---|---|
 | 代码 | 报告只输出 basename / 相对路径；无时间 / 主机名 / 用户名 / 绝对路径 | 扫描 + 测试断言 |
-| 文档 | README / plan / data 无本机绝对路径（`D:\` / `C:\Users` / `ASUS`） | 扫描 |
+| 文档 | README / plan / data 无本机盘符绝对路径、无本机用户名 / 主机名（`tools/check_desensitize.py` 扫描） | 扫描 |
 | 提交元数据 | 作者 / 提交者均为 `yuluo554 <282769740+yuluo554@users.noreply.github.com>` | `git log` 复核 |
 | tag tagger | tag 时设置 `GIT_COMMITTER_NAME/EMAIL` 为同一 noreply 身份 | tag 后 `git for-each-ref` 复核 |
 

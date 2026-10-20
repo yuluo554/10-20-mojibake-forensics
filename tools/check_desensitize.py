@@ -24,6 +24,8 @@ PATH_NEEDLES = [
 
 DOC_HOST_TOKENS = ["ASUS"]
 DOC_PREFIXES = ("README.md", "AGENTS.md", "data/", "plan/")
+# 守门自身：needle 字面量所在文件不参与路径形态扫描（与 tests/test_bench.py 同理）。
+SELF_EXEMPT = ("tools" + chr(92) + "check_desensitize.py", "tools/check_desensitize.py")
 
 
 def _scan(text, needles, where):
@@ -44,6 +46,8 @@ def main():
     hits = []
     for f in files:
         if f.endswith((".zip", ".bin")):
+            continue
+        if f.replace(chr(92), "/") in SELF_EXEMPT:
             continue
         try:
             text = io.open(f, encoding="utf-8", errors="replace").read()
