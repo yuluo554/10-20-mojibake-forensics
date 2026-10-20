@@ -1,0 +1,14 @@
+# 源码行尾归一；被字节断言的冻结件必须标 -text（数据落库时逐项补）
+* text=auto eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.toml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.cfg text eol=lf
+*.in text eol=lf
+
+# 冻结的二进制/字节断言 fixture（M1–M5 逐个登记）
+# *.zip binary
+# *.bin binary

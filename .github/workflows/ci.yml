@@ -1,0 +1,52 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: python ${{ matrix.python }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, windows-latest]
+        python: ["3.8", "3.12"]
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install
+        run: python -m pip install -e ".[dev]"
+
+      - name: Sprint layout gate
+        run: python tools/check_sprint_layout.py
+
+      - name: Tests
+        run: python -m pytest -q
+
+      - name: CLI smoke
+        shell: bash
+        run: |
+          set -e
+          python -m mojibake_forensics --version
+          for cmd in attr explain recover file scan; do
+            python -m mojibake_forensics "$cmd" --help > /dev/null
+          done
+          set +e
+          python -m mojibake_forensics attr --text "é›…" --json
+          code=$?
+          set -e
+          test "$code" -eq 4
+
+      - name: Layout gate mutation selftest
+        if: runner.os == 'Linux' && matrix.python == '3.12'
+        run: python tools/check_layout_mutations.py

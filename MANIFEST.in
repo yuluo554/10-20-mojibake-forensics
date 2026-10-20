@@ -1,0 +1,12 @@
+include README.md
+include LICENSE
+include AGENTS.md
+include pyproject.toml
+include .gitattributes
+
+recursive-include src *.py
+recursive-include data README.md *.json *.md *.py
+recursive-include bench *.py *.md
+recursive-include plan *.md
+recursive-include tests *.py
+recursive-include tools *.py
