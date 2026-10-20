@@ -7,7 +7,7 @@
 - **交付形态**：**纯本地 Python CLI**（标准库编码表，零外部数据、零网络、无模型）。唯一形态，不设备选。
 - **发布**：GitHub 公开仓库，v0.1.0（**tag + Release 附产物 + 发布留档**三件套）。
 - **查证基准日**：2026-10-20。
-- **状态**：M0 / M1 / M2 / M3 / M4 / M5 完成（题目定稿 + 方法论装订 + 可运行骨架 + 数据先行 + `attr` 归因 + `explain` 证明 + `recover` 判定 + `file` 管道与 `scan` 门禁）；M6 发布中（tag 前准备）。
+- **状态**：M0 / M1 / M2 / M3 / M4 / M5 / M6 完成（题目定稿 + 方法论装订 + 可运行骨架 + 数据先行 + `attr` 归因 + `explain` 证明 + `recover` 判定 + `file` 管道与 `scan` 门禁 + GitHub 发布）。项目首期收尾；CI 首绿 run 39452638001。
 
 ## 文档索引表
 
@@ -28,7 +28,7 @@
 | `plan/HANDOFF-M4.md` | M3 → M4 交接单（七节，含当前事实·状态不变量） | ✅ v1 |
 | `plan/HANDOFF-M5.md` | M4 → M5 交接单（七节，含当前事实·状态不变量） | ✅ v1 |
 | `plan/HANDOFF-M6.md` | M5 → M6 交接单（七节，含当前事实·状态不变量） | ✅ v1 |
-| `plan/RELEASE-M6.md` | 发布留档（tag 时点事实 / tag 后追加事实分栏） | 🟡 tag 前事实已落盘 |
+| `plan/RELEASE-M6.md` | 发布留档（tag 时点事实 / tag 后追加事实分栏） | ✅ 两栏齐 |
 
 > 索引状态列随里程碑同步翻转；不得在一处标 ✅ 而在另一处标 ⬜。
 
@@ -98,8 +98,8 @@
 | 退出码语义稳定 | §四单点定义 | 五个子命令 | 四组退出码测试（干净 / 新增 / 用法错误 / 环境不满足） | ✅ M5 起 `EXIT_NOT_READY` 常量删除，五个子命令只用 0/1/2/3 |
 | fixture 可重建 | 生成脚本固定输入 | `data/fixtures/**` | 重生成逐字节一致（`--check`） | ✅ M1 已重建（3.8 / 3.12） |
 | bench 可复算 | 57 例程序化生成 | `bench/run.py` → `bench/out/attr.json` + `bench/golden/attr.json` | 干净环境重跑数字一致（同解释器版本） | ✅ M1 已复算；M2 硬门复跑 |
-| README 四场景复现 | 场景命令 | `README.md` | 干净 clone 按 README 跑通 | ⬜ 待 M6 |
-| 发布三件套 | — | tag / Release 附产物 / `plan/RELEASE-M6.md` | tag 树内含留档；Release 有附件 + 本地副本 + sha256 | ⬜ 待 M6 |
+| README 四场景复现 | 场景命令 | `README.md` | 干净 clone 按 README 跑通 | ✅ M6（Release 真下载 + 新 venv 解包树四场景全过；`plan/RELEASE-M6.md` §2.2） |
+| 发布三件套 | — | tag / Release 附产物 / `plan/RELEASE-M6.md` | tag 树内含留档；Release 有附件 + 本地副本 + sha256 | ✅ M6（tag `6a5d7bd`；附件 sha256 三处一致；留档两栏齐） |
 
 ## 提交材料实物表（plan/01 §三 逐项落位）
 
@@ -127,7 +127,7 @@
 | M3 | `explain` 证明 | 每条路径可被**独立脚本**重放；`--vs` 对照给出分叉点；改错 codec 名 → 指向具体 step；双跑一致 | ✅ 已完成（2026-10-20） |
 | M4 | `recover` 不可逆 | 五类各一条单测；`LOST` 附丢失点定位；输出不含自造字符；`verify` 失败降级为 `LOST` | ✅ 已完成（2026-10-20） |
 | M5 | `file` 管道 + `scan` 门禁 | 三类管道 fixture 全对；干净语料**零报告零改动**；退出码四组语义稳定；JSON 机器可读 | ✅ 已完成（2026-10-20） |
-| M6 | 发布 | **git tag（`v0.1.0`）+ GitHub Release（附产物：手工源码包，本地留副本 + sha256）+ 发布留档 `plan/RELEASE-M6.md`（tag 前落盘、tag 后分栏追加）**；干净环境按 README 跑通四场景；提交面脱敏（含 tag tagger 邮箱）；发布 GitHub **公开仓库** | ⬜ |
+| M6 | 发布 | **git tag（`v0.1.0`）+ GitHub Release（附产物：手工源码包，本地留副本 + sha256）+ 发布留档 `plan/RELEASE-M6.md`（tag 前落盘、tag 后分栏追加）**；干净环境按 README 跑通四场景；提交面脱敏（含 tag tagger 邮箱）；发布 GitHub **公开仓库** | ✅ 已完成（2026-10-20） |
 
 > **M6 DoD 口径 = A）"Release 附产物"**：至少 1 个手工上传附件（`git archive` + `gzip -9n` + `SHA256SUMS`），本地留副本并记录 sha256。里程碑表的 DoD 列**只能加不能减**；要减必须在决策记录留一行理由。
 

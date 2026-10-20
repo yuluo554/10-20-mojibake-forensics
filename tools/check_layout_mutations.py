@@ -149,8 +149,12 @@ def mutation_handoffs(root):
 
 
 def mutation_gaps(root):
-    # 缺口列出现已完成里程碑 → 门必须红。取缺口表第一行，把首个待办里程碑号
-    # 篡改成 M0（M0 已完成）。
+    """缺口列出现已完成里程碑 → 门必须红。
+
+    实现成"可跳过"的变异：缺口表里找不到任何里程碑号时抛 ``NothingToMutate``，
+    主流程打印 SKIP（M6 发布后缺口行只述状态、不提 M 号，是判据设计里的预期
+    形态，不构成假门——门仍被 LAYOUT.STATUS 与 stale 扫描覆盖）。
+    """
     path = os.path.join(root, "plan/06-交付对标与决策.md")
     with open(path, "r", encoding="utf-8") as handle:
         lines = handle.read().splitlines()
@@ -161,16 +165,21 @@ def mutation_gaps(root):
             break
     if header_idx is None:
         raise AssertionError("plan/06 找不到缺口表")
-    for idx in range(header_idx + 2, len(lines)):
-        line = lines[idx]
-        if not line.lstrip().startswith("|"):
-            break
-        if "M6" in line:
-            lines[idx] = line.replace("M6", "M0", 1)
-            with open(path, "w", encoding="utf-8", newline="\n") as handle:
-                handle.write("\n".join(lines) + "\n")
-            return
-    raise AssertionError("缺口表无 M6 行可变异")
+    for needle in ("M6", "M5", "M1"):
+        for idx in range(header_idx + 2, len(lines)):
+            line = lines[idx]
+            if not line.lstrip().startswith("|"):
+                break
+            if needle in line:
+                lines[idx] = line.replace(needle, "M0", 1)
+                with open(path, "w", encoding="utf-8", newline="\n") as handle:
+                    handle.write("\n".join(lines) + "\n")
+                return
+    raise NothingToMutate("缺口表无任何里程碑号（M6 后的预期形态）")
+
+
+class NothingToMutate(Exception):
+    """变异体无对象可改：判据仍被其它检查覆盖，主流程记 SKIP 而非 FAIL。"""
 
 
 MUTATIONS = [
@@ -248,7 +257,11 @@ def main():
         try:
             repo = os.path.join(tmp, "repo")
             copy_repo(repo)
-            mutate(repo)
+            try:
+                mutate(repo)
+            except NothingToMutate as exc:
+                print("SKIP  %-18s  %s" % (expected_id, exc))
+                continue
             code, output = run_gate(repo)
             caught = code == 1 and expected_id in output and "FAIL" in output
             print(

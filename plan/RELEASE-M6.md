@@ -42,19 +42,56 @@
 
 ## 二、tag 后追加
 
-<!-- POST_TAG_PLACEHOLDER -->
-> tag 后回填：tag 对象哈希、tag 父提交、Release URL、附件名 + sha256、干净环境四场景结果、CI run id、附件与 tag 树同源复核输出。
+（2026-10-20 回填；本栏在 tag 后提交进入仓库，tag 对象本身不含本栏字面值。）
+
+### 2.1 发布事实
+
+| 项 | 值 |
+|---|---|
+| tag 对象 | `6a5d7bdb5fa8fb9161b9f5e1336481a18cb4a96c`（annotated；tagger `yuluo554 <282769740+yuluo554@users.noreply.github.com>`） |
+| tag 父提交 | `fbb7b2c1230d4d5267885cc020f5b0b37a3dab6a` |
+| 远端对账 | tag 对象与 main 头提交远端 sha 与本地逐字节一致（`gh api .../git/ref/tags/v0.1.0` 与 `.../commits/main`） |
+| 仓库 | https://github.com/yuluo554/10-20-mojibake-forensics（public；git 443 间歇阻断，push 走 SSH 通道） |
+| Release | https://github.com/yuluo554/10-20-mojibake-forensics/releases/tag/v0.1.0（非 draft / 非 prerelease） |
+| 附件 | `mojibake-forensics-0.1.0.tar.gz` + `SHA256SUMS` |
+| sha256 | `b98055ff9b61ff71fc9fe3883ada8007a3ea7589db956cb95f100fc7296e9279`（本地副本 = Release 下载件 = 远端 API 读回，三者一致） |
+| 同源复核 | `tools/check_release.py` 离线项：解包 118 个文件与 `git show v0.1.0:<path>` 逐文件 sha256 一致，文件集合与 `git ls-tree -r v0.1.0` 一致，含 `plan/RELEASE-M6.md` |
+
+### 2.2 干净环境验证（真下载 + 中立目录 + 新 venv）
+
+- `gh release download` → sha256 与本地一致；`tar xzf`；`py -3.12 -m venv` 新环境 `pip install ./mojibake-forensics-0.1.0.tar.gz` → `forensics 0.1.0`。
+- 四场景（解包树内，README 命令路径）：
+  1. `attr --text "é›…é›…"` → 351 候选 / top 5 / criteria 行，退出码 0；
+  2. `explain --pick 1 --vs 2` → 2 步重放 `recompute: PASS` + 分叉点 `step 2 codec differs`，退出码 0；
+  3. `recover --text "锟斤拷" --pick 1` → `LOST(kun_jin_kao)` + 丢失点 + `no_invented_characters`，退出码 1；
+  4. `scan`（fixture 干净语料）→ `ok` / 0 new，退出码 0；（污染语料）→ `attention` / 2 new（ja.md:1、zh.md:1），退出码 1。
+- 解包树内跑打包自带测试套件：174 passed（venv 内装 pytest 后复跑两轮一致）。
+
+### 2.3 CI 首跑实录（如实登记）
+
+| run | 触发 | 结果 | 说明 |
+|---|---|---|---|
+| 39450988842 | push `v0.1.0` | failure（仅 ubuntu ×2） | tag 树内 `tests/test_recover.py` 已知测试缺陷：`COMPUTERNAME` 在 Linux 缺省空串使 host-facts 断言恒真；windows ×2 全绿 |
+| 39450975557 / 39451948486 | push main | failure（ubuntu 3.12） | 同一缺陷（已修 `f8056bb`）+ 变异验证"M3 待办"假设过期（已修 `2f67bb2`） |
+| **39452638001** | push main（`2f67bb2`） | **success** | 4 矩阵（3.8/3.12 × ubuntu/windows）全绿 |
+
+- 缺陷修复提交（`f8056bb` / `2f67bb2`）在 tag 之后，**不回填进 tag 树**；tag 忠实记录发布物，已知问题在 Release 正文"已知边界"下登记。
+- push 数 5 = run 数 5（含 tag 推送触发的一次），对账一致。
+
+### 2.4 发布门终态
+
+`py -3.12 -X utf8 tools/check_release.py --online` → 5 PASS / 0 FAIL / 0 SKIP（VERSION / RELEASE_DOC / TAG / ARTIFACTS / ONLINE）。
 
 ## 三、阶段 7 覆盖对账表
 
 | 出口门 | 状态 | 证据 / 不适用理由 |
 |---|---|---|
-| 发布物本体已验（真下载 + 中立目录） | 待首推 | tag 后从 Release 真下载，解包到仓库外中立目录 |
-| 附件与 tag 树逐字节同源 | 待首推 | `tools/check_release.py` 离线项逐文件比对 |
-| 源码包自足（`MANIFEST.in` 白名单） | 待首推 | `git archive` 含全部 tracked 文件；解包后按 README 安装 |
-| README 每条命令在解包树真敲 | 待首推 | 四场景：attr / explain / recover / scan |
-| 版本号多处一致 | 实现 | `pyproject.toml` / `__init__.py` / README 均为 `0.1.0`；发布门 VERSION PASS |
-| 脱敏（提交身份 + tagger 邮箱） | 实现 | 提交身份 noreply；tagger 在 tag 时固定 noreply（tag 后复核） |
-| CI push 数 = run 数对账 | 待首推 | 首推后回填 |
-| 发布门 `--pre-tag` 跑通 | 实现 | `tools/check_release.py --pre-tag` 退出码 0 |
+| 发布物本体已验（真下载 + 中立目录） | 实现 | Release 真下载（sha256 一致）+ 中立目录解包 + 新 venv 安装；§2.2 |
+| 附件与 tag 树逐字节同源 | 实现 | 发布门 ARTIFACTS：118 文件逐文件 sha256 与 tag 树一致；§2.1 |
+| 源码包自足（`MANIFEST.in` 白名单） | 实现 | `git archive` 全 tracked 文件；解包树内安装 + 174 测试全绿；§2.2 |
+| README 每条命令在解包树真敲 | 实现 | 四场景全过（§2.2），命令路径与 README 一致 |
+| 版本号多处一致 | 实现 | `pyproject.toml` / `__init__.py` / README 均 `0.1.0`；发布门 VERSION PASS |
+| 脱敏（提交身份 + tagger 邮箱） | 实现 | 5 个提交作者/提交者均 noreply；tagger noreply（发布门 TAG PASS） |
+| CI push 数 = run 数对账 | 实现 | push 5 = run 5；tag 树 run 红（已知测试缺陷）如实登记，main 首绿 run 39452638001 |
+| 发布门 `--pre-tag` 跑通 | 实现 | tag 前 2 PASS / 0 FAIL / 3 SKIP；tag 后 `--online` 5 PASS |
 | PyPI 首发 | 不适用 | 本项目发布形态为 GitHub Release 手工源码包（`plan/00` 交付形态），不做 PyPI |
