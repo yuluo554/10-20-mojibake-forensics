@@ -87,3 +87,21 @@ def test_fixture_directories_exist():
     for module in ("attr", "explain", "recover", "file", "scan"):
         path = os.path.join(ROOT, "data", "fixtures", module, "README.md")
         assert os.path.exists(path), path
+
+
+def test_fixture_skeleton_subdirs_exist():
+    expected = [
+        "recover/kun-jin-kao",
+        "recover/tang-tang",
+        "recover/question-mark",
+        "recover/replacement-char",
+        "recover/silent-drop",
+        "file/bom-conflict",
+        "file/utf16-misalignment",
+        "file/zip-cjk-utf8",
+        "file/zip-cjk-cp437",
+        "scan/polluted",
+    ]
+    for rel in expected:
+        path = os.path.join(ROOT, "data", "fixtures", rel, "README.md")
+        assert os.path.exists(path), path
