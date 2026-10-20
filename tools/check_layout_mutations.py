@@ -125,18 +125,52 @@ def mutation_status(root):
 
 
 def mutation_handoffs(root):
-    # M0/M1/M2 are already done; use the next pending milestone (M3), whose
-    # handoff exists in the repository, then remove it to simulate a missing one.
-    set_milestone_done(root, 3)
-    os.remove(os.path.join(root, "plan/HANDOFF-M3.md"))
+    # 找一个"已完成且交接单在仓"的里程碑，删掉它的交接单模拟缺件。
+    # （最早写成"M3 是下一个待办"——M3–M5 完成后该假设失效，改为动态选取。）
+    target = None
+    for rel in ("plan/00-README总览.md", "plan/05-里程碑与发布.md", "README.md"):
+        path = os.path.join(root, rel)
+        if not os.path.exists(path):
+            continue
+        with open(path, "r", encoding="utf-8") as handle:
+            for line in handle.read().splitlines():
+                match = STATUS_LINE.match(line)
+                if not match:
+                    continue
+                milestone = int(match.group(1))
+                done = not any(marker in line for marker in PENDING_MARKERS)
+                handoff = os.path.join(root, "plan/HANDOFF-M%d.md" % milestone)
+                if milestone > 0 and done and os.path.exists(handoff):
+                    if target is None or milestone < target:
+                        target = milestone
+    if target is None:
+        raise AssertionError("找不到可变异的已完成里程碑（状态副本缺 done 行？）")
+    os.remove(os.path.join(root, "plan/HANDOFF-M%d.md" % target))
 
 
 def mutation_gaps(root):
-    replace_text(
-        os.path.join(root, "plan/06-交付对标与决策.md"),
-        "| 证明重放未实现（M3） |",
-        "| 证明重放未实现，见 M0 收尾记录 |",
-    )
+    # 缺口列出现已完成里程碑 → 门必须红。取缺口表第一行，把首个待办里程碑号
+    # 篡改成 M0（M0 已完成）。
+    path = os.path.join(root, "plan/06-交付对标与决策.md")
+    with open(path, "r", encoding="utf-8") as handle:
+        lines = handle.read().splitlines()
+    header_idx = None
+    for idx, line in enumerate(lines):
+        if line.lstrip().startswith("|") and "缺口" in line:
+            header_idx = idx
+            break
+    if header_idx is None:
+        raise AssertionError("plan/06 找不到缺口表")
+    for idx in range(header_idx + 2, len(lines)):
+        line = lines[idx]
+        if not line.lstrip().startswith("|"):
+            break
+        if "M6" in line:
+            lines[idx] = line.replace("M6", "M0", 1)
+            with open(path, "w", encoding="utf-8", newline="\n") as handle:
+                handle.write("\n".join(lines) + "\n")
+            return
+    raise AssertionError("缺口表无 M6 行可变异")
 
 
 MUTATIONS = [
