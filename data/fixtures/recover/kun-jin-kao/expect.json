@@ -1,0 +1,52 @@
+{
+  "criteria": {
+    "decoders": [
+      "utf-8",
+      "gb18030",
+      "big5",
+      "shift_jis",
+      "euc-kr",
+      "cp1252",
+      "latin-1"
+    ],
+    "encoders": [
+      "utf-8",
+      "gb18030",
+      "gbk",
+      "big5",
+      "shift_jis",
+      "euc-jp",
+      "euc-kr",
+      "cp1252",
+      "latin-1",
+      "cp437"
+    ],
+    "max_depth": 3
+  },
+  "expected": {
+    "contains_tool_invented_chars": false,
+    "loss": {
+      "bytes_hex": "EF BF BD",
+      "codec": "gbk",
+      "offset": 0,
+      "repeat": 2,
+      "replaced_with": "U+FFFD",
+      "step": "decode"
+    },
+    "note": "bytes were already destroyed; any 'repair' would invent characters",
+    "reason": "kun_jin_kao",
+    "recovered": null,
+    "status": "LOST"
+  },
+  "input": {
+    "construction": {
+      "bytes_hex": "EF BF BD EF BF BD",
+      "codec": "gbk",
+      "kind": "bytes_decode",
+      "repeat": 2,
+      "replacement_char": "U+FFFD"
+    },
+    "text": "锟斤拷"
+  },
+  "note": "M4 consumes this fixture; LOST must not guess"
+}

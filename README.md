@@ -6,17 +6,17 @@
 
 输出恒为**有界候选集 + 每一步的字节证明 + 不可逆判定**，**永不假装猜出唯一答案**。这是与"自动修乱码"工具的产品立场差异：多解是常态，证据比自信重要。
 
-> 当前状态：**M0 可运行骨架**。五个子命令的参数面、退出码契约、JSON schema 已就位；判定引擎在 M2–M5 落地。此刻运行子命令会返回 `status="not_ready"` 与退出码 4，**不会伪造候选或修复结果**。
+> 当前状态：**M4 `recover` 判定已完成**（`attr` 有界候选 + `explain` 逐步字节证明与对照 + `recover` 确定性还原与不可逆判死 + 退出码 0/1/2/3）。`file` / `scan` 仍返回 `status="not_ready"` 与退出码 4，**不会伪造候选或修复结果**。
 
 ## 项目状态
 
 | 里程碑 | 状态 | 说明 |
 |---|---|---|
 | M0 | ✅ 已完成（2026-10-20） | 题目定稿 + 方法论装订 + 可运行骨架 |
-| M1 | ⬜ 未开始 | 数据先行：fixture 生成器 + 五类不可逆样例 + 干净基线 + 基准口径 |
-| M2 | ⬜ 未开始 | `attr`：候选枚举 + 无损性过滤 + 三层打分 |
-| M3 | ⬜ 未开始 | `explain`：逐步字节证明 + 对照 |
-| M4 | ⬜ 未开始 | `recover`：确定性还原 + 不可逆判死 |
+| M1 | ✅ 已完成（2026-10-20） | 数据先行：fixture 生成器 + 五类不可逆样例 + 干净基线 + 可复算 57 例探针 |
+| M2 | ✅ 已完成（2026-10-20） | `attr`：候选枚举 + 无损性过滤 + 三层打分 + 置信度区间；57 例硬门 57/57 |
+| M3 | ✅ 已完成（2026-10-20） | `explain`：逐步字节证明 + 独立复算 + 对照分叉点 |
+| M4 | ✅ 已完成（2026-10-20） | `recover`：确定性还原 + 不可逆判死 |
 | M5 | ⬜ 未开始 | `file` 原始字节管道 + `scan` CI 门禁 |
 | M6 | ⬜ 未开始 | GitHub 发布：tag + Release 附产物 + 发布留档 |
 
@@ -72,7 +72,72 @@ forensics recover --text "锟斤拷" --pick 1
 forensics scan --dir ./corpus --baseline ./clean-corpus.json --format json
 ```
 
-> 上述命令在 M0 骨架下均返回退出码 4（`not_ready`）。请勿把骨架输出当作判定结果。
+> `attr` 自 M2 起、`explain` 自 M3 起、`recover` 自 M4 起可直接运行（链深上限 3；`--top` 只影响展示）。`file` / `scan` 仍返回退出码 4（`not_ready`），请勿把骨架输出当作判定结果。
+
+### `recover` 判定（M4）
+
+- **判定顺序固定**（`plan/03` §5.2）：先判不可逆五类——`U+FFFD` → `LOST(reason=replacement_char)` + 偏移；`锟斤拷` → `LOST(reason=kun_jin_kao)` + `EF BF BD` 重复位置；`烫烫烫`/`屯屯屯` → `NOT_MOJIBAKE(reason=msvc_fill)`；`?` → `LOST(reason=encode_truncated)` + 偏移；`silent_drop` 只在有出处证据时可判，CLI 面不伪造。判死后不再重放。
+- **`RECOVERED` 必过 verify**：按 `--pick` 取 `attr.search` 已排序候选，复用 explain 的逐步重放（不重新枚举）；失败降级 `LOST(reason=verify_failed)`，**绝不输出未经验证的修复**。
+- `--pick` 必填（缺省 → 退出码 2，提示先跑 `attr`）；越界 → 退出码 2；`--out` 与 `--file` 输入同路径 → 退出码 2；**永不覆盖输入**。
+- `LOST` / `NOT_MOJIBAKE` 输出 `loss`（`step` / `offset` / `replaced_with` / `cause`），输出不含工具自造字符。
+
+### `attr` 输出字段（M2）
+
+```json
+{
+  "status": "candidates",
+  "total_candidates": 323,
+  "total_chains": 888,
+  "candidates": [
+    {"rank": 1, "result": "雅", "path": [...], "path_string": "encode:cp1252>decode:utf-8",
+     "depth": 1,
+     "score": {"readability": 1.0, "depth": 0.5, "language": 0.0, "total": 1.25},
+     "confidence": {"lower": 0.0005, "upper": 0.1491},
+     "note": "truncated_to_top_n"}
+  ]
+}
+```
+
+- `candidates` **恒为列表**，按冻结排序键 `(-score_total, depth, path_string)` 排序；`--top` 只截断展示。
+- `total_candidates` = 不同结果文本数；`total_chains` = 通过无损性硬过滤的链路数。两者**始终报完整数**，不受 `--top` 影响。
+- `confidence` 是候选**之间**的相对份额区间（`data/README.md` §4.5），不是概率；全部候选 `score_total <= 0` 时为 `null` + `note="no_positive_score"`；单候选为 `1.0` + `note="single_candidate_in_bounded_search"`。
+- `status="no_candidate"` 时 `candidates=[]` + `notes=["depth_limit_reached"]`，退出码 1——**不返回空列表冒充成功**。
+
+### `explain` 输出字段（M3）
+
+```json
+{
+  "status": "ok",
+  "mode": "pick",
+  "pick": 1,
+  "total_candidates": 323,
+  "total_chains": 888,
+  "proofs": [
+    {
+      "rank": 1,
+      "result": "雅",
+      "path": [...],
+      "path_string": "encode:cp1252>decode:utf-8",
+      "depth": 1,
+      "steps": [
+        {"index": 1, "op": "encode", "codec": "cp1252", "input": "é›…", "output_hex": "E9 9B 85", "verify": true},
+        {"index": 2, "op": "decode", "codec": "utf-8", "input_hex": "E9 9B 85", "output": "雅", "verify": true}
+      ],
+      "verify": true,
+      "failed_step": null,
+      "output": "雅",
+      "divergence": {"vs_rank": 2, "kind": "step", "at_step": 2, "statement": "step 2: op/codec differs: decode:utf-8 vs decode:latin-1", ...}
+    }
+  ]
+}
+```
+
+- `explain` 只读：先跑一次只读 `attr` 搜索（不落盘），再对选中的候选**逐步重放**；每步把"重放得到的输入/输出"与链路记录比对，第一个不一致处停在 `failed_step`（1 起）。它**不重新枚举**候选。
+- 每步 `verify` 独立复算：`output.encode(codec)` / `bytes.decode(codec)` 必须与该步记录一致；失败步带 `failure`（`reason` + 字节/字符偏移）。
+- `verify` 全绿 → `status="ok"`（退出码 0）；任一步失败 → `status="verify_failed"`（退出码 1），`failed_step` 指向具体步。
+- `divergence` 只陈述与对照候选（`--vs m`，缺省为 top-2 中的另一条；仅 `--pick` 模式提供）的**第一处差异**：步/字节/字符偏移与两侧值，**不判断哪个更好**。候选不足两条时 `notes=["no_second_candidate"]`。
+- `--pick N` 越界（`pick_out_of_range`）与 `--vs` 越界（`vs_out_of_range`）都是退出码 2；`--all` 输出全部候选证明（无对照）。
+- 证明可被独立脚本重放：`tests/independent_replay.py` 只用标准库与报告自身的 `path` / `steps` 字段复算每一步（不 import 工具内部状态）。
 
 ## 输出与退出码
 
@@ -86,18 +151,18 @@ forensics scan --dir ./corpus --baseline ./clean-corpus.json --format json
 | 1 | 成功执行，但结论需要人处理（`no_candidate` / `LOST` / `scan` 有新增） |
 | 2 | 用法 / 输入错误（参数、文件不存在、基线 JSON 语法错误、`--pick` 越界） |
 | 3 | 环境不满足（codec 不可用、Python 版本过低、标准库模块缺失） |
-| 4 | **骨架期专用**：对应模块尚未实现；落地后整项退役 |
+| 4 | **骨架期专用**：该子命令尚未落地（M2 起 `attr`、M3 起 `explain`、M4 起 `recover` 不再返回本码；`file` / `scan` 仍为骨架） |
 
 退出码语义唯一权威：`data/README.md` §4.7；代码常量在 `src/mojibake_forensics/report.py`。
 
 ## 已知边界
 
 - **不承诺唯一解**：候选恒为列表，置信度恒为区间。文档、输出、README 三处表述一致。
-- **链深上限 3**：深度 3 的候选规模与排序效果尚未实测；超过上限报 `depth_limit_reached`，不静默截断。
+- **链深上限 3**：探针深度为 2，M2 实测在链深 3 候选中位数 **125**、最大 **241**（57 例）；超过上限报 `depth_limit_reached`，不静默截断。
 - **CJK 优先**：首期覆盖 `gb18030` / `gbk` / `big5` / `shift_jis` / `euc-jp` / `euc-kr`，西文 `cp1252` / `latin-1` / `cp437` 作为通道参与；不做全量代码页覆盖。
 - **不做原地修复 / 批量改名**：本工具是尸检，不是整容；`file` / `scan` 全程只读，`recover` 只写 stdout 或 `--out`，永不覆盖输入。
 - **不做云分析 / 上传 / 遥测**：纯本地、零网络；报告不写绝对路径、主机名、用户名。
-- **词频语言先验默认关闭**：二期可选；第三方词表原文不入仓。
+- **词频语言先验默认关闭**：二期可选；`--freq` 当前**明确报错**（`freq_not_implemented`，退出码 2），不静默忽略、不伪造语言先验；第三方词表原文不入仓。
 - **不重做 charset 检测器**：检测器回答的是另一个问题；本工具只在内部复用标准库 codec。
 - **不可逆五类不猜字**：`U+FFFD`、`锟斤拷`、`烫烫烫/屯屯屯`、`?` 截断、`errors='ignore'` 静默丢失 → `LOST` / `NOT_MOJIBAKE` + 丢失点。
 
@@ -108,7 +173,8 @@ python tools/check_sprint_layout.py       # 方法论布局门（新对话第一
 python tools/check_layout_mutations.py    # 布局门变异验证（临时目录，不动工作树）
 python tools/check_release.py --pre-tag   # 发布门（M6 前骨架）
 python -m pytest -q                      # 单元与常驻测试
-python bench/run.py                      # 57 例探针（M1/M2）
+python bench/run.py                      # 57 例探针 → bench/out/attr.json
+python bench/run.py --check              # 与 bench/golden/attr.json 逐字节比对
 ```
 
 项目布局：
@@ -125,7 +191,7 @@ tests/                    单元 + 常驻守门
 
 ## 数值口径
 
-编码器/解码器集合、链深、无损性判据、三层打分、置信度、误改率为零、退出码——**七项只在 `data/README.md` §四定义一次**。任何改动必须同一次提交同步代码、基准、计划摘录与 README。
+编码器/解码器集合、链深、无损性判据、三层打分、置信度、误改率为零、退出码、`scan` 命中判据——**八项只在 `data/README.md` §四定义一次**。任何改动必须同一次提交同步代码、基准、计划摘录与 README。
 
 ## 方法论
 

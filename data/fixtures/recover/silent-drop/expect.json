@@ -1,0 +1,53 @@
+{
+  "criteria": {
+    "decoders": [
+      "utf-8",
+      "gb18030",
+      "big5",
+      "shift_jis",
+      "euc-kr",
+      "cp1252",
+      "latin-1"
+    ],
+    "encoders": [
+      "utf-8",
+      "gb18030",
+      "gbk",
+      "big5",
+      "shift_jis",
+      "euc-jp",
+      "euc-kr",
+      "cp1252",
+      "latin-1",
+      "cp437"
+    ],
+    "max_depth": 3
+  },
+  "expected": {
+    "contains_tool_invented_chars": false,
+    "loss": {
+      "cause": "errors=ignore",
+      "codec": "latin-1",
+      "dropped_char": "雅",
+      "offset": 1,
+      "step": "encode"
+    },
+    "note": "the visible 'ab' is clean; only provenance or raw bytes reveal the drop",
+    "reason": "silent_drop",
+    "recovered": null,
+    "requires_provenance": true,
+    "status": "LOST"
+  },
+  "input": {
+    "construction": {
+      "bytes_hex": "61 62",
+      "decode": "latin-1",
+      "encode": "latin-1",
+      "errors": "ignore",
+      "kind": "encode_errors_ignore",
+      "original": "a雅b"
+    },
+    "text": "ab"
+  },
+  "note": "M4 consumes this fixture; do not infer a drop from 'ab' alone"
+}

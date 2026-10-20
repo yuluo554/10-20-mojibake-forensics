@@ -19,7 +19,9 @@ EXIT_OK = 0
 EXIT_ATTENTION = 1
 EXIT_USAGE = 2
 EXIT_ENV = 3
-# Skeleton-only code; retired in M5/M6 (constant, CLI, tests, docs — four places).
+# Skeleton-only code. ``attr`` stopped returning it in M2; the remaining
+# subcommands retire one by one (M3-M5), then the constant goes (four places:
+# constant, CLI, tests, docs).
 EXIT_NOT_READY = 4
 
 
@@ -72,11 +74,18 @@ def human_not_ready(command, milestone):
     )
 
 
-def emit(payload, as_json=False, command=None, milestone=None, stream=None):
+def emit(payload, as_json=False, command=None, milestone=None, stream=None, human=None):
+    """Write the payload: errors/``--json`` as canonical JSON, else human text.
+
+    ``human`` is the command's stable text rendering; when a module has no
+    renderer yet the canonical JSON is written instead (never an empty result).
+    """
     stream = stream if stream is not None else sys.stdout
     if as_json or payload.get("status") == "error":
         write_json(payload, stream=stream)
     elif payload.get("status") == "not_ready":
         stream.write(human_not_ready(command or payload.get("command", "?"), milestone or payload.get("milestone", "?")))
+    elif human is not None:
+        stream.write(human)
     else:
         write_json(payload, stream=stream)

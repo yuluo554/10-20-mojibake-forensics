@@ -106,3 +106,19 @@ def test_handoff_m1_has_seven_sections():
         "命令速查",
     ):
         assert needle in text, needle
+
+
+def test_handoff_m2_has_seven_sections():
+    path = os.path.join(ROOT, "plan", "HANDOFF-M2.md")
+    with open(path, "r", encoding="utf-8") as handle:
+        text = handle.read()
+    for needle in (
+        "证据",
+        "当前事实",
+        "待办",
+        "（K 编号",
+        "环境坑",
+        "DoD",
+        "命令速查",
+    ):
+        assert needle in text, needle

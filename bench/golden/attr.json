@@ -1,0 +1,4216 @@
+{
+  "cases": [
+    {
+      "expanded_candidate_count": 44,
+      "id": "zh1/utf8-latin1",
+      "input": "å­ç¬¦æ¾ç¤ºå¼å¸¸",
+      "language": "zh",
+      "minimal_candidate_count": 9,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:utf-8",
+          "rank": 1,
+          "result": "字符显示异常",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "氓颅聴莽卢娄忙聵戮莽陇潞氓录聜氓赂赂",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:gb18030",
+          "rank": 3,
+          "result": "瀛楃鏄剧ず寮傚父",
+          "score_total": 1.027777777778
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:shift_jis",
+          "rank": 4,
+          "result": "蟄礼ｬｦ譏ｾ遉ｺ蠑ょｸｸ",
+          "score_total": 0.5
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 5,
+          "result": "02020304010703040604¡è02020402020000",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 6,
+          "result": "Ã¥Â­Â—Ã§Â¬Â¦Ã¦Â˜Â¾Ã§Â¤ÂºÃ¥Â¼Â‚Ã¥Â¸Â¸",
+          "score_total": 0.341666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 7,
+          "result": "Ã¥Â­ÂÃ§Â¬Â¦Ã¦ÂÂ¾Ã§Â¤ÂºÃ¥Â¼ÂÃ¥Â¸Â¸",
+          "score_total": 0.341666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:cp1252",
+          "rank": 8,
+          "result": "å­—ç¬¦æ˜¾ç¤ºå¼‚å¸¸",
+          "score_total": 0.333333333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:shift_jis",
+          "rank": 9,
+          "result": "ﾃ･ﾂｭﾂ療ｧﾂｬﾂｦﾃｦﾂ伉ｾﾃｧﾂ､ﾂｺﾃ･ﾂｼﾂづ･ﾂｸﾂｸ",
+          "score_total": -0.113636363636
+        }
+      ],
+      "sample": "zh1",
+      "scenario": "utf8-latin1",
+      "truth": "字符显示异常",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 33,
+      "id": "zh1/utf8-cp437",
+      "input": "σ¡ùτ¼ªµÿ╛τñ║σ╝éσ╕╕",
+      "language": "zh",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:utf-8",
+          "rank": 1,
+          "result": "字符显示异常",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:gb18030",
+          "rank": 2,
+          "result": "瀛楃鏄剧ず寮傚父",
+          "score_total": 1.027777777778
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:shift_jis",
+          "rank": 3,
+          "result": "蟄礼ｬｦ譏ｾ遉ｺ蠑ょｸｸ",
+          "score_total": 0.5
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "¦Ò03¨´¦Ó04090807¨_¦Ó09¨U¦Ò¨a¨¦¦Ò¨Y¨Y",
+          "score_total": 0.360416666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:cp1252",
+          "rank": 5,
+          "result": "å­—ç¬¦æ˜¾ç¤ºå¼‚å¸¸",
+          "score_total": 0.333333333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:latin-1",
+          "rank": 6,
+          "result": "å­ç¬¦æ¾ç¤ºå¼å¸¸",
+          "score_total": 0.333333333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 7,
+          "result": "ÏÂ¡Ã¹ÏÂ¼ÂªÂµÃ¿âÏÃ±âÏâÃ©Ïââ",
+          "score_total": 0.313414634146
+        }
+      ],
+      "sample": "zh1",
+      "scenario": "utf8-cp437",
+      "truth": "字符显示异常",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 39,
+      "id": "zh1/gb18030-latin1",
+      "input": "×Ö·ûÏÔÊ¾Òì³£",
+      "language": "zh",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:big5",
+          "rank": 1,
+          "result": "趼睫珆尨祑都",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:euc-kr",
+          "rank": 2,
+          "result": "俚륜鞫刻嫩끽",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:gb18030",
+          "rank": 3,
+          "result": "字符显示异常",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 4,
+          "result": "脳脰路没脧脭脢戮脪矛鲁拢",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 5,
+          "result": "¡Á00¡¤040308080606¨¬0605",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "ÃÃÂ·Ã»ÃÃÃÂ¾ÃÃ¬Â³Â£",
+          "score_total": 0.325
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:shift_jis",
+          "rank": 7,
+          "result": "ﾃ療鳴ｷﾃｻﾃ湘氾環ｾﾃ津ｬﾂｳﾂ｣",
+          "score_total": 0.25
+        }
+      ],
+      "sample": "zh1",
+      "scenario": "gb18030-latin1",
+      "truth": "字符显示异常",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 3,
+      "truth_rank_minimal": 3
+    },
+    {
+      "expanded_candidate_count": 57,
+      "id": "zh1/gb18030-cp437",
+      "input": "╫╓╖√╧╘╩╛╥∞│ú",
+      "language": "zh",
+      "minimal_candidate_count": 10,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:big5",
+          "rank": 1,
+          "result": "趼睫珆尨祑都",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:euc-kr",
+          "rank": 2,
+          "result": "俚륜鞫刻嫩끽",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:gb18030",
+          "rank": 3,
+          "result": "字符显示异常",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:big5",
+          "rank": 4,
+          "result": "矣汾汶﹟男沔皂灶甬﹢岫迆",
+          "score_total": 1.083333333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:shift_jis",
+          "rank": 5,
+          "result": "笊ｫ笊凪楓竏壺仏笊倪鮒笊帚払竏樞狽ﾃｺ",
+          "score_total": 1.013157894737
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:cp1252",
+          "rank": 6,
+          "result": "¨o¨W¨Z¡Ì¨k¨\\¨m¨_¨i¡Þ©¦¨²",
+          "score_total": 0.383333333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:cp1252",
+          "rank": 7,
+          "result": "×Ö·ûÏÔÊ¾Òì³£",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 8,
+          "result": "â•«â•“â•–âˆšâ•§â•˜â•©â•›â•¥âˆžâ”‚Ãº",
+          "score_total": 0.304285714286
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 9,
+          "result": "â«ââââ§ââ©ââ¥ââÃº",
+          "score_total": 0.298571428571
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:shift_jis",
+          "rank": 10,
+          "result": "ｨoｨWｨZ｡ﾌｨkｨ\\ｨmｨ_ｨi｡ﾞｩｦｨｲ",
+          "score_total": -0.016666666667
+        }
+      ],
+      "sample": "zh1",
+      "scenario": "gb18030-cp437",
+      "truth": "字符显示异常",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 3,
+      "truth_rank_minimal": 3
+    },
+    {
+      "expanded_candidate_count": 42,
+      "id": "zh1/utf8-cp1252",
+      "input": "å­—ç¬¦æ˜¾ç¤ºå¼‚å¸¸",
+      "language": "zh",
+      "minimal_candidate_count": 8,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:utf-8",
+          "rank": 1,
+          "result": "字符显示异常",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:gb18030",
+          "rank": 2,
+          "result": "瀛楃鏄剧ず寮傚父",
+          "score_total": 1.027777777778
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:shift_jis",
+          "rank": 3,
+          "result": "蟄礼ｬｦ譏ｾ遉ｺ蠑ょｸｸ",
+          "score_total": 0.5
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "0202¡ª040107030¹00604¡è0202046¥5020000",
+          "score_total": 0.352941176471
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 5,
+          "result": "Ã¥Â­â€”Ã§Â¬Â¦Ã¦ËœÂ¾Ã§Â¤ÂºÃ¥Â¼â€šÃ¥Â¸Â¸",
+          "score_total": 0.342105263158
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "Ã¥Â­âÃ§Â¬Â¦Ã¦ËÂ¾Ã§Â¤ÂºÃ¥Â¼âÃ¥Â¸Â¸",
+          "score_total": 0.336842105263
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:latin-1",
+          "rank": 7,
+          "result": "å­ç¬¦æ¾ç¤ºå¼å¸¸",
+          "score_total": 0.333333333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:shift_jis",
+          "rank": 8,
+          "result": "ﾃ･ﾂｭ窶氾ｧﾂｬﾂｦﾃｦﾋ慊ｾﾃｧﾂ､ﾂｺﾃ･ﾂｼ窶堙･ﾂｸﾂｸ",
+          "score_total": -0.022727272727
+        }
+      ],
+      "sample": "zh1",
+      "scenario": "utf8-cp1252",
+      "truth": "字符显示异常",
+      "truth_chain": {
+        "path_string": "encode:cp1252>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 18,
+      "id": "zh2/utf8-latin1",
+      "input": "ç¼ç äºæè°æ¥",
+      "language": "zh",
+      "minimal_candidate_count": 5,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:gb18030",
+          "rank": 1,
+          "result": "缂栫爜浜嬫晠璋冩煡",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:utf-8",
+          "rank": 2,
+          "result": "编码事故调查",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 3,
+          "result": "莽录聳莽聽聛盲潞聥忙聲聟猫掳聝忙聼楼",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "040402040201010201030105¨¨¡ã03030106",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 5,
+          "result": "Ã§Â¼ÂÃ§Â ÂÃ¤ÂºÂÃ¦ÂÂÃ¨Â°ÂÃ¦ÂÂ¥",
+          "score_total": 0.330555555556
+        }
+      ],
+      "sample": "zh2",
+      "scenario": "utf8-latin1",
+      "truth": "编码事故调查",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 2,
+      "truth_rank_minimal": 2
+    },
+    {
+      "expanded_candidate_count": 19,
+      "id": "zh2/utf8-cp437",
+      "input": "τ╝ûτáüΣ║ïµòàΦ░âµƒÑ",
+      "language": "zh",
+      "minimal_candidate_count": 5,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:gb18030",
+          "rank": 1,
+          "result": "缂栫爜浜嬫晠璋冩煡",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:utf-8",
+          "rank": 2,
+          "result": "编码事故调查",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 3,
+          "result": "¦Ó¨a04¦Ó¨¢¨¹¦²¨U0708¨°¨¤¦µ7409080605",
+          "score_total": 0.353846153846
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 4,
+          "result": "ÏâÃ»ÏÃ¡Ã¼Î£âÃ¯ÂµÃ²Ã Î¦âÃ¢ÂµÆÃ",
+          "score_total": 0.324358974359
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:latin-1",
+          "rank": 5,
+          "result": "ç¼ç äºæè°æ¥",
+          "score_total": 0.311111111111
+        }
+      ],
+      "sample": "zh2",
+      "scenario": "utf8-cp437",
+      "truth": "编码事故调查",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 2,
+      "truth_rank_minimal": 2
+    },
+    {
+      "expanded_candidate_count": 29,
+      "id": "zh2/gb18030-latin1",
+      "input": "±àÂëÊÂ¹Êµ÷²é",
+      "language": "zh",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:big5",
+          "rank": 1,
+          "result": "晤鎢岈嘟覃脤",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:euc-kr",
+          "rank": 2,
+          "result": "긍쯤慤믐딧꿴",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:gb18030",
+          "rank": 3,
+          "result": "编码事故调查",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 4,
+          "result": "卤脿脗毛脢脗鹿脢碌梅虏茅",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 5,
+          "result": "¡À¨¤00050800010808¡Â05¨¦",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 6,
+          "result": "Â±Ã Ã‚Ã«ÃŠÃ‚Â¹ÃŠÂµÃ·Â²Ã©",
+          "score_total": 0.341666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 7,
+          "result": "Â±Ã ÃÃ«ÃÃÂ¹ÃÂµÃ·Â²Ã©",
+          "score_total": 0.333333333333
+        }
+      ],
+      "sample": "zh2",
+      "scenario": "gb18030-latin1",
+      "truth": "编码事故调查",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 3,
+      "truth_rank_minimal": 3
+    },
+    {
+      "expanded_candidate_count": 30,
+      "id": "zh2/gb18030-cp437",
+      "input": "▒α┬δ╩┬╣╩╡≈▓Θ",
+      "language": "zh",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:big5",
+          "rank": 1,
+          "result": "晤鎢岈嘟覃脤",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:euc-kr",
+          "rank": 2,
+          "result": "긍쯤慤믐딧꿴",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:gb18030",
+          "rank": 3,
+          "result": "编码事故调查",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "75¦Á©Ð¦Ä¨m©Ð¨g¨m¨e¡Ö¨¦¨",
+          "score_total": 0.361538461538
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:cp1252",
+          "rank": 5,
+          "result": "±àÂëÊÂ¹Êµ÷²é",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 6,
+          "result": "â–’Î±â”¬Î´â•©â”¬â•£â•©â•¡â‰ˆâ–“Î˜",
+          "score_total": 0.310606060606
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 7,
+          "result": "âÎ±â¬Î´â©â¬â£â©â¡ââÎ",
+          "score_total": 0.310606060606
+        }
+      ],
+      "sample": "zh2",
+      "scenario": "gb18030-cp437",
+      "truth": "编码事故调查",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 3,
+      "truth_rank_minimal": 3
+    },
+    {
+      "expanded_candidate_count": 18,
+      "id": "zh3/utf8-latin1",
+      "input": "ä¸­ææ³¨éæ¾ç¤ºä¹±ç ",
+      "language": "zh",
+      "minimal_candidate_count": 5,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:utf-8",
+          "rank": 1,
+          "result": "中文注释显示乱码",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "盲赂颅忙聳聡忙鲁篓茅聡聤忙聵戮莽陇潞盲鹿卤莽聽聛",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:gb18030",
+          "rank": 3,
+          "result": "涓枃娉ㄩ噴鏄剧ず涔辩爜",
+          "score_total": 1.0
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "0100020302070306¡§¨¦070003040604¡è020101¡À040201",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 5,
+          "result": "Ã¤Â¸Â­Ã¦ÂÂÃ¦Â³Â¨Ã©ÂÂÃ¦ÂÂ¾Ã§Â¤ÂºÃ¤Â¹Â±Ã§Â Â",
+          "score_total": 0.3375
+        }
+      ],
+      "sample": "zh3",
+      "scenario": "utf8-latin1",
+      "truth": "中文注释显示乱码",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 25,
+      "id": "zh3/utf8-cp437",
+      "input": "Σ╕¡µûçµ│¿Θçèµÿ╛τñ║Σ╣▒τáü",
+      "language": "zh",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:utf-8",
+          "rank": 1,
+          "result": "中文注释显示乱码",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "危鈺暵÷得幻碘攤驴螛莽猫碌每鈺浵劽扁晳危鈺ｂ枓蟿谩眉",
+          "score_total": 1.105555555556
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:gb18030",
+          "rank": 3,
+          "result": "涓枃娉ㄩ噴鏄剧ず涔辩爜",
+          "score_total": 1.0
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "¦²¨Y0308040408©¦07¦¨04¨¨0807¨_¦Ó09¨U¦²¨g75¦Ó¨¢¨¹",
+          "score_total": 0.355714285714
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:latin-1",
+          "rank": 5,
+          "result": "ä¸­ææ³¨éæ¾ç¤ºä¹±ç ",
+          "score_total": 0.325
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 6,
+          "result": "Î£â••Â¡ÂµÃ»Ã§Âµâ”‚Â¿Î˜Ã§Ã¨ÂµÃ¿â•›Ï„Ã±â•‘Î£â•£â–’Ï„Ã¡Ã¼",
+          "score_total": 0.324074074074
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 7,
+          "result": "Î£âÂ¡ÂµÃ»Ã§ÂµâÂ¿ÎÃ§Ã¨ÂµÃ¿âÏÃ±âÎ£â£âÏÃ¡Ã¼",
+          "score_total": 0.324074074074
+        }
+      ],
+      "sample": "zh3",
+      "scenario": "utf8-cp437",
+      "truth": "中文注释显示乱码",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 25,
+      "id": "zh3/gb18030-latin1",
+      "input": "ÖÐÎÄ×¢ÊÍÏÔÊ¾ÂÒÂë",
+      "language": "zh",
+      "minimal_candidate_count": 6,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:big5",
+          "rank": 1,
+          "result": "笢恅蛁庋珆尨觴鎢",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:euc-kr",
+          "rank": 2,
+          "result": "櫓匡鬧姦鞫刻쫘쯤",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:gb18030",
+          "rank": 3,
+          "result": "中文注释显示乱码",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 4,
+          "result": "脰脨脦脛脳垄脢脥脧脭脢戮脗脪脗毛",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 5,
+          "result": "00040202¡Á0408010308080600060005",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "ÃÃÃÃÃÂ¢ÃÃÃÃÃÂ¾ÃÃÃÃ«",
+          "score_total": 0.309375
+        }
+      ],
+      "sample": "zh3",
+      "scenario": "gb18030-latin1",
+      "truth": "中文注释显示乱码",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 3,
+      "truth_rank_minimal": 3
+    },
+    {
+      "expanded_candidate_count": 42,
+      "id": "zh3/gb18030-cp437",
+      "input": "╓╨╬─╫ó╩═╧╘╩╛┬╥┬δ",
+      "language": "zh",
+      "minimal_candidate_count": 9,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:big5",
+          "rank": 1,
+          "result": "笢恅蛁庋珆尨觴鎢",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:euc-kr",
+          "rank": 2,
+          "result": "櫓匡鬧姦鞫刻쫘쯤",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:gb18030",
+          "rank": 3,
+          "result": "中文注释显示乱码",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:big5",
+          "rank": 4,
+          "result": "汾甸私岸矣車皂汽男沔皂灶房甬房汛",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 5,
+          "result": "鈺撯暔鈺攢鈺斥暕鈺愨暓鈺樷暕鈺涒敩鈺モ敩未",
+          "score_total": 1.076086956522
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:cp1252",
+          "rank": 6,
+          "result": "¨W¨l¨p©¤¨o¨®¨m¨T¨k¨\\¨m¨_©Ð¨i©Ð¦Ä",
+          "score_total": 0.384375
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:cp1252",
+          "rank": 7,
+          "result": "ÖÐÎÄ×¢ÊÍÏÔÊ¾ÂÒÂë",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 8,
+          "result": "ââ¨â¬ââ«Ã³â©ââ§ââ©ââ¬â¥â¬Î´",
+          "score_total": 0.308695652174
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:shift_jis",
+          "rank": 9,
+          "result": "ｨWｨlｨpｩ､ｨoｨｮｨmｨTｨkｨ\\ｨmｨ_ｩﾐｨiｩﾐｦﾄ",
+          "score_total": -0.009375
+        }
+      ],
+      "sample": "zh3",
+      "scenario": "gb18030-cp437",
+      "truth": "中文注释显示乱码",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 3,
+      "truth_rank_minimal": 3
+    },
+    {
+      "expanded_candidate_count": 40,
+      "id": "zh4/utf8-latin1",
+      "input": "ä¸­ææ¸¬è©¦",
+      "language": "zh",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:utf-8",
+          "rank": 1,
+          "result": "中文測試",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "盲赂颅忙聳聡忙赂卢猫漏娄",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:gb18030",
+          "rank": 3,
+          "result": "涓枃娓│",
+          "score_total": 0.416666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "010002030207030001¨¨0807",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 5,
+          "result": "Ã¤Â¸Â­Ã¦Â–Â‡Ã¦Â¸Â¬Ã¨Â©Â¦",
+          "score_total": 0.341666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "Ã¤Â¸Â­Ã¦ÂÂÃ¦Â¸Â¬Ã¨Â©Â¦",
+          "score_total": 0.341666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:cp1252",
+          "rank": 7,
+          "result": "ä¸­æ–‡æ¸¬è©¦",
+          "score_total": 0.333333333333
+        }
+      ],
+      "sample": "zh4",
+      "scenario": "utf8-latin1",
+      "truth": "中文測試",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 46,
+      "id": "zh4/utf8-cp437",
+      "input": "Σ╕¡µûçµ╕¼Φ⌐ª",
+      "language": "zh",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:utf-8",
+          "rank": 1,
+          "result": "中文測試",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:gb18030",
+          "rank": 2,
+          "result": "涓枃娓│",
+          "score_total": 0.416666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 3,
+          "result": "¦²¨Y0308040408¨Y04¦µ6é109",
+          "score_total": 0.3575
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:cp1252",
+          "rank": 4,
+          "result": "ä¸­æ–‡æ¸¬è©¦",
+          "score_total": 0.333333333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:latin-1",
+          "rank": 5,
+          "result": "ä¸­ææ¸¬è©¦",
+          "score_total": 0.333333333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "Î£âÂ¡ÂµÃ»Ã§ÂµâÂ¼Î¦âÂª",
+          "score_total": 0.327777777778
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:shift_jis",
+          "rank": 7,
+          "result": "ﾎ｣笊閉｡ﾂｵﾃｻﾃｧﾂｵ笊閉ｼﾎｦ竚青ｪ",
+          "score_total": 0.178571428571
+        }
+      ],
+      "sample": "zh4",
+      "scenario": "utf8-cp437",
+      "truth": "中文測試",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 32,
+      "id": "zh4/gb18030-latin1",
+      "input": "ÖÐÎÄyÔ",
+      "language": "zh",
+      "minimal_candidate_count": 5,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:gb18030",
+          "rank": 1,
+          "result": "中文測試",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "脰脨脦脛聹y脭聡",
+          "score_total": 1.15
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 3,
+          "result": "0004020208y0807",
+          "score_total": 0.353448275862
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:cp1252",
+          "rank": 4,
+          "result": "ÖÐÎÄœyÔ‡",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 5,
+          "result": "ÃÃÃÃÂyÃÂ",
+          "score_total": 0.31
+        }
+      ],
+      "sample": "zh4",
+      "scenario": "gb18030-latin1",
+      "truth": "中文測試",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 37,
+      "id": "zh4/gb18030-cp437",
+      "input": "╓╨╬─£y╘ç",
+      "language": "zh",
+      "minimal_candidate_count": 6,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:gb18030",
+          "rank": 1,
+          "result": "中文測試",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 2,
+          "result": "¨W¨l¨p©¤05y¨\\04",
+          "score_total": 0.376315789474
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:cp1252",
+          "rank": 3,
+          "result": "ÖÐÎÄœyÔ‡",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:latin-1",
+          "rank": 4,
+          "result": "ÖÐÎÄyÔ",
+          "score_total": 0.3375
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 5,
+          "result": "â•“â•¨â•¬â”€Â£yâ•˜Ã§",
+          "score_total": 0.315
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "ââ¨â¬âÂ£yâÃ§",
+          "score_total": 0.315
+        }
+      ],
+      "sample": "zh4",
+      "scenario": "gb18030-cp437",
+      "truth": "中文測試",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 39,
+      "id": "zh4/utf8-cp1252",
+      "input": "ä¸­æ–‡æ¸¬è©¦",
+      "language": "zh",
+      "minimal_candidate_count": 6,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:utf-8",
+          "rank": 1,
+          "result": "中文測試",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:gb18030",
+          "rank": 2,
+          "result": "涓枃娓│",
+          "score_total": 0.416666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 3,
+          "result": "01000203¨C6¦0030001¨¨0807",
+          "score_total": 0.354545454545
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 4,
+          "result": "Ã¤Â¸Â­Ã¦â€“â€¡Ã¦Â¸Â¬Ã¨Â©Â¦",
+          "score_total": 0.338461538462
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 5,
+          "result": "Ã¤Â¸Â­Ã¦ââ¡Ã¦Â¸Â¬Ã¨Â©Â¦",
+          "score_total": 0.338461538462
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:latin-1",
+          "rank": 6,
+          "result": "ä¸­ææ¸¬è©¦",
+          "score_total": 0.333333333333
+        }
+      ],
+      "sample": "zh4",
+      "scenario": "utf8-cp1252",
+      "truth": "中文測試",
+      "truth_chain": {
+        "path_string": "encode:cp1252>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 40,
+      "id": "zh4/sjis-latin1",
+      "input": "¶ª",
+      "language": "zh",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:gb18030",
+          "rank": 1,
+          "result": "拞暥應帋",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:shift_jis",
+          "rank": 2,
+          "result": "中文測試",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 3,
+          "result": "聮聠聲露聭陋聨聨",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "0806010907090404",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 5,
+          "result": "Â’Â†Â•Â¶Â‘ÂªÂŽÂŽ",
+          "score_total": 0.325
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "ÂÂÂÂ¶ÂÂªÂÂ",
+          "score_total": 0.3125
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:cp1252",
+          "rank": 7,
+          "result": "’†•¶‘ªŽŽ",
+          "score_total": 0.3
+        }
+      ],
+      "sample": "zh4",
+      "scenario": "sjis-latin1",
+      "truth": "中文測試",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:shift_jis",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 2,
+      "truth_rank_minimal": 2
+    },
+    {
+      "expanded_candidate_count": 56,
+      "id": "zh4/euckr-latin1",
+      "input": "ñéÙþö´ãË",
+      "language": "zh",
+      "minimal_candidate_count": 9,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:big5",
+          "rank": 1,
+          "result": "齌湞鶼蒶",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:euc-kr",
+          "rank": 2,
+          "result": "中文測試",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:gb18030",
+          "rank": 3,
+          "result": "耖冼龃闼",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 4,
+          "result": "帽茅脵镁枚麓茫脣",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:euc-jp>decode:shift_jis",
+          "rank": 5,
+          "result": "将ﾐ将ｱ宵繽ｩﾐ将ﾓ｡ｭ将ｪ宵ｳ",
+          "score_total": 0.40625
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 6,
+          "result": "09¨¦020602070009",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 7,
+          "result": "Ã±Ã©Ã™Ã¾Ã¶Â´Ã£Ã‹",
+          "score_total": 0.3375
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 8,
+          "result": "Ã±Ã©ÃÃ¾Ã¶Â´Ã£Ã",
+          "score_total": 0.3375
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:euc-jp>decode:latin-1",
+          "rank": 9,
+          "result": "«Ð«±ªã©Ð«Ó¡­«ªª³",
+          "score_total": 0.319565217391
+        }
+      ],
+      "sample": "zh4",
+      "scenario": "euckr-latin1",
+      "truth": "中文測試",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:euc-kr",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 2,
+      "truth_rank_minimal": 2
+    },
+    {
+      "expanded_candidate_count": 44,
+      "id": "zh4/big5-latin1",
+      "input": "¤¤¤å´ú¸Õ",
+      "language": "zh",
+      "minimal_candidate_count": 8,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:big5",
+          "rank": 1,
+          "result": "中文測試",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:gb18030",
+          "rank": 2,
+          "result": "いゅ代刚",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 3,
+          "result": "陇陇陇氓麓煤赂脮",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:euc-kr",
+          "rank": 4,
+          "result": "ㄴㅵ덜먼",
+          "score_total": 0.75
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 5,
+          "result": "¡è¡è¡è0207¨²0009",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 6,
+          "result": "Â¤Â¤Â¤Ã¥Â´ÃºÂ¸Ã•",
+          "score_total": 0.34375
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 7,
+          "result": "Â¤Â¤Â¤Ã¥Â´ÃºÂ¸Ã",
+          "score_total": 0.34375
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:euc-jp>decode:latin-1",
+          "rank": 8,
+          "result": "¢ð¢ð¢ð«©¡­«â¢±ªØ",
+          "score_total": 0.319565217391
+        }
+      ],
+      "sample": "zh4",
+      "scenario": "big5-latin1",
+      "truth": "中文測試",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:big5",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 26,
+      "id": "ja1/utf8-latin1",
+      "input": "æ¥æ¬èªã®ãã¹ã",
+      "language": "ja",
+      "minimal_candidate_count": 4,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:utf-8",
+          "rank": 1,
+          "result": "日本語のテスト",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "忙聴楼忙聹卢猫陋聻茫聛庐茫聝聠茫聜鹿茫聝聢",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 3,
+          "result": "030306030801¨¨0900000103000306000201000308",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 4,
+          "result": "Ã¦ÂÂ¥Ã¦ÂÂ¬Ã¨ÂªÂÃ£ÂÂ®Ã£ÂÂÃ£ÂÂ¹Ã£ÂÂ",
+          "score_total": 0.328571428571
+        }
+      ],
+      "sample": "ja1",
+      "scenario": "utf8-latin1",
+      "truth": "日本語のテスト",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 31,
+      "id": "ja1/utf8-cp437",
+      "input": "µùÑµ£¼Φ¬₧πü«πâåπé╣πâê",
+      "language": "ja",
+      "minimal_candidate_count": 5,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:utf-8",
+          "rank": 1,
+          "result": "日本語のテスト",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 2,
+          "result": "08¨´05080504¦µ016²7¦Ð¨¹00¦Ð0902¦Ð¨¦¨g¦Ð09¨º",
+          "score_total": 0.353125
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 3,
+          "result": "ÂµÃ¹Ã‘ÂµÂ£Â¼Î¦Â¬â‚§Ï€Ã¼Â«Ï€Ã¢Ã¥Ï€Ã©â•£Ï€Ã¢Ãª",
+          "score_total": 0.334090909091
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 4,
+          "result": "ÂµÃ¹ÃÂµÂ£Â¼Î¦Â¬â§ÏÃ¼Â«ÏÃ¢Ã¥ÏÃ©â£ÏÃ¢Ãª",
+          "score_total": 0.334090909091
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:latin-1",
+          "rank": 5,
+          "result": "æ¥æ¬èªã®ãã¹ã",
+          "score_total": 0.307142857143
+        }
+      ],
+      "sample": "ja1",
+      "scenario": "utf8-cp437",
+      "truth": "日本語のテスト",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 41,
+      "id": "ja1/gb18030-latin1",
+      "input": "ÈÕ±¾ÕZ¤Î¥Æ¥¹¥È",
+      "language": "ja",
+      "minimal_candidate_count": 6,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:gb18030",
+          "rank": 1,
+          "result": "日本語のテスト",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "脠脮卤戮脮Z陇脦楼脝楼鹿楼脠",
+          "score_total": 1.192857142857
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 3,
+          "result": "0609¡À0609Z¡è02060406010606",
+          "score_total": 0.352040816327
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 4,
+          "result": "ÃˆÃ•Â±Â¾Ã•ZÂ¤ÃŽÂ¥Ã†Â¥Â¹Â¥Ãˆ",
+          "score_total": 0.335185185185
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 5,
+          "result": "ÃÃÂ±Â¾ÃZÂ¤ÃÂ¥ÃÂ¥Â¹Â¥Ã",
+          "score_total": 0.331481481481
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:shift_jis",
+          "rank": 6,
+          "result": "ﾈﾕｱｾﾕZ､ﾎ･ﾆ･ｹ･ﾈ",
+          "score_total": -0.2
+        }
+      ],
+      "sample": "ja1",
+      "scenario": "gb18030-latin1",
+      "truth": "日本語のテスト",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 53,
+      "id": "ja1/gb18030-cp437",
+      "input": "╚╒▒╛╒Zñ╬Ñ╞Ñ╣Ñ╚",
+      "language": "ja",
+      "minimal_candidate_count": 8,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:gb18030",
+          "rank": 1,
+          "result": "日本語のテスト",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "鈺氣晵鈻掆暃鈺抁帽鈺戔暈脩鈺Ｃ戔暁",
+          "score_total": 1.083333333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:shift_jis",
+          "rank": 3,
+          "result": "笊壺葡笆停副笊短ﾃｱ笊ｬﾃ鯛服ﾃ鯛淵ﾃ鯛伏",
+          "score_total": 0.821428571429
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "¨^¨V75¨_¨VZ09¨p05¨b05¨g05¨^",
+          "score_total": 0.374324324324
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:cp1252",
+          "rank": 5,
+          "result": "ÈÕ±¾ÕZ¤Î¥Æ¥¹¥È",
+          "score_total": 0.357142857143
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 6,
+          "result": "â•šâ•’â–’â•›â•’ZÃ±â•¬Ã‘â•žÃ‘â•£Ã‘â•š",
+          "score_total": 0.308333333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 7,
+          "result": "âââââZÃ±â¬ÃâÃâ£Ãâ",
+          "score_total": 0.3
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:shift_jis",
+          "rank": 8,
+          "result": "ﾈﾕｱｾﾕZ､ﾎ･ﾆ･ｹ･ﾈ",
+          "score_total": -0.2
+        }
+      ],
+      "sample": "ja1",
+      "scenario": "gb18030-cp437",
+      "truth": "日本語のテスト",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 48,
+      "id": "ja1/sjis-latin1",
+      "input": "ú{êÌeXg",
+      "language": "ja",
+      "minimal_candidate_count": 8,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:gb18030",
+          "rank": 1,
+          "result": "擔杮岅偺僥僗僩",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:shift_jis",
+          "rank": 2,
+          "result": "日本語のテスト",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 3,
+          "result": "聯煤聳{聦锚聜脤聝e聝X聝g",
+          "score_total": 1.021428571429
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:shift_jis",
+          "rank": 4,
+          "result": "ﾂ禿ｺﾂ本ﾂ古ｪﾂづ個テﾂスﾂト",
+          "score_total": 0.5
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 5,
+          "result": "09¨²02{02¨º020003e03X03g",
+          "score_total": 0.36
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:cp1252",
+          "rank": 6,
+          "result": "“ú–{Œê‚ÌƒeƒXƒg",
+          "score_total": 0.357142857143
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 7,
+          "result": "Â“ÃºÂ–{ÂŒÃªÂ‚ÃŒÂƒeÂƒXÂƒg",
+          "score_total": 0.354166666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 8,
+          "result": "ÂÃºÂ{ÂÃªÂÃÂeÂXÂg",
+          "score_total": 0.333333333333
+        }
+      ],
+      "sample": "ja1",
+      "scenario": "sjis-latin1",
+      "truth": "日本語のテスト",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:shift_jis",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 2,
+      "truth_rank_minimal": 2
+    },
+    {
+      "expanded_candidate_count": 39,
+      "id": "ja1/euckr-latin1",
+      "input": "ìíÜâåÞªÎ«Æ«¹«È",
+      "language": "ja",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:big5",
+          "rank": 1,
+          "result": "擨塓槧肥宦姘客",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:euc-kr",
+          "rank": 2,
+          "result": "日本語のテスト",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 3,
+          "result": "矛铆脺芒氓脼陋脦芦脝芦鹿芦脠",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "¨¬¨ª050902070902000400010006",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 5,
+          "result": "Ã¬Ã­ÃœÃ¢Ã¥ÃžÂªÃŽÂ«Ã†Â«Â¹Â«Ãˆ",
+          "score_total": 0.342857142857
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "Ã¬Ã­ÃÃ¢Ã¥ÃÂªÃÂ«ÃÂ«Â¹Â«Ã",
+          "score_total": 0.332142857143
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:gb18030",
+          "rank": 7,
+          "result": "祉茆遛",
+          "score_total": 0.107142857143
+        }
+      ],
+      "sample": "ja1",
+      "scenario": "euckr-latin1",
+      "truth": "日本語のテスト",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:euc-kr",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 2,
+      "truth_rank_minimal": 2
+    },
+    {
+      "expanded_candidate_count": 42,
+      "id": "ja1/big5-latin1",
+      "input": "¤é¥»»yÆÒÇ^ÇQÇ`",
+      "language": "ja",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:big5",
+          "rank": 1,
+          "result": "日本語のテスト",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:gb18030",
+          "rank": 2,
+          "result": "らセ粂埔荿荙莁",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 3,
+          "result": "陇茅楼禄禄y脝脪脟^脟Q脟`",
+          "score_total": 1.021428571429
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "¡è¨¦060303y040605^05Q05`",
+          "score_total": 0.36
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 5,
+          "result": "Â¤Ã©Â¥Â»Â»yÃ†Ã’Ã‡^Ã‡QÃ‡`",
+          "score_total": 0.345833333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "Â¤Ã©Â¥Â»Â»yÃÃÃ^ÃQÃ`",
+          "score_total": 0.345833333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:shift_jis",
+          "rank": 7,
+          "result": "､鬣ｻｻyﾆﾒﾇ^ﾇQﾇ`",
+          "score_total": 0.080769230769
+        }
+      ],
+      "sample": "ja1",
+      "scenario": "big5-latin1",
+      "truth": "日本語のテスト",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:big5",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 25,
+      "id": "ja2/utf8-latin1",
+      "input": "æå­åãèª¿æ»",
+      "language": "ja",
+      "minimal_candidate_count": 5,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:gb18030",
+          "rank": 1,
+          "result": "鏂囧瓧鍖栥亼瑾挎熁",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:utf-8",
+          "rank": 2,
+          "result": "文字化け調査",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 3,
+          "result": "忙聳聡氓颅聴氓聦聳茫聛聭猫陋驴忙聼禄",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "030207020203020202000107¨¨0907030103",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 5,
+          "result": "Ã¦ÂÂÃ¥Â­ÂÃ¥ÂÂÃ£ÂÂÃ¨ÂªÂ¿Ã¦ÂÂ»",
+          "score_total": 0.327777777778
+        }
+      ],
+      "sample": "ja2",
+      "scenario": "utf8-latin1",
+      "truth": "文字化け調査",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 2,
+      "truth_rank_minimal": 2
+    },
+    {
+      "expanded_candidate_count": 28,
+      "id": "ja2/utf8-cp437",
+      "input": "µûçσ¡ùσîûπüæΦ¬┐µƒ╗",
+      "language": "ja",
+      "minimal_candidate_count": 6,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:gb18030",
+          "rank": 1,
+          "result": "鏂囧瓧鍖栥亼瑾挎熁",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:utf-8",
+          "rank": 2,
+          "result": "文字化け調査",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 3,
+          "result": "碌没莽蟽隆霉蟽卯没蟺眉忙桅卢鈹惵灯掆晽",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "080404¦Ò03¨´¦Ò0604¦Ð¨¹03¦µ01©´0806¨[",
+          "score_total": 0.351785714286
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 5,
+          "result": "ÂµÃ»Ã§ÏÂ¡Ã¹ÏÃ®Ã»ÏÃ¼Ã¦Î¦Â¬âÂµÆâ",
+          "score_total": 0.328947368421
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:latin-1",
+          "rank": 6,
+          "result": "æå­åãèª¿æ»",
+          "score_total": 0.305555555556
+        }
+      ],
+      "sample": "ja2",
+      "scenario": "utf8-cp437",
+      "truth": "文字化け調査",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 2,
+      "truth_rank_minimal": 2
+    },
+    {
+      "expanded_candidate_count": 40,
+      "id": "ja2/gb18030-latin1",
+      "input": "ÎÄ×Ö»¯¤±Õ{Ë",
+      "language": "ja",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:gb18030",
+          "rank": 1,
+          "result": "文字化け調査",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "脦脛脳脰禄炉陇卤脮{聳脣",
+          "score_total": 1.183333333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 3,
+          "result": "0202¡Á000304¡è¡À09{0209",
+          "score_total": 0.352564102564
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:cp1252",
+          "rank": 4,
+          "result": "ÎÄ×Ö»¯¤±Õ{–Ë",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 5,
+          "result": "ÃŽÃ„Ã—Ã–Â»Â¯Â¤Â±Ã•{Â–Ã‹",
+          "score_total": 0.328260869565
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "ÃÃÃÃÂ»Â¯Â¤Â±Ã{ÂÃ",
+          "score_total": 0.323913043478
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:shift_jis",
+          "rank": 7,
+          "result": "ﾎﾄﾗﾖｻｯ､ｱﾕ{麺",
+          "score_total": -0.05
+        }
+      ],
+      "sample": "ja2",
+      "scenario": "gb18030-latin1",
+      "truth": "文字化け調査",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 41,
+      "id": "ja2/gb18030-cp437",
+      "input": "╬─╫╓╗»ñ▒╒{û╦",
+      "language": "ja",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:gb18030",
+          "rank": 1,
+          "result": "文字化け調査",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 2,
+          "result": "¨p©¤¨o¨W¨[030975¨V{04¨j",
+          "score_total": 0.372580645161
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:cp1252",
+          "rank": 3,
+          "result": "ÎÄ×Ö»¯¤±Õ{–Ë",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:latin-1",
+          "rank": 4,
+          "result": "ÎÄ×Ö»¯¤±Õ{Ë",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 5,
+          "result": "â•¬â”€â•«â•“â•—Â»Ã±â–’â•’{Ã»â•¦",
+          "score_total": 0.311290322581
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "â¬ââ«ââÂ»Ã±ââ{Ã»â¦",
+          "score_total": 0.311290322581
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:shift_jis",
+          "rank": 7,
+          "result": "ﾎﾄﾗﾖｻｯ､ｱﾕ{麺",
+          "score_total": -0.05
+        }
+      ],
+      "sample": "ja2",
+      "scenario": "gb18030-cp437",
+      "truth": "文字化け調査",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 34,
+      "id": "ja2/sjis-latin1",
+      "input": "¶»¯²¸",
+      "language": "ja",
+      "minimal_candidate_count": 6,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:gb18030",
+          "rank": 1,
+          "result": "暥帤壔偗挷嵏",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:shift_jis",
+          "rank": 2,
+          "result": "文字化け調査",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 3,
+          "result": "聲露聨職聣禄聜炉聮虏聧赂",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:shift_jis",
+          "rank": 4,
+          "result": "ﾂ閉ｶﾂ篠堋可ｻﾂつｯﾂ陳ｲﾂ債ｸ",
+          "score_total": 0.367647058824
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 5,
+          "result": "010904060903020408050300",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "ÂÂ¶ÂÂÂÂ»ÂÂ¯ÂÂ²ÂÂ¸",
+          "score_total": 0.320833333333
+        }
+      ],
+      "sample": "ja2",
+      "scenario": "sjis-latin1",
+      "truth": "文字化け調査",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:shift_jis",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 2,
+      "truth_rank_minimal": 2
+    },
+    {
+      "expanded_candidate_count": 35,
+      "id": "ja2/euckr-latin1",
+      "input": "Ùþí®ûùª±ðàÞÛ",
+      "language": "ja",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:euc-kr",
+          "rank": 1,
+          "result": "文字化け調査",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "脵镁铆庐没霉陋卤冒脿脼脹",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:gb18030",
+          "rank": 3,
+          "result": "冼懋疣捋",
+          "score_total": 0.583333333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "0206¨ª0304¨´09¡À08¨¤0704",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 5,
+          "result": "Ã™Ã¾Ã­Â®Ã»Ã¹ÂªÂ±Ã°Ã ÃžÃ›",
+          "score_total": 0.341666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "ÃÃ¾Ã­Â®Ã»Ã¹ÂªÂ±Ã°Ã ÃÃ",
+          "score_total": 0.3375
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:euc-jp>decode:latin-1",
+          "rank": 7,
+          "result": "ªã©Ð«¿¢î«å«ã¢ì¡Þ©Ã«¢©°ªå",
+          "score_total": 0.318571428571
+        }
+      ],
+      "sample": "ja2",
+      "scenario": "euckr-latin1",
+      "truth": "文字化け調査",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:euc-kr",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 26,
+      "id": "ja3/utf8-latin1",
+      "input": "æ±äº¬ã®è³æ",
+      "language": "ja",
+      "minimal_candidate_count": 4,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:utf-8",
+          "rank": 1,
+          "result": "東京の資料",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "忙聺卤盲潞卢茫聛庐猫鲁聡忙聳聶",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 3,
+          "result": "0309¡À010201000103¨¨0607030205",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 4,
+          "result": "Ã¦ÂÂ±Ã¤ÂºÂ¬Ã£ÂÂ®Ã¨Â³ÂÃ¦ÂÂ",
+          "score_total": 0.333333333333
+        }
+      ],
+      "sample": "ja3",
+      "scenario": "utf8-latin1",
+      "truth": "東京の資料",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 31,
+      "id": "ja3/utf8-cp437",
+      "input": "µ¥▒Σ║¼πü«Φ│çµûÖ",
+      "language": "ja",
+      "minimal_candidate_count": 5,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:utf-8",
+          "rank": 1,
+          "result": "東京の資料",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 2,
+          "result": "080675¦²¨U04¦Ð¨¹00¦µ©¦04080400",
+          "score_total": 0.352083333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 3,
+          "result": "ÂµÂ¥â–’Î£â•‘Â¼Ï€Ã¼Â«Î¦â”‚Ã§ÂµÃ»Ã–",
+          "score_total": 0.325757575758
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 4,
+          "result": "ÂµÂ¥âÎ£âÂ¼ÏÃ¼Â«Î¦âÃ§ÂµÃ»Ã",
+          "score_total": 0.325757575758
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:latin-1",
+          "rank": 5,
+          "result": "æ±äº¬ã®è³æ",
+          "score_total": 0.316666666667
+        }
+      ],
+      "sample": "ja3",
+      "scenario": "utf8-cp437",
+      "truth": "東京の資料",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 39,
+      "id": "ja3/gb18030-latin1",
+      "input": "|¾©¤ÎÙYÁÏ",
+      "language": "ja",
+      "minimal_candidate_count": 6,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:gb18030",
+          "rank": 1,
+          "result": "東京の資料",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "聳|戮漏陇脦脵Y脕脧",
+          "score_total": 1.09
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:cp1252",
+          "rank": 3,
+          "result": "–|¾©¤ÎÙYÁÏ",
+          "score_total": 0.36
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "02|0608¡è0202Y0903",
+          "score_total": 0.35625
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 5,
+          "result": "Â|Â¾Â©Â¤ÃÃYÃÃ",
+          "score_total": 0.333333333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:shift_jis",
+          "rank": 6,
+          "result": "翻ｾｩ､ﾎﾙYﾁﾏ",
+          "score_total": -0.005555555556
+        }
+      ],
+      "sample": "ja3",
+      "scenario": "gb18030-latin1",
+      "truth": "東京の資料",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 50,
+      "id": "ja3/gb18030-cp437",
+      "input": "û|╛⌐ñ╬┘Y┴╧",
+      "language": "ja",
+      "minimal_candidate_count": 8,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:gb18030",
+          "rank": 1,
+          "result": "東京の資料",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "没|鈺涒寪帽鈺敇Y鈹粹暓",
+          "score_total": 0.973076923077
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:shift_jis",
+          "rank": 3,
+          "result": "ﾃｻ|笊帚倹ﾃｱ笊ｬ笏郎笏ｴ笊ｧ",
+          "score_total": 0.54375
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "04|¨_6é109¨p©¼Y©Ø¨k",
+          "score_total": 0.375
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:cp1252",
+          "rank": 5,
+          "result": "–|¾©¤ÎÙYÁÏ",
+          "score_total": 0.36
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:latin-1",
+          "rank": 6,
+          "result": "|¾©¤ÎÙYÁÏ",
+          "score_total": 0.36
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 7,
+          "result": "Ã»|ââÃ±â¬âYâ´â§",
+          "score_total": 0.320833333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:shift_jis",
+          "rank": 8,
+          "result": "翻ｾｩ､ﾎﾙYﾁﾏ",
+          "score_total": -0.005555555556
+        }
+      ],
+      "sample": "ja3",
+      "scenario": "gb18030-cp437",
+      "truth": "東京の資料",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 46,
+      "id": "ja3/sjis-latin1",
+      "input": "Ì¿",
+      "language": "ja",
+      "minimal_candidate_count": 8,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:gb18030",
+          "rank": 1,
+          "result": "搶嫗偺帒椏",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:shift_jis",
+          "rank": 2,
+          "result": "東京の資料",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 3,
+          "result": "聯聦聥聻聜脤聨聭聴驴",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:shift_jis",
+          "rank": 4,
+          "result": "ﾂ督個仰楪づ個篠堕猟ｿ",
+          "score_total": 0.977272727273
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 5,
+          "result": "09020100020004070307",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 6,
+          "result": "Â“ÂŒÂ‹ÂžÂ‚ÃŒÂŽÂ‘Â—Â¿",
+          "score_total": 0.325
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 7,
+          "result": "ÂÂÂÂÂÃÂÂÂÂ¿",
+          "score_total": 0.305
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:cp1252",
+          "rank": 8,
+          "result": "“Œ‹ž‚ÌŽ‘—¿",
+          "score_total": 0.3
+        }
+      ],
+      "sample": "ja3",
+      "scenario": "sjis-latin1",
+      "truth": "東京の資料",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:shift_jis",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 2,
+      "truth_rank_minimal": 2
+    },
+    {
+      "expanded_candidate_count": 42,
+      "id": "ja3/euckr-latin1",
+      "input": "ÔÔÌÈªÎíÀÖù",
+      "language": "ja",
+      "minimal_candidate_count": 9,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:big5",
+          "rank": 1,
+          "result": "娵昈肥簎翐",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:euc-kr",
+          "rank": 2,
+          "result": "東京の資料",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 3,
+          "result": "脭脭脤脠陋脦铆脌脰霉",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:gb18030",
+          "rank": 4,
+          "result": "栽倘砝柱",
+          "score_total": 0.85
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:euc-jp>decode:gb18030",
+          "rank": 5,
+          "result": "彧詮彧缽彚鞆彨繌彧訌",
+          "score_total": 0.583333333333
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 6,
+          "result": "080800060902¨ª0800¨´",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 7,
+          "result": "Ã”Ã”ÃŒÃˆÂªÃŽÃ­Ã€Ã–Ã¹",
+          "score_total": 0.325
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:euc-jp>decode:latin-1",
+          "rank": 8,
+          "result": "ªÔªÔªÀª²¢ìªÂ«¿ª¢ªÓ«ã",
+          "score_total": 0.316666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 9,
+          "result": "ÃÃÃÃÂªÃÃ­ÃÃÃ¹",
+          "score_total": 0.315
+        }
+      ],
+      "sample": "ja3",
+      "scenario": "euckr-latin1",
+      "truth": "東京の資料",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:euc-kr",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 2,
+      "truth_rank_minimal": 2
+    },
+    {
+      "expanded_candidate_count": 40,
+      "id": "ja3/big5-latin1",
+      "input": "ªF¨ÊÆÒ¸ê®Æ",
+      "language": "ja",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:big5",
+          "rank": 1,
+          "result": "東京の資料",
+          "score_total": 1.25
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "陋F篓脢脝脪赂锚庐脝",
+          "score_total": 1.17
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:gb18030",
+          "rank": 3,
+          "result": "狥ㄊ埔戈",
+          "score_total": 0.65
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "09F¡§08040600¨º0304",
+          "score_total": 0.35303030303
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 5,
+          "result": "ÂªFÂ¨ÃŠÃ†Ã’Â¸ÃªÂ®Ã†",
+          "score_total": 0.339473684211
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "ÂªFÂ¨ÃÃÃÂ¸ÃªÂ®Ã",
+          "score_total": 0.334210526316
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:euc-jp>decode:latin-1",
+          "rank": 7,
+          "result": "¢ìF¡¯ª´©¡ªÒ¢±«´¢î©¡",
+          "score_total": 0.324074074074
+        }
+      ],
+      "sample": "ja3",
+      "scenario": "big5-latin1",
+      "truth": "東京の資料",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:big5",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 24,
+      "id": "ko1/utf8-latin1",
+      "input": "íêµ­ì´ íì¤í¸",
+      "language": "ko",
+      "minimal_candidate_count": 6,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 1,
+          "result": "铆聲聹锚碌颅矛聳麓 铆聟聦矛聤陇铆聤赂",
+          "score_total": 1.207894736842
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:utf-8",
+          "rank": 2,
+          "result": "한국어 테스트",
+          "score_total": 1.135714285714
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 3,
+          "result": "¨ª0108¨º0802¨¬0207 ¨ª0502¨¬00¡è¨ª0000",
+          "score_total": 0.351694915254
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 4,
+          "result": "Ã­Â•ÂœÃªÂµÂ­Ã¬Â–Â´ Ã­Â…ÂŒÃ¬ÂŠÂ¤Ã­ÂŠÂ¸",
+          "score_total": 0.344594594595
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:cp1252",
+          "rank": 5,
+          "result": "í•œêµ­ì–´ í…ŒìŠ¤íŠ¸",
+          "score_total": 0.339473684211
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "Ã­ÂÂÃªÂµÂ­Ã¬ÂÂ´ Ã­ÂÂÃ¬ÂÂ¤Ã­ÂÂ¸",
+          "score_total": 0.333783783784
+        }
+      ],
+      "sample": "ko1",
+      "scenario": "utf8-latin1",
+      "truth": "한국어 테스트",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 3,
+      "truth_rank_minimal": 2
+    },
+    {
+      "expanded_candidate_count": 25,
+      "id": "ko1/utf8-cp437",
+      "input": "φò£Ω╡¡∞û┤ φàî∞èñφè╕",
+      "language": "ko",
+      "minimal_candidate_count": 6,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:utf-8",
+          "rank": 1,
+          "result": "한국어 테스트",
+          "score_total": 1.135714285714
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 2,
+          "result": "¦Õ¨°05¦¸¨e03¡Þ04©È ¦Õ¨¤06¡Þ¨¨09¦Õ¨¨¨Y",
+          "score_total": 0.356382978723
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:cp1252",
+          "rank": 3,
+          "result": "í•œêµ­ì–´ í…ŒìŠ¤íŠ¸",
+          "score_total": 0.339473684211
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 4,
+          "result": "Ï†Ã²Â£Î©â•¡Â¡âˆžÃ»â”¤ Ï†Ã Ã®âˆžÃ¨Ã±Ï†Ã¨â••",
+          "score_total": 0.330952380952
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 5,
+          "result": "ÏÃ²Â£Î©â¡Â¡âÃ»â¤ ÏÃ Ã®âÃ¨Ã±ÏÃ¨â",
+          "score_total": 0.32619047619
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:latin-1",
+          "rank": 6,
+          "result": "íêµ­ì´ íì¤í¸",
+          "score_total": 0.318421052632
+        }
+      ],
+      "sample": "ko1",
+      "scenario": "utf8-cp437",
+      "truth": "한국어 테스트",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 2,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 16,
+      "id": "ko1/gb18030-latin1",
+      "input": "637ô02ë5 53215¾7",
+      "language": "ko",
+      "minimal_candidate_count": 4,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:gb18030",
+          "rank": 1,
+          "result": "한국어 테스트",
+          "score_total": 1.135714285714
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "聝6聞3聜7么0聝2毛5 聝5職3聝2聺1聝5戮7",
+          "score_total": 0.834
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 3,
+          "result": "036043027000032055 035063032091035067",
+          "score_total": 0.37131147541
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 4,
+          "result": "Â6Â3Â7Ã´0Â2Ã«5 Â5Â3Â2Â1Â5Â¾7",
+          "score_total": 0.360810810811
+        }
+      ],
+      "sample": "ko1",
+      "scenario": "gb18030-latin1",
+      "truth": "한국어 테스트",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 23,
+      "id": "ko1/gb18030-cp437",
+      "input": "â6ä3é7⌠0â2δ5 â5Ü3â2¥1â5╛7",
+      "language": "ko",
+      "minimal_candidate_count": 5,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:gb18030",
+          "rank": 1,
+          "result": "한국어 테스트",
+          "score_total": 1.135714285714
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 2,
+          "result": "Ã¢6Ã¤3Ã©7âŒ 0Ã¢2Î´5 Ã¢5Ãœ3Ã¢2Â¥1Ã¢5â•›7",
+          "score_total": 0.378205128205
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 3,
+          "result": "096013¨¦76ê60092¦Ä5 095053092061095¨_7",
+          "score_total": 0.377272727273
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 4,
+          "result": "Ã¢6Ã¤3Ã©7â 0Ã¢2Î´5 Ã¢5Ã3Ã¢2Â¥1Ã¢5â7",
+          "score_total": 0.373076923077
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:latin-1",
+          "rank": 5,
+          "result": "637ô02ë5 53215¾7",
+          "score_total": 0.366
+        }
+      ],
+      "sample": "ko1",
+      "scenario": "gb18030-cp437",
+      "truth": "한국어 테스트",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 23,
+      "id": "ko1/utf8-cp1252",
+      "input": "í•œêµ­ì–´ í…ŒìŠ¤íŠ¸",
+      "language": "ko",
+      "minimal_candidate_count": 5,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:utf-8",
+          "rank": 1,
+          "result": "한국어 테스트",
+          "score_total": 1.135714285714
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 2,
+          "result": "¨ª6¦104¨º0802¨¬¨C07 ¨ª¡­03¨¬07¡è¨ª0700",
+          "score_total": 0.355454545455
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 3,
+          "result": "Ã­â€¢Å“ÃªÂµÂ­Ã¬â€“Â´ Ã­â€¦Å’Ã¬Å Â¤Ã­Å Â¸",
+          "score_total": 0.3375
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 4,
+          "result": "Ã­â¢ÅÃªÂµÂ­Ã¬âÂ´ Ã­â¦ÅÃ¬Å Â¤Ã­Å Â¸",
+          "score_total": 0.3375
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:latin-1",
+          "rank": 5,
+          "result": "íêµ­ì´ íì¤í¸",
+          "score_total": 0.318421052632
+        }
+      ],
+      "sample": "ko1",
+      "scenario": "utf8-cp1252",
+      "truth": "한국어 테스트",
+      "truth_chain": {
+        "path_string": "encode:cp1252>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 2,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 27,
+      "id": "ko1/euckr-latin1",
+      "input": "ÇÑ±¹¾î Å×½ºÆ®",
+      "language": "ko",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 1,
+          "result": "脟脩卤鹿戮卯 脜脳陆潞脝庐",
+          "score_total": 1.188461538462
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:euc-kr",
+          "rank": 2,
+          "result": "한국어 테스트",
+          "score_total": 1.135714285714
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:gb18030",
+          "rank": 3,
+          "result": "茄惫绢 抛胶飘",
+          "score_total": 1.135714285714
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:big5",
+          "rank": 4,
+          "result": "и措橫 纔蝶お",
+          "score_total": 0.992857142857
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 5,
+          "result": "0505¡À010606 03¡Á05020403",
+          "score_total": 0.352222222222
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 6,
+          "result": "Ã‡Ã‘Â±Â¹Â¾Ã® Ã…Ã—Â½ÂºÃ†Â®",
+          "score_total": 0.334
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 7,
+          "result": "ÃÃÂ±Â¹Â¾Ã® ÃÃÂ½ÂºÃÂ®",
+          "score_total": 0.334
+        }
+      ],
+      "sample": "ko1",
+      "scenario": "euckr-latin1",
+      "truth": "한국어 테스트",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:euc-kr",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 2,
+      "truth_rank_minimal": 2
+    },
+    {
+      "expanded_candidate_count": 16,
+      "id": "ko2/utf8-latin1",
+      "input": "ì¸ì½ë© ì¤ë¥",
+      "language": "ko",
+      "minimal_candidate_count": 4,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 1,
+          "result": "矛聺赂矛陆聰毛聰漏 矛聵陇毛楼聵",
+          "score_total": 1.2
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:utf-8",
+          "rank": 2,
+          "result": "인코딩 오류",
+          "score_total": 1.116666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 3,
+          "result": "¨¬0900¨¬0500050008 ¨¬04¡è050604",
+          "score_total": 0.351886792453
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 4,
+          "result": "Ã¬ÂÂ¸Ã¬Â½ÂÃ«ÂÂ© Ã¬ÂÂ¤Ã«Â¥Â",
+          "score_total": 0.337096774194
+        }
+      ],
+      "sample": "ko2",
+      "scenario": "utf8-latin1",
+      "truth": "인코딩 오류",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 3,
+      "truth_rank_minimal": 2
+    },
+    {
+      "expanded_candidate_count": 18,
+      "id": "ko2/utf8-cp437",
+      "input": "∞¥╕∞╜öδö⌐ ∞ÿñδÑÿ",
+      "language": "ko",
+      "minimal_candidate_count": 4,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:utf-8",
+          "rank": 1,
+          "result": "인코딩 오류",
+          "score_total": 1.116666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 2,
+          "result": "¡Þ06¨Y¡Þ¨`02¦Ä026é1 ¡Þ0709¦Ä0507",
+          "score_total": 0.358510638298
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:latin-1",
+          "rank": 3,
+          "result": "ì¸ì½ë© ì¤ë¥",
+          "score_total": 0.325
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 4,
+          "result": "âÂ¥âââÃ¶Î´Ã¶â âÃ¿Ã±Î´ÃÃ¿",
+          "score_total": 0.317567567568
+        }
+      ],
+      "sample": "ko2",
+      "scenario": "utf8-cp437",
+      "truth": "인코딩 오류",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 2,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 24,
+      "id": "ko2/gb18030-latin1",
+      "input": "374å99¾0 2ö70«1",
+      "language": "ko",
+      "minimal_candidate_count": 6,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:gb18030",
+          "rank": 1,
+          "result": "인코딩 오류",
+          "score_total": 1.116666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "聝3職7聝4氓9聜9戮0 聝2枚7聝0芦1",
+          "score_total": 0.830952380952
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:cp1252",
+          "rank": 3,
+          "result": "ƒ3š7ƒ4å9‚9¾0 ƒ2ö7ƒ0«1",
+          "score_total": 0.397619047619
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 4,
+          "result": "Âƒ3Âš7Âƒ4Ã¥9Â‚9Â¾0 Âƒ2Ã¶7Âƒ0Â«1",
+          "score_total": 0.382258064516
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 5,
+          "result": "033067034029029060 032027030001",
+          "score_total": 0.371568627451
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "Â3Â7Â4Ã¥9Â9Â¾0 Â2Ã¶7Â0Â«1",
+          "score_total": 0.366129032258
+        }
+      ],
+      "sample": "ko2",
+      "scenario": "gb18030-latin1",
+      "truth": "인코딩 오류",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 25,
+      "id": "ko2/gb18030-cp437",
+      "input": "â3Ü7â4σ9é9╛0 â2÷7â0½1",
+      "language": "ko",
+      "minimal_candidate_count": 6,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:gb18030",
+          "rank": 1,
+          "result": "인코딩 오류",
+          "score_total": 1.116666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:cp1252",
+          "rank": 2,
+          "result": "ƒ3š7ƒ4å9‚9¾0 ƒ2ö7ƒ0«1",
+          "score_total": 0.397619047619
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 3,
+          "result": "Ã¢3Ãœ7Ã¢4Ïƒ9Ã©9â•›0 Ã¢2Ã·7Ã¢0Â½1",
+          "score_total": 0.378125
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "093057094¦Ò9¨¦9¨_0 092¡Â7090051",
+          "score_total": 0.377906976744
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:latin-1",
+          "rank": 5,
+          "result": "374å99¾0 2ö70«1",
+          "score_total": 0.37380952381
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "Ã¢3Ã7Ã¢4Ï9Ã©9â0 Ã¢2Ã·7Ã¢0Â½1",
+          "score_total": 0.371875
+        }
+      ],
+      "sample": "ko2",
+      "scenario": "gb18030-cp437",
+      "truth": "인코딩 오류",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 30,
+      "id": "ko2/euckr-latin1",
+      "input": "ÀÎÄÚµù ¿À·ù",
+      "language": "ko",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 1,
+          "result": "脌脦脛脷碌霉 驴脌路霉",
+          "score_total": 1.177272727273
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:big5",
+          "rank": 2,
+          "result": "檣囀註 螃盟",
+          "score_total": 1.116666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:euc-kr",
+          "rank": 3,
+          "result": "인코딩 오류",
+          "score_total": 1.116666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:gb18030",
+          "rank": 4,
+          "result": "牢内爹 坷幅",
+          "score_total": 1.116666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 5,
+          "result": "0802020308¨´ 0708¡¤¨´",
+          "score_total": 0.352857142857
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 6,
+          "result": "Ã€ÃŽÃ„ÃšÂµÃ¹ Â¿Ã€Â·Ã¹",
+          "score_total": 0.340476190476
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 7,
+          "result": "ÃÃÃÃÂµÃ¹ Â¿ÃÂ·Ã¹",
+          "score_total": 0.330952380952
+        }
+      ],
+      "sample": "ko2",
+      "scenario": "euckr-latin1",
+      "truth": "인코딩 오류",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:euc-kr",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 4,
+      "truth_rank_minimal": 3
+    },
+    {
+      "expanded_candidate_count": 18,
+      "id": "ko3/utf8-latin1",
+      "input": "ìì¸ ìë£",
+      "language": "ko",
+      "minimal_candidate_count": 5,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 1,
+          "result": "矛聞聹矛職赂 矛聻聬毛拢聦",
+          "score_total": 1.188461538462
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:utf-8",
+          "rank": 2,
+          "result": "서울 자료",
+          "score_total": 1.09
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:gb18030",
+          "rank": 3,
+          "result": "靹滌毟 鞛愲",
+          "score_total": 0.85
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "¨¬0408¨¬0600 ¨¬0006050502",
+          "score_total": 0.352325581395
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 5,
+          "result": "Ã¬ÂÂÃ¬ÂÂ¸ Ã¬ÂÂÃ«Â£Â",
+          "score_total": 0.33
+        }
+      ],
+      "sample": "ko3",
+      "scenario": "utf8-latin1",
+      "truth": "서울 자료",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 3,
+      "truth_rank_minimal": 2
+    },
+    {
+      "expanded_candidate_count": 31,
+      "id": "ko3/utf8-cp437",
+      "input": "∞ä£∞Ü╕ ∞₧Éδúî",
+      "language": "ko",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:utf-8",
+          "rank": 1,
+          "result": "서울 자료",
+          "score_total": 1.09
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:gb18030",
+          "rank": 2,
+          "result": "靹滌毟 鞛愲",
+          "score_total": 0.85
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:shift_jis",
+          "rank": 3,
+          "result": "竏榲､ﾂ｣竏榲懌封 竏樞ぉﾃ火ｴﾃｺﾃｮ",
+          "score_total": 0.535
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "¡Þ0105¡Þ05¨Y ¡Þ6²707¦Ä¨²06",
+          "score_total": 0.358108108108
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 5,
+          "result": "âˆžÃ¤Â£âˆžÃœâ•• âˆžâ‚§Ã‰Î´ÃºÃ®",
+          "score_total": 0.33
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 6,
+          "result": "âÃ¤Â£âÃâ ââ§ÃÎ´ÃºÃ®",
+          "score_total": 0.316666666667
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:latin-1",
+          "rank": 7,
+          "result": "ìì¸ ìë£",
+          "score_total": 0.311538461538
+        }
+      ],
+      "sample": "ko3",
+      "scenario": "utf8-cp437",
+      "truth": "서울 자료",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:utf-8",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 4,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 16,
+      "id": "ko3/gb18030-latin1",
+      "input": "1ó935 3101",
+      "language": "ko",
+      "minimal_candidate_count": 4,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:latin-1>decode:gb18030",
+          "rank": 1,
+          "result": "서울 자료",
+          "score_total": 1.09
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 2,
+          "result": "聝1贸9聝3聡5 聝3聺1聝0聺1",
+          "score_total": 0.826470588235
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 3,
+          "result": "031¨®9033075 033091030091",
+          "score_total": 0.373076923077
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 4,
+          "result": "Â1Ã³9Â3Â5 Â3Â1Â0Â1",
+          "score_total": 0.358
+        }
+      ],
+      "sample": "ko3",
+      "scenario": "gb18030-latin1",
+      "truth": "서울 자료",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 35,
+      "id": "ko3/gb18030-cp437",
+      "input": "â1≤9â3ç5 â3¥1â0¥1",
+      "language": "ko",
+      "minimal_candidate_count": 6,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:gb18030",
+          "rank": 1,
+          "result": "서울 자료",
+          "score_total": 1.09
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 2,
+          "result": "Ã¢1â‰¤9Ã¢3Ã§5 Ã¢3Â¥1Ã¢0Â¥1",
+          "score_total": 0.380769230769
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 3,
+          "result": "Ã¢1â¤9Ã¢3Ã§5 Ã¢3Â¥1Ã¢0Â¥1",
+          "score_total": 0.380769230769
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 4,
+          "result": "091¡Ü9093045 093061090061",
+          "score_total": 0.373076923077
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp437>decode:latin-1",
+          "rank": 5,
+          "result": "1ó935 3101",
+          "score_total": 0.361764705882
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:shift_jis",
+          "rank": 6,
+          "result": "ﾃ｢1竕､9ﾃ｢3ﾃｧ5 ﾃ｢3ﾂ･1ﾃ｢0ﾂ･1",
+          "score_total": 0.062
+        }
+      ],
+      "sample": "ko3",
+      "scenario": "gb18030-cp437",
+      "truth": "서울 자료",
+      "truth_chain": {
+        "path_string": "encode:cp437>decode:gb18030",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 1,
+      "truth_rank_minimal": 1
+    },
+    {
+      "expanded_candidate_count": 40,
+      "id": "ko3/euckr-latin1",
+      "input": "¼­¿ï ÀÚ·á",
+      "language": "ko",
+      "minimal_candidate_count": 7,
+      "minimal_candidates": [
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:gb18030",
+          "rank": 1,
+          "result": "录颅驴茂 脌脷路谩",
+          "score_total": 1.161111111111
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:big5",
+          "rank": 2,
+          "result": "憮選 濠猿",
+          "score_total": 1.09
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:euc-kr",
+          "rank": 3,
+          "result": "서울 자료",
+          "score_total": 1.09
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:cp1252>decode:gb18030",
+          "rank": 4,
+          "result": "辑匡 磊丰",
+          "score_total": 1.09
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:gb18030>decode:latin-1",
+          "rank": 5,
+          "result": "04020707 0803¡¤¨¢",
+          "score_total": 0.353448275862
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:cp1252",
+          "rank": 6,
+          "result": "Â¼Â­Â¿Ã¯ Ã€ÃšÂ·Ã¡",
+          "score_total": 0.35
+        },
+        {
+          "depth": 1,
+          "path_string": "encode:utf-8>decode:latin-1",
+          "rank": 7,
+          "result": "Â¼Â­Â¿Ã¯ ÃÃÂ·Ã¡",
+          "score_total": 0.344117647059
+        }
+      ],
+      "sample": "ko3",
+      "scenario": "euckr-latin1",
+      "truth": "서울 자료",
+      "truth_chain": {
+        "path_string": "encode:latin-1>decode:euc-kr",
+        "verify": true
+      },
+      "truth_in_expanded": true,
+      "truth_in_minimal": true,
+      "truth_rank_expanded": 4,
+      "truth_rank_minimal": 3
+    }
+  ],
+  "depth3": {
+    "candidate_size": {
+      "max": 241,
+      "mean": 121.754386,
+      "median": 125.0,
+      "min": 50
+    },
+    "cases": [
+      {
+        "id": "zh1/utf8-latin1",
+        "total_candidates": 162,
+        "total_chains": 602,
+        "truth_rank": 1
+      },
+      {
+        "id": "zh1/utf8-cp437",
+        "total_candidates": 121,
+        "total_chains": 485,
+        "truth_rank": 1
+      },
+      {
+        "id": "zh1/gb18030-latin1",
+        "total_candidates": 152,
+        "total_chains": 654,
+        "truth_rank": 3
+      },
+      {
+        "id": "zh1/gb18030-cp437",
+        "total_candidates": 241,
+        "total_chains": 1654,
+        "truth_rank": 3
+      },
+      {
+        "id": "zh1/utf8-cp1252",
+        "total_candidates": 160,
+        "total_chains": 506,
+        "truth_rank": 1
+      },
+      {
+        "id": "zh2/utf8-latin1",
+        "total_candidates": 56,
+        "total_chains": 226,
+        "truth_rank": 2
+      },
+      {
+        "id": "zh2/utf8-cp437",
+        "total_candidates": 60,
+        "total_chains": 257,
+        "truth_rank": 2
+      },
+      {
+        "id": "zh2/gb18030-latin1",
+        "total_candidates": 92,
+        "total_chains": 486,
+        "truth_rank": 3
+      },
+      {
+        "id": "zh2/gb18030-cp437",
+        "total_candidates": 94,
+        "total_chains": 616,
+        "truth_rank": 3
+      },
+      {
+        "id": "zh3/utf8-latin1",
+        "total_candidates": 53,
+        "total_chains": 204,
+        "truth_rank": 1
+      },
+      {
+        "id": "zh3/utf8-cp437",
+        "total_candidates": 75,
+        "total_chains": 281,
+        "truth_rank": 1
+      },
+      {
+        "id": "zh3/gb18030-latin1",
+        "total_candidates": 81,
+        "total_chains": 430,
+        "truth_rank": 3
+      },
+      {
+        "id": "zh3/gb18030-cp437",
+        "total_candidates": 150,
+        "total_chains": 1273,
+        "truth_rank": 3
+      },
+      {
+        "id": "zh4/utf8-latin1",
+        "total_candidates": 148,
+        "total_chains": 502,
+        "truth_rank": 1
+      },
+      {
+        "id": "zh4/utf8-cp437",
+        "total_candidates": 181,
+        "total_chains": 580,
+        "truth_rank": 1
+      },
+      {
+        "id": "zh4/gb18030-latin1",
+        "total_candidates": 125,
+        "total_chains": 367,
+        "truth_rank": 1
+      },
+      {
+        "id": "zh4/gb18030-cp437",
+        "total_candidates": 143,
+        "total_chains": 436,
+        "truth_rank": 1
+      },
+      {
+        "id": "zh4/utf8-cp1252",
+        "total_candidates": 150,
+        "total_chains": 462,
+        "truth_rank": 1
+      },
+      {
+        "id": "zh4/sjis-latin1",
+        "total_candidates": 152,
+        "total_chains": 544,
+        "truth_rank": 2
+      },
+      {
+        "id": "zh4/euckr-latin1",
+        "total_candidates": 218,
+        "total_chains": 1110,
+        "truth_rank": 2
+      },
+      {
+        "id": "zh4/big5-latin1",
+        "total_candidates": 161,
+        "total_chains": 895,
+        "truth_rank": 1
+      },
+      {
+        "id": "ja1/utf8-latin1",
+        "total_candidates": 107,
+        "total_chains": 345,
+        "truth_rank": 1
+      },
+      {
+        "id": "ja1/utf8-cp437",
+        "total_candidates": 122,
+        "total_chains": 389,
+        "truth_rank": 1
+      },
+      {
+        "id": "ja1/gb18030-latin1",
+        "total_candidates": 165,
+        "total_chains": 829,
+        "truth_rank": 1
+      },
+      {
+        "id": "ja1/gb18030-cp437",
+        "total_candidates": 205,
+        "total_chains": 891,
+        "truth_rank": 1
+      },
+      {
+        "id": "ja1/sjis-latin1",
+        "total_candidates": 203,
+        "total_chains": 741,
+        "truth_rank": 2
+      },
+      {
+        "id": "ja1/euckr-latin1",
+        "total_candidates": 158,
+        "total_chains": 974,
+        "truth_rank": 2
+      },
+      {
+        "id": "ja1/big5-latin1",
+        "total_candidates": 163,
+        "total_chains": 1009,
+        "truth_rank": 1
+      },
+      {
+        "id": "ja2/utf8-latin1",
+        "total_candidates": 87,
+        "total_chains": 302,
+        "truth_rank": 2
+      },
+      {
+        "id": "ja2/utf8-cp437",
+        "total_candidates": 97,
+        "total_chains": 367,
+        "truth_rank": 2
+      },
+      {
+        "id": "ja2/gb18030-latin1",
+        "total_candidates": 141,
+        "total_chains": 448,
+        "truth_rank": 1
+      },
+      {
+        "id": "ja2/gb18030-cp437",
+        "total_candidates": 145,
+        "total_chains": 486,
+        "truth_rank": 1
+      },
+      {
+        "id": "ja2/sjis-latin1",
+        "total_candidates": 126,
+        "total_chains": 423,
+        "truth_rank": 2
+      },
+      {
+        "id": "ja2/euckr-latin1",
+        "total_candidates": 125,
+        "total_chains": 553,
+        "truth_rank": 1
+      },
+      {
+        "id": "ja3/utf8-latin1",
+        "total_candidates": 93,
+        "total_chains": 295,
+        "truth_rank": 1
+      },
+      {
+        "id": "ja3/utf8-cp437",
+        "total_candidates": 107,
+        "total_chains": 337,
+        "truth_rank": 1
+      },
+      {
+        "id": "ja3/gb18030-latin1",
+        "total_candidates": 138,
+        "total_chains": 447,
+        "truth_rank": 1
+      },
+      {
+        "id": "ja3/gb18030-cp437",
+        "total_candidates": 182,
+        "total_chains": 615,
+        "truth_rank": 1
+      },
+      {
+        "id": "ja3/sjis-latin1",
+        "total_candidates": 177,
+        "total_chains": 661,
+        "truth_rank": 2
+      },
+      {
+        "id": "ja3/euckr-latin1",
+        "total_candidates": 138,
+        "total_chains": 778,
+        "truth_rank": 2
+      },
+      {
+        "id": "ja3/big5-latin1",
+        "total_candidates": 143,
+        "total_chains": 668,
+        "truth_rank": 1
+      },
+      {
+        "id": "ko1/utf8-latin1",
+        "total_candidates": 78,
+        "total_chains": 221,
+        "truth_rank": 3
+      },
+      {
+        "id": "ko1/utf8-cp437",
+        "total_candidates": 78,
+        "total_chains": 204,
+        "truth_rank": 2
+      },
+      {
+        "id": "ko1/gb18030-latin1",
+        "total_candidates": 50,
+        "total_chains": 128,
+        "truth_rank": 1
+      },
+      {
+        "id": "ko1/gb18030-cp437",
+        "total_candidates": 74,
+        "total_chains": 174,
+        "truth_rank": 1
+      },
+      {
+        "id": "ko1/utf8-cp1252",
+        "total_candidates": 74,
+        "total_chains": 177,
+        "truth_rank": 2
+      },
+      {
+        "id": "ko1/euckr-latin1",
+        "total_candidates": 87,
+        "total_chains": 432,
+        "truth_rank": 2
+      },
+      {
+        "id": "ko2/utf8-latin1",
+        "total_candidates": 52,
+        "total_chains": 130,
+        "truth_rank": 3
+      },
+      {
+        "id": "ko2/utf8-cp437",
+        "total_candidates": 57,
+        "total_chains": 135,
+        "truth_rank": 2
+      },
+      {
+        "id": "ko2/gb18030-latin1",
+        "total_candidates": 80,
+        "total_chains": 223,
+        "truth_rank": 1
+      },
+      {
+        "id": "ko2/gb18030-cp437",
+        "total_candidates": 80,
+        "total_chains": 206,
+        "truth_rank": 1
+      },
+      {
+        "id": "ko2/euckr-latin1",
+        "total_candidates": 104,
+        "total_chains": 488,
+        "truth_rank": 4
+      },
+      {
+        "id": "ko3/utf8-latin1",
+        "total_candidates": 64,
+        "total_chains": 158,
+        "truth_rank": 6
+      },
+      {
+        "id": "ko3/utf8-cp437",
+        "total_candidates": 109,
+        "total_chains": 280,
+        "truth_rank": 10
+      },
+      {
+        "id": "ko3/gb18030-latin1",
+        "total_candidates": 59,
+        "total_chains": 140,
+        "truth_rank": 1
+      },
+      {
+        "id": "ko3/gb18030-cp437",
+        "total_candidates": 151,
+        "total_chains": 348,
+        "truth_rank": 1
+      },
+      {
+        "id": "ko3/euckr-latin1",
+        "total_candidates": 146,
+        "total_chains": 877,
+        "truth_rank": 7
+      }
+    ],
+    "cases_total": 57,
+    "chain_count": {
+      "max": 1654,
+      "mean": 499.105263,
+      "median": 447.0,
+      "min": 128
+    },
+    "max_depth": 3,
+    "measured": true,
+    "note": "measured by attr at MAX_DEPTH=3 over the same 57 probe cases (M2); small-sample feasibility evidence, not a product metric",
+    "truth_first": 30,
+    "truth_first_rate": 0.526316,
+    "truth_in_candidates": 57
+  },
+  "matrix": {
+    "samples": [
+      {
+        "id": "zh1",
+        "language": "zh",
+        "text": "字符显示异常"
+      },
+      {
+        "id": "zh2",
+        "language": "zh",
+        "text": "编码事故调查"
+      },
+      {
+        "id": "zh3",
+        "language": "zh",
+        "text": "中文注释显示乱码"
+      },
+      {
+        "id": "zh4",
+        "language": "zh",
+        "text": "中文測試"
+      },
+      {
+        "id": "ja1",
+        "language": "ja",
+        "text": "日本語のテスト"
+      },
+      {
+        "id": "ja2",
+        "language": "ja",
+        "text": "文字化け調査"
+      },
+      {
+        "id": "ja3",
+        "language": "ja",
+        "text": "東京の資料"
+      },
+      {
+        "id": "ko1",
+        "language": "ko",
+        "text": "한국어 테스트"
+      },
+      {
+        "id": "ko2",
+        "language": "ko",
+        "text": "인코딩 오류"
+      },
+      {
+        "id": "ko3",
+        "language": "ko",
+        "text": "서울 자료"
+      }
+    ],
+    "scenarios": [
+      {
+        "decode": "latin-1",
+        "encode": "utf-8",
+        "id": "utf8-latin1"
+      },
+      {
+        "decode": "cp437",
+        "encode": "utf-8",
+        "id": "utf8-cp437"
+      },
+      {
+        "decode": "latin-1",
+        "encode": "gb18030",
+        "id": "gb18030-latin1"
+      },
+      {
+        "decode": "cp437",
+        "encode": "gb18030",
+        "id": "gb18030-cp437"
+      },
+      {
+        "decode": "cp1252",
+        "encode": "utf-8",
+        "id": "utf8-cp1252"
+      },
+      {
+        "decode": "latin-1",
+        "encode": "shift_jis",
+        "id": "sjis-latin1"
+      },
+      {
+        "decode": "latin-1",
+        "encode": "euc-kr",
+        "id": "euckr-latin1"
+      },
+      {
+        "decode": "latin-1",
+        "encode": "big5",
+        "id": "big5-latin1"
+      }
+    ]
+  },
+  "metrics": {
+    "candidate_size_expanded": {
+      "max": 57,
+      "mean": 33.385965,
+      "median": 33.0,
+      "min": 16
+    },
+    "candidate_size_minimal": {
+      "max": 10,
+      "mean": 6.421053,
+      "median": 7.0,
+      "min": 4
+    },
+    "cases_total": 57,
+    "single_candidate_cases_minimal": 0,
+    "truth_first_expanded": 30,
+    "truth_first_minimal": 34,
+    "truth_first_rate_expanded": 0.526316,
+    "truth_first_rate_minimal": 0.596491,
+    "truth_in_expanded": 57,
+    "truth_in_minimal": 57,
+    "usable_by_scenario": {
+      "big5-latin1": 3,
+      "euckr-latin1": 7,
+      "gb18030-cp437": 10,
+      "gb18030-latin1": 10,
+      "sjis-latin1": 4,
+      "utf8-cp1252": 3,
+      "utf8-cp437": 10,
+      "utf8-latin1": 10
+    }
+  },
+  "notes": [
+    "small-sample feasibility probe, not a product metric",
+    "candidate set = distinct recovered texts; one representative chain per text",
+    "minimal = depth-1 lossless recoveries; expanded = depth <= 2",
+    "depth3 = attr at MAX_DEPTH over the same cases (M2); counts are complete, not top-N",
+    "this file is the reproducible record; the pre-M1 one-off script was not archived"
+  ],
+  "probe": {
+    "cases": 57,
+    "decoders": 7,
+    "depth": 2,
+    "encoders": 10,
+    "note": "small-sample feasibility probe, not a product metric",
+    "samples": 10,
+    "scenarios": 8
+  },
+  "schema": "mojibake-forensics/bench/1"
+}

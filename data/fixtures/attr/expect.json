@@ -1,0 +1,128 @@
+{
+  "criteria": {
+    "decoders": [
+      "utf-8",
+      "gb18030",
+      "big5",
+      "shift_jis",
+      "euc-kr",
+      "cp1252",
+      "latin-1"
+    ],
+    "encoders": [
+      "utf-8",
+      "gb18030",
+      "gbk",
+      "big5",
+      "shift_jis",
+      "euc-jp",
+      "euc-kr",
+      "cp1252",
+      "latin-1",
+      "cp437"
+    ],
+    "max_depth": 3
+  },
+  "expected": {
+    "candidates_are_always_a_list": true,
+    "cases": [
+      {
+        "candidate_count_min": 1,
+        "chain": "encode:cp1252>decode:utf-8",
+        "id": "classic-cp1252",
+        "note": null,
+        "status": "candidates",
+        "steps": [
+          {
+            "codec": "cp1252",
+            "index": 1,
+            "input": "é›…",
+            "op": "encode",
+            "output_hex": "E9 9B 85"
+          },
+          {
+            "codec": "utf-8",
+            "index": 2,
+            "input_hex": "E9 9B 85",
+            "op": "decode",
+            "output": "雅"
+          }
+        ],
+        "truth": "雅",
+        "truth_in_candidates": true
+      },
+      {
+        "candidate_count_min": 1,
+        "chain": "encode:latin-1>decode:utf-8",
+        "id": "utf8-as-latin1",
+        "note": null,
+        "status": "candidates",
+        "steps": [
+          {
+            "codec": "latin-1",
+            "index": 1,
+            "input": "ä¸­ææ¸¬è©¦",
+            "op": "encode",
+            "output_hex": "E4 B8 AD E6 96 87 E6 B8 AC E8 A9 A6"
+          },
+          {
+            "codec": "utf-8",
+            "index": 2,
+            "input_hex": "E4 B8 AD E6 96 87 E6 B8 AC E8 A9 A6",
+            "op": "decode",
+            "output": "中文測試"
+          }
+        ],
+        "truth": "中文測試",
+        "truth_in_candidates": true
+      },
+      {
+        "candidate_count_min": 1,
+        "chain": "encode:cp437>decode:utf-8",
+        "id": "utf8-as-cp437",
+        "note": null,
+        "status": "candidates",
+        "steps": [
+          {
+            "codec": "cp437",
+            "index": 1,
+            "input": "µùÑµ£¼Φ¬₧",
+            "op": "encode",
+            "output_hex": "E6 97 A5 E6 9C AC E8 AA 9E"
+          },
+          {
+            "codec": "utf-8",
+            "index": 2,
+            "input_hex": "E6 97 A5 E6 9C AC E8 AA 9E",
+            "op": "decode",
+            "output": "日本語"
+          }
+        ],
+        "truth": "日本語",
+        "truth_in_candidates": true
+      }
+    ],
+    "status": "candidates",
+    "top_1_note": "single_candidate_in_bounded_search"
+  },
+  "input": {
+    "cases": [
+      {
+        "corrupted_bytes_hex": "E9 9B 85",
+        "id": "classic-cp1252",
+        "text": "é›…"
+      },
+      {
+        "corrupted_bytes_hex": "E4 B8 AD E6 96 87 E6 B8 AC E8 A9 A6",
+        "id": "utf8-as-latin1",
+        "text": "ä¸­ææ¸¬è©¦"
+      },
+      {
+        "corrupted_bytes_hex": "E6 97 A5 E6 9C AC E8 AA 9E",
+        "id": "utf8-as-cp437",
+        "text": "µùÑµ£¼Φ¬₧"
+      }
+    ]
+  },
+  "note": "M2 consumes this fixture; expected values are recomputable with stdlib codecs"
+}

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """Command-line entry point for Mojibake Forensics.
 
-Skeleton behaviour: every implemented-in-a-later-milestone subcommand returns
+``attr`` is implemented from M2, ``explain`` from M3 and ``recover`` from M4.
+Subcommands still waiting for their milestone (``file`` / ``scan``) return
 ``status="not_ready"`` and exit code 4. No empty result is fabricated.
 """
 
@@ -66,16 +67,19 @@ def build_parser():
         "explain", help="replay a candidate path step by step with byte proofs"
     )
     _add_text_input(explain)
-    explain.add_argument("--pick", type=int, default=None, help="candidate rank to explain")
-    explain.add_argument("--all", dest="all_candidates", action="store_true", help="explain all candidates")
+    selection = explain.add_mutually_exclusive_group(required=True)
+    selection.add_argument("--pick", type=int, default=None, help="candidate rank to explain")
+    selection.add_argument(
+        "--all", dest="all_candidates", action="store_true", help="explain all candidates"
+    )
     explain.add_argument("--vs", type=int, default=None, help="compare with candidate rank N")
     explain.add_argument("--json", action="store_true", help="machine-readable JSON")
 
     recover = subparsers.add_parser(
         "recover", help="recover via an explicit candidate, or declare LOST / NOT_MOJIBAKE"
     )
-    recover.add_argument("--text", required=True, help="already-decoded string")
-    recover.add_argument("--pick", type=int, required=True, help="candidate rank from attr")
+    _add_text_input(recover)
+    recover.add_argument("--pick", type=int, default=None, help="candidate rank from attr (required; run `attr` first)")
     recover.add_argument("--out", default=None, help="write recovered text here (never overwrite input)")
     recover.add_argument("--json", action="store_true", help="machine-readable JSON")
 
@@ -113,8 +117,10 @@ def _exit_code_for(payload):
     status = payload.get("status")
     if status == "not_ready":
         return report.EXIT_NOT_READY
-    if status in ("candidates", "recovered", "ok", "explain"):
+    if status in ("candidates", "recovered", "ok"):
         return report.EXIT_OK
+    if status in ("no_candidate", "verify_failed", "lost", "not_mojibake"):
+        return report.EXIT_ATTENTION
     if status == "error":
         return report.EXIT_USAGE
     return report.EXIT_ATTENTION
@@ -125,13 +131,15 @@ def main(argv=None):
     parser = build_parser()
     args = parser.parse_args(argv)
 
-    if args.command == "explain" and args.pick is None and not args.all_candidates:
-        parser.error("explain requires --pick N or --all")
-    if args.command == "attr" and args.top < 1:
-        parser.error("--top must be >= 1")
+    if args.command == "explain" and args.all_candidates and args.vs is not None:
+        parser.error("--vs is only valid with --pick")
     if args.command == "explain" and args.pick is not None and args.pick < 1:
         parser.error("--pick must be >= 1")
-    if args.command == "recover" and args.pick < 1:
+    if args.command == "explain" and args.vs is not None and args.vs < 1:
+        parser.error("--vs must be >= 1")
+    if args.command == "attr" and args.top < 1:
+        parser.error("--top must be >= 1")
+    if args.command == "recover" and args.pick is not None and args.pick < 1:
         parser.error("--pick must be >= 1")
 
     try:
@@ -142,11 +150,17 @@ def main(argv=None):
 
     module = COMMANDS[args.command]
     payload = module.run(args)
+
+    renderer = getattr(module, "render", None)
+    human = None
+    if renderer is not None and not _wants_json(args):
+        human = renderer(payload)
     report.emit(
         payload,
         as_json=_wants_json(args),
         command=args.command,
         milestone=payload.get("milestone"),
+        human=human,
     )
     return _exit_code_for(payload)
 

@@ -1,0 +1,50 @@
+{
+  "criteria": {
+    "decoders": [
+      "utf-8",
+      "gb18030",
+      "big5",
+      "shift_jis",
+      "euc-kr",
+      "cp1252",
+      "latin-1"
+    ],
+    "encoders": [
+      "utf-8",
+      "gb18030",
+      "gbk",
+      "big5",
+      "shift_jis",
+      "euc-jp",
+      "euc-kr",
+      "cp1252",
+      "latin-1",
+      "cp437"
+    ],
+    "max_depth": 3
+  },
+  "expected": {
+    "contains_tool_invented_chars": false,
+    "loss": {
+      "bytes_hex": "FF",
+      "codec": "utf-8",
+      "offset": 3,
+      "replaced_with": "U+FFFD",
+      "step": "decode"
+    },
+    "note": "U+FFFD marks bytes that no longer exist; the original cannot be recovered",
+    "reason": "replacement_char",
+    "recovered": null,
+    "status": "LOST"
+  },
+  "input": {
+    "construction": {
+      "bytes_hex": "61 62 63 FF 64 65 66",
+      "decode": "utf-8",
+      "errors": "replace",
+      "kind": "decode_errors_replace"
+    },
+    "text": "abc�def"
+  },
+  "note": "M4 consumes this fixture; LOST must locate U+FFFD"
+}

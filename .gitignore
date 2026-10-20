@@ -46,6 +46,8 @@ htmlcov/
 *.tar
 *.tar.gz
 *.tgz
+# 例外：字节断言的 zip fixture 必须入库（M1 起；固定 ZIP_STORED + 时间戳）
+!data/fixtures/file/**/*.zip
 
 # ---- 本项目：语料与基准产物 ----
 # 干净语料只提统计、不入仓原文；语料目录整体忽略

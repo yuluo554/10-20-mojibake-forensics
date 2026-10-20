@@ -1,0 +1,54 @@
+{
+  "criteria": {
+    "decoders": [
+      "utf-8",
+      "gb18030",
+      "big5",
+      "shift_jis",
+      "euc-kr",
+      "cp1252",
+      "latin-1"
+    ],
+    "encoders": [
+      "utf-8",
+      "gb18030",
+      "gbk",
+      "big5",
+      "shift_jis",
+      "euc-jp",
+      "euc-kr",
+      "cp1252",
+      "latin-1",
+      "cp437"
+    ],
+    "max_depth": 3
+  },
+  "expected": {
+    "bom": {
+      "bytes_hex": "EF BB BF",
+      "kind": "utf-8",
+      "offset": 0,
+      "present": true
+    },
+    "bom_conflict": true,
+    "content": {
+      "as_gb18030": {
+        "decodable": true,
+        "text": "中文"
+      },
+      "as_utf8": {
+        "byte_offset": 0,
+        "decodable": false
+      },
+      "body_hex": "D6 D0 CE C4"
+    },
+    "mutates_input": false,
+    "status": "ok"
+  },
+  "input": {
+    "bytes_hex": "EF BB BF D6 D0 CE C4",
+    "path": "bom-conflict.bin",
+    "sha256": "aecdf6510ffa856fd3086488ac8a0fdd213577dd28487606edbd2f2510d6ba2b"
+  },
+  "note": "M5 consumes this fixture; report the conflict, never rewrite"
+}

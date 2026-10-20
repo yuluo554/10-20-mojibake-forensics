@@ -1,0 +1,47 @@
+{
+  "criteria": {
+    "decoders": [
+      "utf-8",
+      "gb18030",
+      "big5",
+      "shift_jis",
+      "euc-kr",
+      "cp1252",
+      "latin-1"
+    ],
+    "encoders": [
+      "utf-8",
+      "gb18030",
+      "gbk",
+      "big5",
+      "shift_jis",
+      "euc-jp",
+      "euc-kr",
+      "cp1252",
+      "latin-1",
+      "cp437"
+    ],
+    "max_depth": 3
+  },
+  "expected": {
+    "mutates_input": false,
+    "status": "ok",
+    "utf16_misalignment": {
+      "byte_length": 9,
+      "odd_length": true,
+      "reason": "odd_byte_count",
+      "shift_offset": 1,
+      "shifted_text": "中文测试",
+      "unshifted": {
+        "byte_offset": 8,
+        "decodable": false
+      }
+    }
+  },
+  "input": {
+    "bytes_hex": "00 2D 4E 87 65 4B 6D D5 8B",
+    "path": "utf16-misalignment.bin",
+    "sha256": "77a1f3951aa69a2fa890af269ef234209984131825bdce314913b7daa27d795e"
+  },
+  "note": "M5 consumes this fixture; evidence only, no auto-fix"
+}

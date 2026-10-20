@@ -1,0 +1,53 @@
+{
+  "criteria": {
+    "decoders": [
+      "utf-8",
+      "gb18030",
+      "big5",
+      "shift_jis",
+      "euc-kr",
+      "cp1252",
+      "latin-1"
+    ],
+    "encoders": [
+      "utf-8",
+      "gb18030",
+      "gbk",
+      "big5",
+      "shift_jis",
+      "euc-jp",
+      "euc-kr",
+      "cp1252",
+      "latin-1",
+      "cp437"
+    ],
+    "max_depth": 3
+  },
+  "expected": {
+    "contains_tool_invented_chars": false,
+    "loss": null,
+    "not_mojibake": true,
+    "note": "MSVC Debug stack fill (0xCC/0xCD); do not try to repair it",
+    "reason": "msvc_fill",
+    "recovered": null,
+    "status": "NOT_MOJIBAKE"
+  },
+  "input": {
+    "alternative_text": "屯屯屯",
+    "construction": {
+      "bytes_hex": {
+        "CC": "CC CC CC CC CC CC",
+        "CD": "CD CD CD CD CD CD"
+      },
+      "codec": "gbk",
+      "fill_bytes": [
+        "CC",
+        "CD"
+      ],
+      "kind": "fill_byte_decode",
+      "repeat": 6
+    },
+    "text": "烫烫烫"
+  },
+  "note": "M4 consumes this fixture; classify, do not repair"
+}

@@ -10,5 +10,5 @@
 *.in text eol=lf
 
 # 冻结的二进制/字节断言 fixture（M1–M5 逐个登记）
-# *.zip binary
-# *.bin binary
+data/fixtures/file/**/*.zip binary
+data/fixtures/file/**/*.bin binary

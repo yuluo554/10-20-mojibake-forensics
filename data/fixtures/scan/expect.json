@@ -1,0 +1,85 @@
+{
+  "criteria": {
+    "decoders": [
+      "utf-8",
+      "gb18030",
+      "big5",
+      "shift_jis",
+      "euc-kr",
+      "cp1252",
+      "latin-1"
+    ],
+    "encoders": [
+      "utf-8",
+      "gb18030",
+      "gbk",
+      "big5",
+      "shift_jis",
+      "euc-jp",
+      "euc-kr",
+      "cp1252",
+      "latin-1",
+      "cp437"
+    ],
+    "max_depth": 3,
+    "scan_hit": {
+      "candidate_readability_at_least": 0.8,
+      "input_readability_below": 0.5,
+      "readability_gain_at_least": 0.3
+    }
+  },
+  "expected": {
+    "clean": {
+      "baselined": [],
+      "exit_code": 0,
+      "files_scanned": 10,
+      "new": [],
+      "stale": []
+    },
+    "polluted": {
+      "exit_code": 1,
+      "new": [
+        {
+          "candidate_contains": "日本語",
+          "category": "mojibake",
+          "corruption_chain": "encode:utf-8>decode:cp437",
+          "path": "polluted/ja.md",
+          "truth_bytes_hex": "E6 97 A5 E6 9C AC E8 AA 9E"
+        },
+        {
+          "candidate_contains": "中文測試",
+          "category": "mojibake",
+          "corruption_chain": "encode:utf-8>decode:latin-1",
+          "path": "polluted/zh.md",
+          "truth_bytes_hex": "E4 B8 AD E6 96 87 E6 B8 AC E8 A9 A6"
+        }
+      ]
+    },
+    "stale_probe": {
+      "bucket": "stale",
+      "exit_code_effect": "none",
+      "virtual_missing_path": "clean/missing.md"
+    }
+  },
+  "input": {
+    "baseline": "clean-corpus.json",
+    "clean_files": [
+      "clean/zh-01.md",
+      "clean/zh-02.md",
+      "clean/zh-03.md",
+      "clean/ja-01.md",
+      "clean/ja-02.md",
+      "clean/ko-01.md",
+      "clean/ko-02.md",
+      "clean/en-01.md",
+      "clean/en-02.md",
+      "clean/mixed-01.md"
+    ],
+    "directory": ".",
+    "polluted_files": [
+      "polluted/zh.md",
+      "polluted/ja.md"
+    ]
+  },
+  "note": "M5 consumes this fixture; clean must be 0 new / 0 file changes"
+}

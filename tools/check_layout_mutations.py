@@ -125,15 +125,17 @@ def mutation_status(root):
 
 
 def mutation_handoffs(root):
-    set_milestone_done(root, 1)
-    os.remove(os.path.join(root, "plan/HANDOFF-M1.md"))
+    # M0/M1/M2 are already done; use the next pending milestone (M3), whose
+    # handoff exists in the repository, then remove it to simulate a missing one.
+    set_milestone_done(root, 3)
+    os.remove(os.path.join(root, "plan/HANDOFF-M3.md"))
 
 
 def mutation_gaps(root):
     replace_text(
         os.path.join(root, "plan/06-交付对标与决策.md"),
-        "| 核心枚举与无损过滤尚未实现（M2） |",
-        "| 核心枚举未实现，见 M0 收尾记录 |",
+        "| 证明重放未实现（M3） |",
+        "| 证明重放未实现，见 M0 收尾记录 |",
     )
 
 

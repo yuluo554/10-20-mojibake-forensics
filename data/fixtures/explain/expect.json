@@ -1,0 +1,63 @@
+{
+  "criteria": {
+    "decoders": [
+      "utf-8",
+      "gb18030",
+      "big5",
+      "shift_jis",
+      "euc-kr",
+      "cp1252",
+      "latin-1"
+    ],
+    "encoders": [
+      "utf-8",
+      "gb18030",
+      "gbk",
+      "big5",
+      "shift_jis",
+      "euc-jp",
+      "euc-kr",
+      "cp1252",
+      "latin-1",
+      "cp437"
+    ],
+    "max_depth": 3
+  },
+  "expected": {
+    "negative": {
+      "byte_offset": 2,
+      "failed_step": 2,
+      "input_hex": "E9 9B 85",
+      "reason": "decode_error",
+      "verify": false
+    },
+    "positive": {
+      "failed_step": null,
+      "result": "雅",
+      "steps": [
+        {
+          "codec": "cp1252",
+          "index": 1,
+          "input": "é›…",
+          "op": "encode",
+          "output_hex": "E9 9B 85"
+        },
+        {
+          "codec": "utf-8",
+          "index": 2,
+          "input_hex": "E9 9B 85",
+          "op": "decode",
+          "output": "雅"
+        }
+      ],
+      "verify": true
+    }
+  },
+  "input": {
+    "corrupted_bytes_hex": "E9 9B 85",
+    "negative_chain": "encode:cp1252>decode:gb18030",
+    "positive_chain": "encode:cp1252>decode:utf-8",
+    "text": "é›…"
+  },
+  "note": "M3 consumes this fixture; replay must not import tool internals"
+}

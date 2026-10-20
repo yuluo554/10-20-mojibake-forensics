@@ -1,0 +1,58 @@
+{
+  "criteria": {
+    "decoders": [
+      "utf-8",
+      "gb18030",
+      "big5",
+      "shift_jis",
+      "euc-kr",
+      "cp1252",
+      "latin-1"
+    ],
+    "encoders": [
+      "utf-8",
+      "gb18030",
+      "gbk",
+      "big5",
+      "shift_jis",
+      "euc-jp",
+      "euc-kr",
+      "cp1252",
+      "latin-1",
+      "cp437"
+    ],
+    "max_depth": 3
+  },
+  "expected": {
+    "archive_sha256": "af6cebdf94896a9358372f98728b75c18bdf2bdc2932681f25a29c8ea8b8afc4",
+    "mutates_input": false,
+    "status": "ok",
+    "zip_names": [
+      {
+        "alternatives": [
+          {
+            "codec": "cp437",
+            "name": "Σ╕¡µûç.txt"
+          }
+        ],
+        "flag_bits": 2048,
+        "flag_utf8": true,
+        "interpretation": "utf-8",
+        "name": "中文.txt",
+        "raw_name_hex": "E4 B8 AD E6 96 87 2E 74 78 74"
+      }
+    ],
+    "zipfile_view": {
+      "compress_type": 0,
+      "create_system": 0,
+      "filename": "中文.txt",
+      "flag_bits": 2048
+    }
+  },
+  "input": {
+    "bytes_hex": "50 4B 03 04 14 00 00 08 00 00 00 00 21 00 AC 2C 60 75 08 00 00 00 08 00 00 00 0A 00 00 00 E4 B8 AD E6 96 87 2E 74 78 74 66 69 78 74 75 72 65 0A 50 4B 01 02 14 00 14 00 00 08 00 00 00 00 21 00 AC 2C 60 75 08 00 00 00 08 00 00 00 0A 00 00 00 00 00 00 00 00 00 00 00 80 01 00 00 00 00 E4 B8 AD E6 96 87 2E 74 78 74 50 4B 05 06 00 00 00 00 01 00 01 00 38 00 00 00 30 00 00 00 00 00",
+    "path": "zip-cjk-utf8.zip",
+    "sha256": "af6cebdf94896a9358372f98728b75c18bdf2bdc2932681f25a29c8ea8b8afc4"
+  },
+  "note": "M5 consumes this fixture; the 0x800 flag selects UTF-8"
+}

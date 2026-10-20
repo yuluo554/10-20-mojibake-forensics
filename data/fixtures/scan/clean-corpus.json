@@ -1,0 +1,163 @@
+{
+  "expected_new": [],
+  "files": [
+    {
+      "allowed_hits": [],
+      "path": "clean/en-01.md",
+      "stats": {
+        "ascii": 26,
+        "chars": 27,
+        "cjk": 0,
+        "controls": 0,
+        "hangul": 0,
+        "kana": 0,
+        "lines": 1,
+        "other": 0,
+        "utf8_decodable": true
+      }
+    },
+    {
+      "allowed_hits": [],
+      "path": "clean/en-02.md",
+      "stats": {
+        "ascii": 33,
+        "chars": 36,
+        "cjk": 0,
+        "controls": 0,
+        "hangul": 0,
+        "kana": 0,
+        "lines": 3,
+        "other": 0,
+        "utf8_decodable": true
+      }
+    },
+    {
+      "allowed_hits": [],
+      "path": "clean/ja-01.md",
+      "stats": {
+        "ascii": 0,
+        "chars": 12,
+        "cjk": 4,
+        "controls": 0,
+        "hangul": 0,
+        "kana": 6,
+        "lines": 1,
+        "other": 1,
+        "utf8_decodable": true
+      }
+    },
+    {
+      "allowed_hits": [],
+      "path": "clean/ja-02.md",
+      "stats": {
+        "ascii": 0,
+        "chars": 13,
+        "cjk": 3,
+        "controls": 0,
+        "hangul": 0,
+        "kana": 8,
+        "lines": 1,
+        "other": 1,
+        "utf8_decodable": true
+      }
+    },
+    {
+      "allowed_hits": [],
+      "path": "clean/ko-01.md",
+      "stats": {
+        "ascii": 3,
+        "chars": 15,
+        "cjk": 0,
+        "controls": 0,
+        "hangul": 11,
+        "kana": 0,
+        "lines": 1,
+        "other": 0,
+        "utf8_decodable": true
+      }
+    },
+    {
+      "allowed_hits": [],
+      "path": "clean/ko-02.md",
+      "stats": {
+        "ascii": 3,
+        "chars": 14,
+        "cjk": 0,
+        "controls": 0,
+        "hangul": 10,
+        "kana": 0,
+        "lines": 1,
+        "other": 0,
+        "utf8_decodable": true
+      }
+    },
+    {
+      "allowed_hits": [],
+      "path": "clean/mixed-01.md",
+      "stats": {
+        "ascii": 16,
+        "chars": 21,
+        "cjk": 4,
+        "controls": 0,
+        "hangul": 0,
+        "kana": 0,
+        "lines": 1,
+        "other": 0,
+        "utf8_decodable": true
+      }
+    },
+    {
+      "allowed_hits": [],
+      "path": "clean/zh-01.md",
+      "stats": {
+        "ascii": 2,
+        "chars": 21,
+        "cjk": 15,
+        "controls": 0,
+        "hangul": 0,
+        "kana": 0,
+        "lines": 3,
+        "other": 1,
+        "utf8_decodable": true
+      }
+    },
+    {
+      "allowed_hits": [],
+      "path": "clean/zh-02.md",
+      "stats": {
+        "ascii": 0,
+        "chars": 17,
+        "cjk": 14,
+        "controls": 0,
+        "hangul": 0,
+        "kana": 0,
+        "lines": 1,
+        "other": 2,
+        "utf8_decodable": true
+      }
+    },
+    {
+      "allowed_hits": [],
+      "path": "clean/zh-03.md",
+      "stats": {
+        "ascii": 0,
+        "chars": 15,
+        "cjk": 13,
+        "controls": 0,
+        "hangul": 0,
+        "kana": 0,
+        "lines": 1,
+        "other": 1,
+        "utf8_decodable": true
+      }
+    }
+  ],
+  "note": "statistics and relative paths only; no corpus text is stored here",
+  "sample_size": {
+    "chars": 191,
+    "files": 10,
+    "lines": 14
+  },
+  "schema": "mojibake-forensics/clean-corpus/1",
+  "source_category": "synthetic-clean-sentences"
+}

@@ -23,24 +23,56 @@ def test_subcommand_help(command, capsys):
     assert "usage:" in capsys.readouterr().out.lower()
 
 
-def test_attr_not_ready_json(capsys):
+def test_attr_is_no_longer_not_ready(capsys):
+    """M2 retires exit code 4 for attr; the envelope is a real candidate list."""
     code = cli.main(["attr", "--text", "é›…", "--json"])
-    assert code == report.EXIT_NOT_READY
+    assert code == report.EXIT_OK
     payload = json.loads(capsys.readouterr().out)
-    assert payload["status"] == "not_ready"
+    assert payload["status"] == "candidates"
     assert payload["command"] == "attr"
-    assert payload["milestone"] == "M2"
+    assert "milestone" not in payload
     assert payload["schema"] == "mojibake-forensics/1"
     assert payload["criteria"]["max_depth"] == 3
+    assert isinstance(payload["candidates"], list)
+
+
+def test_recover_is_no_longer_not_ready(capsys):
+    """M4 retires exit code 4 for recover; the envelope is a real verdict."""
+    code = cli.main(["recover", "--text", "é›…", "--pick", "1", "--json"])
+    assert code == report.EXIT_OK
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["status"] == "recovered"
+    assert payload["command"] == "recover"
+    assert "milestone" not in payload
+    assert payload["schema"] == "mojibake-forensics/1"
+    assert payload["recovered"] == "雅"
+    assert payload["verify"] is True
+
+
+def test_explain_is_no_longer_not_ready(capsys):
+    """M3 retires exit code 4 for explain; the envelope carries a real proof."""
+    code = cli.main(["explain", "--text", "é›…", "--pick", "1", "--json"])
+    assert code == report.EXIT_OK
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["status"] == "ok"
+    assert payload["command"] == "explain"
+    assert "milestone" not in payload
+    assert payload["schema"] == "mojibake-forensics/1"
+    assert payload["proofs"][0]["verify"] is True
+
+
+@pytest.mark.parametrize(
+    "argv",
+    [
+        ["file", "--path", "x.bin", "--json"],
+        ["scan", "--dir", ".", "--baseline", "baseline.json", "--json"],
+    ],
+)
+def test_remaining_commands_still_not_ready(argv, capsys):
+    assert cli.main(argv) == report.EXIT_NOT_READY
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["status"] == "not_ready"
     assert payload["notes"] == ["not_implemented_in_skeleton"]
-
-
-def test_recover_not_ready_human(capsys):
-    code = cli.main(["recover", "--text", "x", "--pick", "1"])
-    assert code == report.EXIT_NOT_READY
-    out = capsys.readouterr().out
-    assert "not implemented yet" in out
-    assert "M4" in out
 
 
 def test_attr_requires_text_or_file():

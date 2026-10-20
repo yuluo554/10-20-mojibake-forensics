@@ -23,7 +23,7 @@ def test_dumps_ends_with_single_newline():
 
 
 def test_not_ready_envelope_fields():
-    payload = report.not_ready("attr", "M2")
+    payload = report.not_ready("explain", "M3")
     assert payload["status"] == "not_ready"
     assert payload["schema"] == "mojibake-forensics/1"
     assert payload["notes"] == ["not_implemented_in_skeleton"]
