@@ -116,13 +116,11 @@ def check_release_doc(pre_tag):
     coverage = bool(re.search(r"^#{2,3}.*覆盖对账", text, re.MULTILINE))
     rows = len(re.findall(r"^\|.*(?:实现|不适用|待首推).*\|$", text, re.MULTILINE))
     details = ["两栏:%s" % columns, "覆盖对账:%s" % coverage, "三态行数:%d" % rows]
-
-    placeholder = "<!-- POST_TAG_PLACEHOLDER -->" in text
+    # tag 模式下当前工作树的文档已含占位注释（第二栏在 tag 后提交回填）——tag 对象
+    # 本身不含第二栏字面值是既定口径（plan/05 §三），不算 FAIL。
     if not pre_tag:
+        placeholder = "<!-- POST_TAG_PLACEHOLDER -->" in text
         details.append("tag 后栏:%s" % ("待回填" if placeholder else "已填"))
-        if placeholder:
-            add("RELEASE_DOC", "FAIL", "；".join(details))
-            return
 
     ok = columns and coverage and rows >= 3
     add("RELEASE_DOC", "PASS" if ok else "FAIL", "；".join(details))
@@ -154,16 +152,17 @@ def check_tag(pre_tag):
         "for-each-ref", "--format=%(taggername)|%(taggeremail)", "refs/tags/%s" % TAG
     )
     tagger_name, _, tagger_email = ref_line.strip().partition("|")
+    email_bare = tagger_email.strip("<>")
     email_ok = bool(
-        re.match(r"^[0-9]+\+[^@]+@users\.noreply\.github\.com$", tagger_email)
-        or tagger_email.endswith("@users.noreply.github.com")
+        re.match(r"^[0-9]+\+[^@]+@users\.noreply\.github\.com$", email_bare)
+        or email_bare.endswith("@users.noreply.github.com")
     )
     name_ok = "ASUS" not in tagger_name and "\\" not in tagger_name and "/" not in tagger_name
     if not email_ok or not name_ok:
         add(
             "TAG",
             "FAIL",
-            "tagger 未脱敏：%s <%s>" % (tagger_name, tagger_email),
+            "tagger 未脱敏：%s <%s>" % (tagger_name, email_bare),
         )
         return
 
@@ -173,13 +172,15 @@ def check_tag(pre_tag):
         return
 
     add("TAG", "PASS", "%s annotated；tagger=%s <%s>；tag 树含发布留档" % (
-        TAG, tagger_name, tagger_email
+        TAG, tagger_name, email_bare
     ))
 
 
 def _tag_tree_hashes():
     """Return {path: sha256(blob)} for every file in the tag tree."""
-    code, out, err = git("ls-tree", "-r", "--name-only", TAG)
+    code, out, err = git(
+        "-c", "core.quotepath=false", "ls-tree", "-r", "--name-only", TAG
+    )
     if code != 0:
         raise RuntimeError("git ls-tree 失败: %s" % err.strip())
     hashes = {}
