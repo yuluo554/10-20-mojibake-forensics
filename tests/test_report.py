@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import json
 
+import pytest
+
 from mojibake_forensics import report
 
 
@@ -36,4 +38,18 @@ def test_exit_code_values_are_frozen():
     assert report.EXIT_ATTENTION == 1
     assert report.EXIT_USAGE == 2
     assert report.EXIT_ENV == 3
-    assert report.EXIT_NOT_READY == 4
+
+
+def test_exit_code_4_is_retired():
+    """M5: the skeleton-only code 4 is gone — the constant must not exist."""
+    assert not hasattr(report, "EXIT_NOT_READY")
+
+
+def test_error_envelope_fields():
+    payload = report.error("bad_thing", "it went wrong", command="file")
+    assert payload["status"] == "error"
+    assert payload["code"] == "bad_thing"
+    assert payload["message"] == "it went wrong"
+    assert payload["command"] == "file"
+    assert payload["schema"] == "mojibake-forensics/1"
+    json.dumps(payload)  # must be JSON-serializable

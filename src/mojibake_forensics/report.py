@@ -19,10 +19,8 @@ EXIT_OK = 0
 EXIT_ATTENTION = 1
 EXIT_USAGE = 2
 EXIT_ENV = 3
-# Skeleton-only code. ``attr`` stopped returning it in M2; the remaining
-# subcommands retire one by one (M3-M5), then the constant goes (four places:
-# constant, CLI, tests, docs).
-EXIT_NOT_READY = 4
+# The skeleton-only code 4 (``EXIT_NOT_READY``) was retired in M5 when the
+# last subcommands (``file`` / ``scan``) landed; no subcommand returns it.
 
 
 def base_envelope(status):

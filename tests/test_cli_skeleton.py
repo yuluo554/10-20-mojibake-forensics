@@ -61,18 +61,24 @@ def test_explain_is_no_longer_not_ready(capsys):
     assert payload["proofs"][0]["verify"] is True
 
 
-@pytest.mark.parametrize(
-    "argv",
-    [
-        ["file", "--path", "x.bin", "--json"],
-        ["scan", "--dir", ".", "--baseline", "baseline.json", "--json"],
-    ],
-)
-def test_remaining_commands_still_not_ready(argv, capsys):
-    assert cli.main(argv) == report.EXIT_NOT_READY
+def test_file_missing_path_is_usage_error(capsys):
+    """M5 retires exit code 4 for file: a missing file is exit code 2, no file writes."""
+    code = cli.main(["file", "--path", "definitely-missing.bin", "--json"])
+    assert code == report.EXIT_USAGE
     payload = json.loads(capsys.readouterr().out)
-    assert payload["status"] == "not_ready"
-    assert payload["notes"] == ["not_implemented_in_skeleton"]
+    assert payload["status"] == "error"
+    assert payload["command"] == "file"
+    assert "milestone" not in payload
+
+
+def test_scan_missing_baseline_is_usage_error(capsys):
+    """M5 retires exit code 4 for scan: a missing baseline is exit code 2."""
+    code = cli.main(["scan", "--dir", ".", "--baseline", "definitely-missing.json", "--json"])
+    assert code == report.EXIT_USAGE
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["status"] == "error"
+    assert payload["command"] == "scan"
+    assert "milestone" not in payload
 
 
 def test_attr_requires_text_or_file():
@@ -99,9 +105,14 @@ def test_recover_rejects_pick_zero():
     assert excinfo.value.code == 2
 
 
-def test_scan_default_format_is_json(capsys):
-    code = cli.main(["scan", "--dir", ".", "--baseline", "baseline.json"])
-    assert code == report.EXIT_NOT_READY
+def test_scan_default_format_is_json(capsys, tmp_path):
+    """Default --format json: the scan output stays machine-readable."""
+    baseline = tmp_path / "baseline.json"
+    baseline.write_text('{"files": [], "expected_new": []}', encoding="utf-8")
+    target = tmp_path / "corpus"
+    target.mkdir()
+    code = cli.main(["scan", "--dir", str(target), "--baseline", str(baseline)])
+    assert code == report.EXIT_OK
     payload = json.loads(capsys.readouterr().out)
-    assert payload["status"] == "not_ready"
+    assert payload["status"] == "ok"
     assert payload["command"] == "scan"

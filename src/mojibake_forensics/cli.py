@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """Command-line entry point for Mojibake Forensics.
 
-``attr`` is implemented from M2, ``explain`` from M3 and ``recover`` from M4.
-Subcommands still waiting for their milestone (``file`` / ``scan``) return
-``status="not_ready"`` and exit code 4. No empty result is fabricated.
+``attr`` (M2), ``explain`` (M3), ``recover`` (M4) and ``file`` / ``scan``
+(M5) are all implemented; only exit codes 0/1/2/3 are in use. No empty
+result is fabricated.
 """
 
 from __future__ import absolute_import
@@ -115,8 +115,6 @@ def _wants_json(args):
 
 def _exit_code_for(payload):
     status = payload.get("status")
-    if status == "not_ready":
-        return report.EXIT_NOT_READY
     if status in ("candidates", "recovered", "ok"):
         return report.EXIT_OK
     if status in ("no_candidate", "verify_failed", "lost", "not_mojibake"):

@@ -6,7 +6,7 @@
 
 输出恒为**有界候选集 + 每一步的字节证明 + 不可逆判定**，**永不假装猜出唯一答案**。这是与"自动修乱码"工具的产品立场差异：多解是常态，证据比自信重要。
 
-> 当前状态：**M4 `recover` 判定已完成**（`attr` 有界候选 + `explain` 逐步字节证明与对照 + `recover` 确定性还原与不可逆判死 + 退出码 0/1/2/3）。`file` / `scan` 仍返回 `status="not_ready"` 与退出码 4，**不会伪造候选或修复结果**。
+> 当前状态：**M5 `file` + `scan` 已完成**（五个子命令全部落地：`attr` 有界候选 + `explain` 逐步字节证明与对照 + `recover` 确定性还原与不可逆判死 + `file` 原始字节管道 + `scan` CI 门禁）。退出码只有 0/1/2/3 四组，**不会伪造候选或修复结果**。
 
 ## 项目状态
 
@@ -17,7 +17,7 @@
 | M2 | ✅ 已完成（2026-10-20） | `attr`：候选枚举 + 无损性过滤 + 三层打分 + 置信度区间；57 例硬门 57/57 |
 | M3 | ✅ 已完成（2026-10-20） | `explain`：逐步字节证明 + 独立复算 + 对照分叉点 |
 | M4 | ✅ 已完成（2026-10-20） | `recover`：确定性还原 + 不可逆判死 |
-| M5 | ⬜ 未开始 | `file` 原始字节管道 + `scan` CI 门禁 |
+| M5 | ✅ 已完成（2026-10-20） | `file` 原始字节管道 + `scan` CI 门禁 |
 | M6 | ⬜ 未开始 | GitHub 发布：tag + Release 附产物 + 发布留档 |
 
 ## 为什么需要它
@@ -72,7 +72,12 @@ forensics recover --text "锟斤拷" --pick 1
 forensics scan --dir ./corpus --baseline ./clean-corpus.json --format json
 ```
 
-> `attr` 自 M2 起、`explain` 自 M3 起、`recover` 自 M4 起可直接运行（链深上限 3；`--top` 只影响展示）。`file` / `scan` 仍返回退出码 4（`not_ready`），请勿把骨架输出当作判定结果。
+> 五个子命令全部可直接运行（链深上限 3；`--top` 只影响展示）：`attr` 自 M2、`explain` 自 M3、`recover` 自 M4、`file` / `scan` 自 M5 起。`file` 与 `scan` 全程只读。
+
+### `file` 原始字节管道与 `scan` 门禁（M5）
+
+- `file --path <path> [--preset ...]`：只读诊断。分节报告 `bom`（含 `bom_conflict`）/ `utf16_misalignment`（奇字节数 + 错位一字节证据，不自动改）/ `zip_names`（`flag_bits & 0x800` 判 UTF-8，无标志时列 CP437 与 UTF-8 两种解释，工具不选择）/ `csv_candidates`（`cp1252` / `gbk` / `shift_jis` + 分隔符嗅探）。文件不存在 → 退出码 2；全程不解压成员内容、不改输入。
+- `scan --dir --baseline`：逐文件、逐非空行命中判据（`data/README.md` §4.8：`readability(line)<0.5` + 候选 `≥0.8` + gain `≥0.3`）；命中分类 `new` / `baselined` / `stale`（基线指向已不存在文件 → `stale`，不影响退出码）；JSON 先写后定退出码：无 `new` → 0，有 `new` → 1，坏输入 → 2 且**不产出任何文件**；全程只读，干净语料基线零报告零改动。
 
 ### `recover` 判定（M4）
 
@@ -151,7 +156,6 @@ forensics scan --dir ./corpus --baseline ./clean-corpus.json --format json
 | 1 | 成功执行，但结论需要人处理（`no_candidate` / `LOST` / `scan` 有新增） |
 | 2 | 用法 / 输入错误（参数、文件不存在、基线 JSON 语法错误、`--pick` 越界） |
 | 3 | 环境不满足（codec 不可用、Python 版本过低、标准库模块缺失） |
-| 4 | **骨架期专用**：该子命令尚未落地（M2 起 `attr`、M3 起 `explain`、M4 起 `recover` 不再返回本码；`file` / `scan` 仍为骨架） |
 
 退出码语义唯一权威：`data/README.md` §4.7；代码常量在 `src/mojibake_forensics/report.py`。
 

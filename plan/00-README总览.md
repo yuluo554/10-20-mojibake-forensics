@@ -7,7 +7,7 @@
 - **交付形态**：**纯本地 Python CLI**（标准库编码表，零外部数据、零网络、无模型）。唯一形态，不设备选。
 - **发布**：GitHub 公开仓库，v0.1.0（**tag + Release 附产物 + 发布留档**三件套）。
 - **查证基准日**：2026-10-20。
-- **状态**：M0 / M1 / M2 / M3 / M4 完成（题目定稿 + 方法论装订 + 可运行骨架 + 数据先行 + `attr` 归因 + `explain` 证明 + `recover` 判定）；M5 待开工（交接单 `plan/HANDOFF-M5.md` 已落盘）。
+- **状态**：M0 / M1 / M2 / M3 / M4 / M5 完成（题目定稿 + 方法论装订 + 可运行骨架 + 数据先行 + `attr` 归因 + `explain` 证明 + `recover` 判定 + `file` 管道与 `scan` 门禁）；M6 待开工（发布）。
 
 ## 文档索引表
 
@@ -27,6 +27,7 @@
 | `plan/HANDOFF-M3.md` | M2 → M3 交接单（七节，含当前事实·状态不变量） | ✅ v1 |
 | `plan/HANDOFF-M4.md` | M3 → M4 交接单（七节，含当前事实·状态不变量） | ✅ v1 |
 | `plan/HANDOFF-M5.md` | M4 → M5 交接单（七节，含当前事实·状态不变量） | ✅ v1 |
+| `plan/HANDOFF-M6.md` | M5 → M6 交接单（七节，含当前事实·状态不变量） | ✅ v1 |
 | `plan/RELEASE-M6.md` | 发布留档（tag 时点事实 / tag 后追加事实分栏） | ⬜ 待 M6 |
 
 > 索引状态列随里程碑同步翻转；不得在一处标 ✅ 而在另一处标 ⬜。
@@ -60,6 +61,7 @@
 | 2026-10-20 | **M2 `attr` 落地：置信度口径补全 + 链深 3 实测 + attr 退出码 4 退役** | ①置信度归一化分母固定为**完整候选集**（`collapse_by_result` 之后、`--top` 之前），`--top` 不改变 `confidence`；守卫取 `Σ score_j <= 0`（与"全部 ≤ 0"等价且覆盖非正分母），返回 `null` + `note="no_positive_score"`。②`--top` 截断时被展示候选标 `note="truncated_to_top_n"`（提示"后面还有"，不是质量判断）。③**链深 3 首次实测**（`attr` 跑同 57 例）：候选中位 **125** / 最小 **50** / 最大 **241**，链路数中位 **447** / 最大 **1654**，真答案入集 **57/57**、排第一 **30/57**；数字进 `bench/golden/attr.json` 的 `depth3` 块，只作小样本证据，不作阈值。④`--freq` 明确报 `freq_not_implemented`（退出码 2），不伪造语言先验。⑤`attr` 不再返回退出码 4（常量保留给 M3–M5 的其余子命令）。 |
 | 2026-10-20 | **M3 `explain` 落地：证明 + 对照 + 退出码 4 退役（explain）** | ①`explain` 不重新枚举：复用 `attr.search` 的已排序候选（`Chain` 仍是唯一中间表示，`plan/02` 口径不破）。②逐步重放每步独立复算：记录的输入/输出与重放状态比对，第一处不一致停在 `failed_step`（1 起），`failure` 带 `reason` + 偏移。③`status="ok"`（verify 全绿）/ `"verify_failed"`（任一步失败，退出码 1）/ `"no_candidate"`（退出码 1，不伪造证明）。④`--vs` 缺省取 top-2 中的另一条（pick 1↔2，其余取 1）；`divergence` 只陈述第一处差异（`kind=step|bytes|text|depth|none`），**不判断优劣**；候选不足两条 → `no_second_candidate`。⑤`--pick`/`--vs` 越界 → 退出码 2（`pick_out_of_range`/`vs_out_of_range`）；`--all` 与 `--vs` 互斥。⑥独立重放脚本 `tests/independent_replay.py`：只用标准库 + 报告自身字段复算，不 import 工具内部状态。⑦`explain` 不再返回退出码 4（常量保留给 `recover`/`file`/`scan`）。 |
 | 2026-10-20 | **M4 `recover` 落地：确定性还原 + 不可逆判死 + 退出码 4 退役（recover）** | ①判定顺序固定（`plan/03` §5.2）：先判不可逆五类——`U+FFFD` → `LOST(replacement_char)` + 偏移；`锟斤拷` → `LOST(kun_jin_kao)` + `EF BF BD` 重复位置；`烫烫烫`/`屯屯屯` → `NOT_MOJIBAKE(msvc_fill)`；`?` → `LOST(encode_truncated)` + 偏移；判死后不再重放。②`silent_drop` 只在有出处证据（原文对照）时可判，CLI 面只有已解坏的 str → 不伪造该判定（fixture `requires_provenance` 口径一致）。③`RECOVERED` 必过 verify：按 `--pick` 取 `attr.search` 已排序候选（不重新枚举），复用 explain 的 `replay_chain` 逐步双向比对；失败降级 `LOST(verify_failed)`，绝不输出未经验证的修复。④`--pick` 必填（缺省 → 退出码 2 `missing_pick`）；越界 → 退出码 2 `pick_out_of_range`；`--out` 与 `--file` 输入同路径 → 退出码 2 `out_overwrites_input`；永不覆盖输入。⑤`recover` 不再返回退出码 4（常量保留给 `file`/`scan`，M5 结束前删）。⑥`no_candidate` → `LOST(reason=no_candidate)` + `depth_limit_reached`，不猜字。 |
+| 2026-10-20 | **M5 `file` + `scan` 落地：退出码 4 全面退役（常量删除）** | ①`file` 只读二进制诊断：BOM 嗅探（UTF-8/16LE/16BE/32 先后）+ `bom_conflict` 证据分节、UTF-16 奇字节数 + 错位一字节证据（`shifted_text`，不自动改）、zip 中央目录名（`flag_bits & 0x800` 判 UTF-8；无标志列 CP437/UTF-8 双解释，工具不选择；不解压成员）、`--preset csv-excel-win` 报 cp1252/gbk/shift_jis 可解码性 + 分隔符嗅探；文件不存在退出码 2。②`scan` 命中判据 = K9（`readability(line)<0.5` + 候选 `≥0.8` + gain `≥0.3`），候选走 `attr.search` 不重新枚举；分桶 new/baselined/stale；坏基线退出码 2 零产出；全程只读，干净语料 0 报告 0 改动。③**`EXIT_NOT_READY` 常量删除**：常量 / CLI / 测试 / 文档四处同步，退出码只剩 0/1/2/3。④新增 `tests/test_file.py`、`tests/test_scan.py` 各 12 条；双解释器全绿；bench `--check` 逐字节一致。 |
 | 2026-10-20 | **M1 探针落地与数字复核（一次性脚本 → 可复算基准）** | 出题前的一次性脚本未入仓，`bench/run.py` 成为唯一可复算实现并冻结 `bench/golden/attr.json`。复跑：minimal（depth 1，按结果去重）候选中位 **7** / 均值 **6.421053** / 最大 **10**；expanded（depth ≤ 2）中位 **33** / 最大 **57**；唯一解 **0/57**；真答案入集 **57/57**（minimal 与 expanded 均 100%）；真答案排第一 **34/57（minimal）/ 30/57（expanded）**。`data/README.md` §1.3 的 4 / 4.5 / 11 与 79% / 93% 保留为历史记录，不再作为可复算口径。**定性结论不变**：多解是常态、真答案不漏、排序不完美。另更正：出题期描述"6 个解码器"与冻结 `DECODERS`（7 个）不一致，M1 按代码集合复算。 |
 
 ## 弃选项汇总（速查）
@@ -89,10 +91,10 @@
 | 不可逆五类判死 | 标准库字节语义（✅） | `forensics recover` 的 `LOST` + 丢失点 | 五类各一条单测；断言输出不含工具自造字符 | ✅ M4 落地（`tests/test_recover.py`） |
 | `锟斤拷` 归因 | `EF BF BD` 重复被 GBK 读回（✅ 可本地复现） | `recover` 的丢失点定位 | fixture `recover/kun-jin-kao` golden | ✅ M4 落地（`LOST(kun_jin_kao)` + offset/repeat） |
 | `烫烫烫/屯屯屯` 非乱码判定 | MSVC `0xCC`/`0xCD` 栈填充（✅ 可本地复现） | `recover` 的 `NOT_MOJIBAKE` | fixture `recover/tang-tang` golden | ✅ M4 落地（`NOT_MOJIBAKE(msvc_fill)`） |
-| BOM / UTF-16 奇偶错位诊断 | 标准库 + 合成 fixture（✅） | `forensics file --path` | 三类管道 fixture golden 逐字节一致 | ⬜ fixture 已落（M1）；实现待 M5 |
-| zip 文件名归因（`0x800` + CP437 对照） | zip 规范 `flag_bits & 0x800`（✅） | `file` 的 `zip_names` | 带/不带标志两个 fixture golden | ⬜ fixture 已落（M1）；实现待 M5 |
-| 零误改基线（误报防线） | 合成干净短句**仅提统计、不入仓原文** | `scan --baseline <clean.json>` | 干净语料 0 报告、0 改动；污染语料退非 0 | ⬜ 基线已落（M1）；门禁待 M5 |
-| 退出码语义稳定 | §四单点定义 | 五个子命令 | 四组退出码测试（干净 / 新增 / 用法错误 / 环境不满足） | 🟡 M2 覆盖 `attr`、M3 覆盖 `explain`、M4 覆盖 `recover` 的 0/1/2/3；其余子命令待 M5 |
+| BOM / UTF-16 奇偶错位诊断 | 标准库 + 合成 fixture（✅） | `forensics file --path` | 三类管道 fixture golden 逐字节一致 | ✅ M5 落地（`tests/test_file.py`） |
+| zip 文件名归因（`0x800` + CP437 对照） | zip 规范 `flag_bits & 0x800`（✅） | `file` 的 `zip_names` | 带/不带标志两个 fixture golden | ✅ M5 落地（`zip_names` 双解释，工具不选择） |
+| 零误改基线（误报防线） | 合成干净短句**仅提统计、不入仓原文** | `scan --baseline <clean.json>` | 干净语料 0 报告、0 改动；污染语料退非 0 | ✅ M5 落地（`tests/test_scan.py`） |
+| 退出码语义稳定 | §四单点定义 | 五个子命令 | 四组退出码测试（干净 / 新增 / 用法错误 / 环境不满足） | ✅ M5 起 `EXIT_NOT_READY` 常量删除，五个子命令只用 0/1/2/3 |
 | fixture 可重建 | 生成脚本固定输入 | `data/fixtures/**` | 重生成逐字节一致（`--check`） | ✅ M1 已重建（3.8 / 3.12） |
 | bench 可复算 | 57 例程序化生成 | `bench/run.py` → `bench/out/attr.json` + `bench/golden/attr.json` | 干净环境重跑数字一致（同解释器版本） | ✅ M1 已复算；M2 硬门复跑 |
 | README 四场景复现 | 场景命令 | `README.md` | 干净 clone 按 README 跑通 | ⬜ 待 M6 |
@@ -105,7 +107,7 @@
 | 承诺项 | 应存在的文件路径 | 由哪个里程碑产出 | 用哪条命令核对 |
 |---|---|---|---|
 | 可安装 CLI 入口 | `pyproject.toml`（`[project.scripts] forensics`）+ `src/mojibake_forensics/cli.py` | M0 骨架 | `pip install -e . && forensics --help` |
-| 五个子命令实现 | `src/mojibake_forensics/{attr,explain,recover,file,scan}.py` + `codecs_table.py` / `paths.py` / `score.py` / `report.py` | M2–M5（`attr` M2、`explain` M3、`recover` M4 已交付） | `forensics <sub> --help` × 5 |
+| 五个子命令实现 | `src/mojibake_forensics/{attr,explain,recover,file,scan}.py` + `codecs_table.py` / `paths.py` / `score.py` / `report.py` | M2–M5（全部已交付） | `forensics <sub> --help` × 5 |
 | 可复算基准 | `bench/run.py` → `bench/out/attr.json`（不入仓）+ `bench/golden/attr.json`（入仓） | M1 基准 / M2 硬门 | `python bench/run.py --check` |
 | fixture 集 | `data/fixtures/{attr,explain,recover,file,scan}/{gen.py,expect.json,README.md}` | M1–M5 | `git ls-files data/fixtures`；`--check` 重生成一致 |
 | 测试 | `tests/test_*.py` | M1–M5 | `pytest -q` |
@@ -123,7 +125,7 @@
 | M2 | `attr` 归因 | 候选集恒为列表；真答案在候选集内 100%（57 例，链深 3 实测 57/57）；候选有界；三层打分与置信度分项可复算；双跑逐字节一致；`bench/out/attr.json` 产出 | ✅ 已完成（2026-10-20） |
 | M3 | `explain` 证明 | 每条路径可被**独立脚本**重放；`--vs` 对照给出分叉点；改错 codec 名 → 指向具体 step；双跑一致 | ✅ 已完成（2026-10-20） |
 | M4 | `recover` 不可逆 | 五类各一条单测；`LOST` 附丢失点定位；输出不含自造字符；`verify` 失败降级为 `LOST` | ✅ 已完成（2026-10-20） |
-| M5 | `file` 管道 + `scan` 门禁 | 三类管道 fixture 全对；干净语料**零报告零改动**；退出码四组语义稳定；JSON 机器可读 | ⬜ |
+| M5 | `file` 管道 + `scan` 门禁 | 三类管道 fixture 全对；干净语料**零报告零改动**；退出码四组语义稳定；JSON 机器可读 | ✅ 已完成（2026-10-20） |
 | M6 | 发布 | **git tag（`v0.1.0`）+ GitHub Release（附产物：手工源码包，本地留副本 + sha256）+ 发布留档 `plan/RELEASE-M6.md`（tag 前落盘、tag 后分栏追加）**；干净环境按 README 跑通四场景；提交面脱敏（含 tag tagger 邮箱）；发布 GitHub **公开仓库** | ⬜ |
 
 > **M6 DoD 口径 = A）"Release 附产物"**：至少 1 个手工上传附件（`git archive` + `gzip -9n` + `SHA256SUMS`），本地留副本并记录 sha256。里程碑表的 DoD 列**只能加不能减**；要减必须在决策记录留一行理由。
