@@ -97,7 +97,9 @@ def test_report_has_no_host_facts(capsys):
     _, payload = _run_json(["recover", "--text", CLASSIC, "--pick", "1"], capsys)
     raw = json.dumps(payload, ensure_ascii=False)
     assert os.getcwd() not in raw
-    assert os.environ.get("COMPUTERNAME", "") not in raw
+    computer_name = os.environ.get("COMPUTERNAME")
+    if computer_name:  # Windows-only var; empty default would make the check vacuous on Linux
+        assert computer_name not in raw
     for key in ("time", "hostname", "host", "user"):
         assert key not in payload
 
