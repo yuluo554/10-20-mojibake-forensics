@@ -22,7 +22,7 @@
 
 | 项 | 现状 | 处置 |
 |---|---|---|
-| tag 树 CI run（39450988842）红 | tag 树内 `tests/test_recover.py` 的 COMPUTERNAME 缺省空串缺陷（Linux 恒真断言） | 修复已在 main（`f8056bb`）；不回填 tag；随下一个 tag 生效 |
+| tag 树 CI run（39450988842）红 | **v0.1.0 的发布物在 Linux 上自带套件 = 1 failed / 173 passed**（`tests/test_recover.py::test_report_has_no_host_facts`；`COMPUTERNAME` 缺省空串使断言恒假）。实测方式：`git clone --no-local` + `checkout v0.1.0` + `env -u COMPUTERNAME pytest` | `main` 上已修（`f8056bb`），**未进 tag**；`v0.1.0` 按既定口径不重打，`v0.1.1` 起不再重现 |
 | Shift-JIS / EUC-KR 全量样本 | 首期少量代表样本 | 二期 |
 | 词频语言先验 | 默认关闭（`--freq` 报错退出码 2） | 二期可选包；词表不入仓 |
 | PyPI | 不适用（发布形态 = GitHub Release 手工源码包） | 如需再启，走 `plan/06` 决策流程 |

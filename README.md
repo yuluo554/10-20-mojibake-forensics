@@ -71,6 +71,8 @@ forensics recover --text "锟斤拷" --pick 1
 # 4) CI 门禁：干净语料零报告（退出码 0）；污染语料有新增（退出码 1）
 forensics scan --dir data/fixtures/scan/clean --baseline data/fixtures/scan/clean-corpus.json --format json
 forensics scan --dir data/fixtures/scan/polluted --baseline data/fixtures/scan/clean-corpus.json --format json
+#    报告里的路径相对「基线文件所在目录」，所以分别是 clean/… 与 polluted/…（data/README.md §4.6）
+#    目录写错（如 cleen）→ 退出码 2，不会静默报成功
 ```
 
 > 五个子命令全部可直接运行（链深上限 3；`--top` 只影响展示）：`attr` 自 M2、`explain` 自 M3、`recover` 自 M4、`file` / `scan` 自 M5 起。`file` 与 `scan` 全程只读。
@@ -78,7 +80,7 @@ forensics scan --dir data/fixtures/scan/polluted --baseline data/fixtures/scan/c
 ### `file` 原始字节管道与 `scan` 门禁（M5）
 
 - `file --path <path> [--preset ...]`：只读诊断。分节报告 `bom`（含 `bom_conflict`）/ `utf16_misalignment`（奇字节数 + 错位一字节证据，不自动改）/ `zip_names`（`flag_bits & 0x800` 判 UTF-8，无标志时列 CP437 与 UTF-8 两种解释，工具不选择）/ `csv_candidates`（`cp1252` / `gbk` / `shift_jis` + 分隔符嗅探）。文件不存在 → 退出码 2；全程不解压成员内容、不改输入。
-- `scan --dir --baseline`：逐文件、逐非空行命中判据（`data/README.md` §4.8：`readability(line)<0.5` + 候选 `≥0.8` + gain `≥0.3`）；命中分类 `new` / `baselined` / `stale`（基线指向已不存在文件 → `stale`，不影响退出码）；JSON 先写后定退出码：无 `new` → 0，有 `new` → 1，坏输入 → 2 且**不产出任何文件**；全程只读，干净语料基线零报告零改动。
+- `scan --dir --baseline`：逐文件、逐非空行命中判据（`data/README.md` §4.8：`readability(line)<0.5` + 候选 `≥0.8` + gain `≥0.3`）；命中分类 `new` / `baselined` / `stale`（基线指向已不存在文件 → `stale`，不影响退出码）；**基线根 = 基线文件所在目录**，`--dir` 只收窄走哪棵子树，报告路径因此保留 `clean/` / `polluted/` 前缀（§4.6）；JSON 先写后定退出码：无 `new` → 0，有 `new` → 1，坏输入（含 `--dir` 不存在或不是目录）→ 2 且**不产出任何文件**；全程只读，干净语料基线零报告零改动。
 
 ### `recover` 判定（M4）
 

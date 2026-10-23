@@ -63,6 +63,9 @@ bench/out/
 samples/
 _private/
 
+# 迭代诊断/执行交接物（含本机绝对路径），不入库
+update/
+
 # ---- 编辑器 / 系统 ----
 .vscode/
 .idea/

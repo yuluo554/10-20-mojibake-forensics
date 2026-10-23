@@ -11,16 +11,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # ubuntu-22.04 是**主动钉版本**，不是遗漏：ubuntu-latest 自 2026-10-19 起
+        # 迁移到 Ubuntu 26，会让「同样 4 条腿全绿」这句话失去可比性。实测该腿
+        # 实际镜像 = ubuntu-22.04（job log: Image: ubuntu-22.04 /
+        # Image Release: .../ubuntu22%2F20261018.327）。不要改成 ubuntu-latest。
         os: [ubuntu-22.04, windows-latest]
         python: ["3.8", "3.12"]
     env:
       PYTHONUTF8: "1"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python }}
 
@@ -29,6 +33,13 @@ jobs:
 
       - name: Sprint layout gate
         run: python tools/check_sprint_layout.py
+
+      # The desensitization gate is cited as release-surface evidence in plan/05,
+      # plan/06, plan/RELEASE-M6.md and plan/WRAPUP-M6.md; running it here is what
+      # makes that citation true. Its positive control (inject a leak → rc=1
+      # TOTAL 3) was verified by hand.
+      - name: Desensitize scan
+        run: python tools/check_desensitize.py
 
       - name: Tests
         run: python -m pytest -q

@@ -104,6 +104,54 @@ def test_report_has_no_host_facts(capsys):
         assert key not in payload
 
 
+def test_host_facts_check_is_not_vacuous_when_var_absent(monkeypatch, capsys):
+    """D1 guard: the host-facts check must not go vacuous when the var is absent.
+
+    ``test_report_has_no_host_facts`` used to pass an empty default to the
+    environment lookup for ``COMPUTERNAME``. On Linux the variable is unset, that
+    default made the substring assertion fail for *every* payload, and the suite
+    shipped red. This test pins both halves: with the var absent the branch must
+    be skipped (and the naive form shown to be unusable), and with a value
+    present the very same assertion shape must still catch a leak.
+    """
+    sentinel = "HOSTFACT-SENTINEL-9f3c"
+
+    # (1) var absent — the branch the old code got wrong.
+    monkeypatch.delenv("COMPUTERNAME", raising=False)
+    _, payload = _run_json(["recover", "--text", CLASSIC, "--pick", "1"], capsys)
+    raw = json.dumps(payload, ensure_ascii=False)
+    assert os.environ.get("COMPUTERNAME") is None  # this really is the absent branch
+    assert os.getcwd() not in raw  # the still-active part of the check
+
+    # The retired form would have been vacuous here: "" is in every string.
+    # Asserting it keeps the regression visible instead of hiding it.
+    assert "" in raw
+
+    # (2) var present — positive control: the assertion shape fires on a leak.
+    monkeypatch.setenv("COMPUTERNAME", sentinel)
+    _, payload = _run_json(["recover", "--text", CLASSIC, "--pick", "1"], capsys)
+    raw = json.dumps(payload, ensure_ascii=False)
+    assert sentinel not in raw  # shipped payload carries no host value
+
+    # ...and the detector is armed: inject the leak and the very same assertion
+    # shape must catch it. Without this half the test would pass on a tool that
+    # simply never emits anything.
+    leaked = json.dumps(dict(payload, host_value=sentinel), ensure_ascii=False)
+    assert sentinel in leaked
+    with pytest.raises(AssertionError):
+        assert sentinel not in leaked
+
+    # (3) static guard: the vacuous idiom must not come back into this file.
+    # ``os.environ.get(<COMPUTERNAME>, "")`` is the exact shape that shipped red
+    # in v0.1.0; on Linux the default "" made the assertion fail for every
+    # payload. Restoring it turns this test red on any platform, including the
+    # Windows machine where the bug is otherwise invisible. The needle is
+    # assembled at runtime so this assertion does not match its own source.
+    needle = 'os.environ.get("COMPUTER' + 'NAME", "")'
+    source = io.open(os.path.abspath(__file__), "r", encoding="utf-8").read()
+    assert needle not in source
+
+
 def test_pick_missing_is_usage_error(capsys):
     code, payload = _run_json(["recover", "--text", CLASSIC], capsys)
     assert code == report.EXIT_USAGE

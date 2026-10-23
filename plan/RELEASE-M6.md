@@ -25,6 +25,7 @@
 | 发布门 | `py -3.12 tools/check_release.py --pre-tag` | VERSION PASS / RELEASE_DOC PASS / TAG SKIP / ARTIFACTS SKIP |
 
 > 交接单写“175 条”，M6 复核实测为 174 条（3.8 / 3.12 同）；以实测为准。
+> **本句为 M6 当时的更正记录，不再改动**（`plan/HANDOFF-M6.md:14` 的「175」是有意保留的历史错值；下一轮不要再"修"它，否则会制造新的不一致）。
 
 ### 1.2 脱敏四步
 

@@ -8,6 +8,11 @@ version = "0.1.0"
 description = "Proof-carrying mojibake attribution for already-decoded strings (CJK-first, local-only)"
 readme = "README.md"
 requires-python = ">=3.8"
+# PEP 639: the `license = { text = "..." }` table form is deprecated and fails
+# hard from 2027-02-18. Migrating to an SPDX string requires setuptools>=77,
+# which requires Python>=3.9 — that would drop this project's 3.8 floor and its
+# CI leg. Deliberate trade-off: keep 3.8, keep the warning, revisit before the
+# deadline (it is the only consumer of the old form in this file).
 license = { text = "MIT" }
 authors = [{ name = "yuluo554" }]
 keywords = ["mojibake", "encoding", "forensics", "cjk", "cli"]

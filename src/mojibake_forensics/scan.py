@@ -116,12 +116,20 @@ def _iter_lines(data):
             yield number, line
 
 
-def scan_directory(directory, baseline, output_format="json"):
+def scan_directory(directory, baseline, output_format="json", root=None):
     """Return new / baselined / stale buckets and the exit code (M5).
 
     ``baseline`` is the parsed baseline dict. Walking order is the fixed byte
     order of the relative paths; every scan is read-only.
+
+    ``root`` is the anchor that baseline paths are relative to (``data/README.md``
+    §4.6). It defaults to ``directory`` so the plain-API call keeps its meaning,
+    but the ``scan`` command passes the baseline file's own directory: a
+    baseline written for a whole fixture tree (``clean/en-01.md``) stays valid
+    when ``--dir`` narrows the walk to one subtree (``clean``). Reported paths
+    and the ``stale`` existence probe both use ``root``.
     """
+    anchor = os.path.abspath(root if root is not None else directory)
     entries = baseline.get("files", [])
     baselined_paths = set()
     allowed = {}
@@ -135,11 +143,11 @@ def scan_directory(directory, baseline, output_format="json"):
     hits = []
     files_scanned = 0
     if os.path.isdir(directory):
-        for root, dirs, files in os.walk(directory):
+        for root_dir, dirs, files in os.walk(directory):
             dirs.sort()
             for name in sorted(files):
-                absolute = os.path.join(root, name)
-                rel = os.path.relpath(absolute, directory).replace(os.sep, "/")
+                absolute = os.path.join(root_dir, name)
+                rel = os.path.relpath(absolute, anchor).replace(os.sep, "/")
                 files_scanned += 1
                 try:
                     handle = io.open(absolute, "rb")
@@ -168,11 +176,11 @@ def scan_directory(directory, baseline, output_format="json"):
     known = set(allowed)
     new = [hit for hit in hits if hit["path"] not in known]
     baselined = [hit for hit in hits if hit["path"] in known]
-    # stale = baseline entries whose file no longer exists on disk
+    # stale = baseline entries whose file no longer exists on disk (under ``anchor``)
     stale = sorted(
         path
         for path in baselined_paths
-        if not os.path.exists(os.path.join(directory, path.replace("/", os.sep)))
+        if not os.path.exists(os.path.join(anchor, path.replace("/", os.sep)))
     )
 
     exit_code = report.EXIT_ATTENTION if new else report.EXIT_OK
@@ -185,8 +193,25 @@ def scan_directory(directory, baseline, output_format="json"):
     }
 
 
+def _baseline_anchor(baseline_path):
+    """Directory that baseline paths are relative to (data/README.md §4.6)."""
+    return os.path.dirname(os.path.abspath(baseline_path))
+
+
 def scan(directory, baseline_path):
     """Full envelope for the ``scan`` subcommand (read-only, K9 thresholds)."""
+    # Input path is validated before anything is walked: a typo in --dir used to
+    # skip the whole walk and report status="ok" with zero files (D3). Exit
+    # code 2 is the documented code for an unreadable path (data/README.md §4.7).
+    if not os.path.exists(directory):
+        raise UsageError(
+            "scan_directory_missing", "--dir does not exist (%s)" % directory
+        )
+    if not os.path.isdir(directory):
+        raise UsageError(
+            "scan_directory_not_a_directory", "--dir is not a directory (%s)" % directory
+        )
+
     baseline = _read_baseline(baseline_path)
     if baseline.get("schema") not in (None, BASELINE_SCHEMA):
         raise UsageError(
@@ -194,12 +219,14 @@ def scan(directory, baseline_path):
             "--baseline schema %r is not %r" % (baseline.get("schema"), BASELINE_SCHEMA),
         )
 
-    buckets = scan_directory(directory, baseline)
+    buckets = scan_directory(directory, baseline, root=_baseline_anchor(baseline_path))
     expected_new = baseline.get("expected_new", [])
     payload = report.base_envelope(
         "ok" if not buckets["new"] else "attention"
     )
     payload["command"] = "scan"
+    # "." is the baseline anchor (the baseline file's own directory), never a
+    # host path: reports must stay free of absolute paths.
     payload["directory"] = "."
     payload["files_scanned"] = buckets["files_scanned"]
     payload["new"] = buckets["new"]
