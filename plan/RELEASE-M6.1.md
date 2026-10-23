@@ -52,26 +52,44 @@
 
 ## 二、tag 后追加
 
-（tag / Release 成功后回填；本栏在 tag 后提交进入仓库，tag 对象本身不含本栏字面值。）
+（2026-10-23 回填；本栏在 tag 后提交进入仓库，tag 对象本身不含本栏字面值。）
 
 ### 2.1 发布事实
 
 | 项 | 值 |
 |---|---|
-| tag 对象 | 待回填 |
-| tag 父提交 | 待回填 |
-| Release | 待回填 |
-| 附件 | `mojibake-forensics-0.1.1.tar.gz` + `SHA256SUMS` |
-| sha256 | 待回填（本地副本 = Release 下载件 = 远端 API 读回，三者一致） |
-| 同源复核 | 待回填（解包逐文件 sha256 与 tag 树比对） |
+| tag 对象 | `182aa005469a8b4345668b83b4db4a6686b59d5a`（annotated；tagger `yuluo554 <282769740+yuluo554@users.noreply.github.com>`） |
+| tag 父提交 | `f7055f89c834d1240bd8450b609662d78d231d2b` |
+| v0.1.0 处置 | **未重打、未移动**：tag 对象仍为 `6a5d7bdb5fa8fb9161b9f5e1336481a18cb4a96c` → `fbb7b2c`；Release 附件 digest 仍为 `b98055ff…e9279` / `50460339…aa780`（发布前后各查一次，逐字节不变） |
+| Release | https://github.com/yuluo554/10-20-mojibake-forensics/releases/tag/v0.1.1（非 draft / 非 prerelease / latest） |
+| 附件 | `mojibake-forensics-0.1.1.tar.gz`（174,422 B）+ `SHA256SUMS`（98 B） |
+| sha256 | `64ec4265df3c66368eeb77a33151216d6126bb2fcb6c9668728e3be0158100f5`（本地副本 = Release 下载件 = 远端 API `digest` 三者一致） |
+| 可重建 | 同一 tag 上再跑一次 `git archive` + `gzip -9n` → sha256 完全相同 |
+| 同源复核 | 发布门离线项：解包 120 个文件与 `git show v0.1.1:<path>` 逐文件 sha256 一致，文件集合与 `git ls-tree -r v0.1.1` 一致，含 `plan/RELEASE-M6.1.md` |
 
-### 2.2 干净环境验证
+### 2.2 干净环境验证（真下载 + 中立目录 + 新 venv）
 
-- 待回填：真下载 → sha256 对撞 → 中立目录解包 → 新 venv 安装 → `forensics --version` → 四场景 → **`env -u COMPUTERNAME` 跑自带套件**（这一条是 D1 的最终验收）。
+- 匿名 `curl` 下载（**不带 token**）→ `sha256sum -c SHA256SUMS` → `OK`；解包到 `%TEMP%` 下中立目录；`py -3.12 -m venv` 新环境 `pip install -e ".[dev]"` → `forensics 0.1.1`。
+- **D1 的最终验收**：解包树内 `env -u COMPUTERNAME … pytest -o addopts=""` → **180 passed**，rc=0。
+  （同一手法在 `v0.1.0` 的发布物上测得 1 failed / 173 passed —— 这就是本版存在的原因。）
+- 四场景（解包树内，README 命令原样）：
+  1. `attr --text "é›…é›…"` → 351 候选 / top 5，退出码 0；
+  2. `explain --pick 1 --vs 2` → 2 步重放 `recompute: PASS` + `divergence: step 2`，退出码 0；
+  3. `recover --text "锟斤拷" --pick 1` → `lost(kun_jin_kao)` / `verify=false`，退出码 1；
+  4. `scan` 干净语料 → `ok` / files 10 / new 0 / **stale 0**，退出码 0；污染语料 → `attention` / files 3 / new `['polluted/ja.md','polluted/zh.md']` / stale 0，退出码 1 —— **与 `expect.json` 逐格一致**（此前 stale 恒为 10、new 缺前缀）。
+- 发布物自带门：布局门 `结论: 全绿`；`bench/run.py --check` → truth 57/57 ×2、truth first 34/57、depth3 median 125 / max 241；12 个 `gen.py --check` 12/12。
+- ⚠ **如实登记**：`tools/check_desensitize.py` 在**无 `.git` 的解包树里 rc=1**（它按 `git ls-files` 枚举文件，解包树没有 git 元数据 → `CalledProcessError`）。这是既有限制（`v0.1.0` 同样如此），**不是本版引入的回归**，也不影响 CI（该门在仓内、有 `.git`，实测 `TOTAL 0` / rc=0）。登记在此以免下轮把它当成新缺陷或误判为"发布物自带门全绿"。
 
 ### 2.3 CI 实录
 
-- 待回填（v0.1.1 tag 推送触发的 run id 与四腿结论）。
+| run | 触发 | 结果 | 说明 |
+|---|---|---|---|
+| 39897950161 | push main（修复批 `96956aa`） | success（4 腿） | 首次带上 `checkout@v7` / `setup-python@v7` / `Desensitize scan` step；注解 0 条 |
+| 39898669158 | push main（定版 `f7055f8`） | success（4 腿） | 注解 0 条 |
+| **39898951145** | push tag `v0.1.1` | **success（4 腿）** | tag 树 CI 全绿 —— 与 `v0.1.0` 的 tag 树 run `39450988842`（ubuntu ×2 红）形成对照 |
+
+- 三条 run 的 `check-runs` 均为 4× `success`；`Node.js 20 is deprecated` 注解计数 **0**（三次都逐 job 查过）。
+- push 数 = run 数：修复批 1、定版 1、tag 1，各触发 1 次。
 
 ## 三、阶段 7 覆盖对账表
 
