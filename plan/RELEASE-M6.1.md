@@ -77,8 +77,9 @@
   2. `explain --pick 1 --vs 2` → 2 步重放 `recompute: PASS` + `divergence: step 2`，退出码 0；
   3. `recover --text "锟斤拷" --pick 1` → `lost(kun_jin_kao)` / `verify=false`，退出码 1；
   4. `scan` 干净语料 → `ok` / files 10 / new 0 / **stale 0**，退出码 0；污染语料 → `attention` / files 3 / new `['polluted/ja.md','polluted/zh.md']` / stale 0，退出码 1 —— **与 `expect.json` 逐格一致**（此前 stale 恒为 10、new 缺前缀）。
-- 发布物自带门：布局门 `结论: 全绿`；`bench/run.py --check` → truth 57/57 ×2、truth first 34/57、depth3 median 125 / max 241；12 个 `gen.py --check` 12/12。
-- ⚠ **如实登记**：`tools/check_desensitize.py` 在**无 `.git` 的解包树里 rc=1**（它按 `git ls-files` 枚举文件，解包树没有 git 元数据 → `CalledProcessError`）。这是既有限制（`v0.1.0` 同样如此），**不是本版引入的回归**，也不影响 CI（该门在仓内、有 `.git`，实测 `TOTAL 0` / rc=0）。登记在此以免下轮把它当成新缺陷或误判为"发布物自带门全绿"。
+- 发布物侧跑通的门（**只有这三类，脱敏门不在此列**，见下一条）：布局门 `结论: 全绿`；`bench/run.py --check` → truth 57/57 ×2、truth first 34/57、depth3 median 125 / max 241；12 个 `gen.py --check` 12/12。
+- ⚠ **如实登记（已定案：接受并限定措辞）**：`tools/check_desensitize.py` 在**无 `.git` 的解包树里 rc=1**——它按 `git ls-files` 枚举文件，解包树没有 git 元数据 → `CalledProcessError`。这是**枚举失败，不是发现泄漏**，也不是本版引入的回归（`v0.1.0` 同样如此）。**决定：不改工具行为，只限定措辞**——本文件、`plan/05` M6 DoD、`plan/06` 发布前检查清单、`plan/WRAPUP-M6` 维护入口、以及脚本自身 docstring 都写明「该门须在 git 工作树内运行」。
+  因此本文件的措辞是：**发布物侧跑通的门 = 布局门 + `bench --check` + 12 个 fixture `--check` + 自带测试套件（`env -u COMPUTERNAME`）；脱敏门的判据落在仓库侧，由 CI 的 `Desensitize scan` step 与发布前本机各跑一次（`TOTAL 0` / rc=0）。不写"发布物自带门全绿"这类无限定语的句子。**
 
 ### 2.3 CI 实录
 
@@ -91,16 +92,30 @@
 - 三条 run 的 `check-runs` 均为 4× `success`；`Node.js 20 is deprecated` 注解计数 **0**（三次都逐 job 查过）。
 - push 数 = run 数：修复批 1、定版 1、tag 1，各触发 1 次。
 
+### 2.4 tag 后的文档补齐（如实登记：**不影响发布物，也不重打 tag**）
+
+以下四处是收尾阶段发现并补齐的**纯文档**项。它们描述的行为**已在 tag 树里**（`data/README.md` §4.6/§4.7 与代码都在 tag 内），只是文档侧的连带义务在 tag 之后才补齐：
+
+| # | 项 | 为什么在 tag 后补 |
+|---|---|---|
+| 1 | `plan/00` 决策记录表新增 M6.1 行（§4.6/§4.7 口径变更 + 对外路径语义变更） | `data/README.md` §五 要求「改 §4.1–§4.8 任一项 → 同一次提交内更新本文件、代码、bench 口径、`plan/01` 摘录、README」。tag 树里 §4.6/§4.7 已改，但这一行决策记录与 `plan/01` 摘录漏在了 tag 之后——**这是本轮的纪律缺口，如实登记，不掩饰** |
+| 2 | `plan/01` §M5 模块补「基线根」与「坏路径」两条摘录 | 同上 |
+| 3 | 脱敏门适用范围限定（`tools/check_desensitize.py` docstring + `plan/05` M6 DoD + `plan/06` 检查清单 + `plan/WRAPUP-M6` 维护入口 + `README.md` 开发命令） | 用户 2026-10-23 定案「接受并限定措辞」：不改工具行为（`git ls-files` 枚举），只把「须在 git 工作树内运行」写清 |
+| 4 | `README.md` 开发命令改为 `pytest -o addopts=""` 提示 | 原写 `pytest -q`，而 `pyproject.toml` 已设 `addopts="-q"` → 变 `-qq` 吞掉汇总行（诊断 D13）。这是同一陷阱的源头，改在此处比只写在诊断书里有用 |
+
+- 处置：**`v0.1.1` 不重打**（重打会换 tag 对象与附件 sha256，而发布物行为不变，代价 > 收益；`v0.1.0` 的先例是「tag 忠实记录发布物，缺陷在留档里登记」）。tag 树与 main 在这四行上不同，差异**全部是文档**，可用 `git diff v0.1.1..HEAD --stat` 逐条核对。
+- 下轮纪律建议：**口径变更的同一次提交里，`plan/00` 决策行 + `plan/01` 摘录与 `data/README.md` 一起改**，别留到收尾。
+
 ## 三、阶段 7 覆盖对账表
 
 | 出口门 | 状态 | 证据 / 不适用理由 |
 |---|---|---|
 | 发布物本体已验（真下载 + 中立目录） | 实现 | §2.2（真下载 + 中立目录解包 + 新 venv） |
 | 附件与 tag 树逐字节同源 | 实现 | 发布门 ARTIFACTS 逐文件 sha256 对撞（不是只比文件名） |
-| 源码包自足 | 实现 | `git archive` 全 tracked 文件；解包树内安装 + 自带套件全绿（`env -u COMPUTERNAME`） |
+| 源码包自足 | 实现 | `git archive` 全 tracked 文件；解包树内安装 + 自带套件全绿（`env -u COMPUTERNAME`）；自带布局门 / `bench --check` / 12 fixture 亦全过 |
 | README 每条命令在解包树真敲 | 实现 | 四场景全过；`scan` 两条命令与 `expect.json` 逐格一致 |
 | 版本号多处一致 | 实现 | `pyproject.toml` / `__init__.py` / README / tag 均 `0.1.1`；发布门 VERSION PASS |
-| 脱敏（提交身份 + tagger 邮箱） | 实现 | 提交作者/提交者为 noreply；tagger noreply（发布门 TAG PASS） |
+| 脱敏（代码 / 文档 / 提交身份 / tagger 邮箱） | 实现 | 仓库侧 `check_desensitize.py` `TOTAL 0` rc=0，且已入 CI（`Desensitize scan` step）；提交作者/提交者与 tagger 均 noreply（发布门 TAG PASS）。**该门依赖 git 工作树，不在"发布物自带门"清单内**——见 §2.2 末条 |
 | CI push 数 = run 数对账 | 实现 | 前置修复批 run `39897950161` 四腿全绿、注解 0；tag 推送另跑一次并回填 §2.3 |
 | 发布门 `--pre-tag` 跑通 | 实现 | tag 前 0 FAIL |
 | PyPI 首发 | 不适用 | 发布形态 = GitHub Release 手工源码包（`plan/00` 交付形态），不做 PyPI |

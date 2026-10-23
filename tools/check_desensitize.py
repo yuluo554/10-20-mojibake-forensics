@@ -6,6 +6,13 @@
 - 裸主机名 token（``ASUS``）只对文档（README / plan / data / AGENTS）生效——
   ``tests/test_bench.py`` 与 ``tools/check_release.py`` 里把 ``ASUS``
   作为脱敏判据的 needle 使用，属于守门自身，不算泄漏。
+
+**适用范围（重要，别误读为"发布物自带门全绿"）**：文件清单来自
+``git ls-files``，所以本门**必须在 git 工作树内运行**。在没有 ``.git`` 的
+解包树（源码包 / tarball）里它会因 ``git ls-files`` 失败而以非零码退出，
+**不是**"发现泄漏"，也**不是**发布物回归。已知且接受的限制（``v0.1.0``
+起即如此）：发布物侧只跑布局门 / ``bench --check`` / 自带测试套件；脱敏门
+的判据落在仓库侧，并由 CI 的 ``Desensitize scan`` step 执行。
 """
 import io
 import subprocess

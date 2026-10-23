@@ -180,6 +180,7 @@ forensics scan --dir data/fixtures/scan/polluted --baseline data/fixtures/scan/c
 python tools/check_sprint_layout.py       # 方法论布局门（新对话第一件事）
 python tools/check_layout_mutations.py    # 布局门变异验证（临时目录，不动工作树）
 python tools/check_release.py --pre-tag   # 发布门（M6 前骨架）
+python tools/check_desensitize.py         # 脱敏门（须在 git 工作树内跑；解包树里会因无 .git 而非零退出）
 python -m pytest -q                      # 单元与常驻测试
 python bench/run.py                      # 57 例探针 → bench/out/attr.json
 python bench/run.py --check              # 与 bench/golden/attr.json 逐字节比对

@@ -15,8 +15,8 @@
 
 1. `python tools/check_sprint_layout.py` —— 布局门（绿才动手）。
 2. 口径单点：`data/README.md` §四（K1–K10 索引见 `plan/HANDOFF-M6.md` §四）；状态副本三处（`plan/00` / `plan/05` / `README.md`）。
-3. 发布类操作：`tools/check_release.py`（`--pre-tag` / 离线 / `--online`）；脱敏：`tools/check_desensitize.py`。
-4. CI：`.github/workflows/ci.yml`（布局门 + pytest + CLI 冒烟 + bench golden + fixture drift + 发布门 pre-tag + 变异自检）。
+3. 发布类操作：`tools/check_release.py`（`--pre-tag` / 离线 / `--online`）；脱敏：`tools/check_desensitize.py`（**须在 git 工作树内跑**：它按 `git ls-files` 枚举，无 `.git` 的解包树里会以非零码退出——那是枚举失败，不是发现泄漏）。
+4. CI：`.github/workflows/ci.yml`（布局门 + **脱敏门** + pytest + CLI 冒烟 + bench golden + fixture drift + 发布门 pre-tag + 变异自检）。
 
 ## 三、已知遗留（如实登记）
 
