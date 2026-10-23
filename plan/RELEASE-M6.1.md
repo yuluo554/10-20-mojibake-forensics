@@ -92,19 +92,21 @@
 - 三条 run 的 `check-runs` 均为 4× `success`；`Node.js 20 is deprecated` 注解计数 **0**（三次都逐 job 查过）。
 - push 数 = run 数：修复批 1、定版 1、tag 1，各触发 1 次。
 
-### 2.4 tag 后的文档补齐（如实登记：**不影响发布物，也不重打 tag**）
+### 2.4 tag 后的补齐（如实登记：**不影响发布物行为，也不重打 tag**）
 
-以下四处是收尾阶段发现并补齐的**纯文档**项。它们描述的行为**已在 tag 树里**（`data/README.md` §4.6/§4.7 与代码都在 tag 内），只是文档侧的连带义务在 tag 之后才补齐：
+以下四项是收尾阶段发现并补齐的。它们描述的行为**已在 tag 树里**（`data/README.md` §4.6/§4.7 与代码都在 tag 内），只是连带义务在 tag 之后才补：
 
 | # | 项 | 为什么在 tag 后补 |
 |---|---|---|
 | 1 | `plan/00` 决策记录表新增 M6.1 行（§4.6/§4.7 口径变更 + 对外路径语义变更） | `data/README.md` §五 要求「改 §4.1–§4.8 任一项 → 同一次提交内更新本文件、代码、bench 口径、`plan/01` 摘录、README」。tag 树里 §4.6/§4.7 已改，但这一行决策记录与 `plan/01` 摘录漏在了 tag 之后——**这是本轮的纪律缺口，如实登记，不掩饰** |
 | 2 | `plan/01` §M5 模块补「基线根」与「坏路径」两条摘录 | 同上 |
-| 3 | 脱敏门适用范围限定（`tools/check_desensitize.py` docstring + `plan/05` M6 DoD + `plan/06` 检查清单 + `plan/WRAPUP-M6` 维护入口 + `README.md` 开发命令） | 用户 2026-10-23 定案「接受并限定措辞」：不改工具行为（`git ls-files` 枚举），只把「须在 git 工作树内运行」写清 |
-| 4 | `README.md` 开发命令改为 `pytest -o addopts=""` 提示 | 原写 `pytest -q`，而 `pyproject.toml` 已设 `addopts="-q"` → 变 `-qq` 吞掉汇总行（诊断 D13）。这是同一陷阱的源头，改在此处比只写在诊断书里有用 |
+| 3 | 脱敏门适用范围限定（`tools/check_desensitize.py` **docstring** + `plan/05` M6 DoD + `plan/06` 检查清单 + `plan/WRAPUP-M6` 维护入口 + `plan/RELEASE-M6.1` + `README.md` 开发命令） | 用户 2026-10-23 定案「接受并限定措辞」：不改工具行为（仍按 `git ls-files` 枚举），只把「须在 git 工作树内运行」写清 |
+| 4 | `README.md` 开发命令补脱敏门一行，并注明其 `pytest` 建议用 `-o addopts=""` | 原文只列 `pytest -q`，而 `pyproject.toml` 已设 `addopts="-q"` → 变 `-qq` 吞掉汇总行（诊断 D13）。陷阱源头在 README，改这里比只写在诊断书里有意义 |
 
-- 处置：**`v0.1.1` 不重打**（重打会换 tag 对象与附件 sha256，而发布物行为不变，代价 > 收益；`v0.1.0` 的先例是「tag 忠实记录发布物，缺陷在留档里登记」）。tag 树与 main 在这四行上不同，差异**全部是文档**，可用 `git diff v0.1.1..HEAD --stat` 逐条核对。
-- 下轮纪律建议：**口径变更的同一次提交里，`plan/00` 决策行 + `plan/01` 摘录与 `data/README.md` 一起改**，别留到收尾。
+- **精确说明 tag 树与 main 的差异**（`git diff v0.1.1..HEAD --stat`，8 个文件 +61 −16）：其中 **7 个是纯文档**（`README.md` / `plan/00` / `plan/01` / `plan/05` / `plan/06` / `plan/RELEASE-M6.1.md` / `plan/WRAPUP-M6.md`）；第 8 个是 `tools/check_desensitize.py`，改动**只在模块 docstring**（+7 行说明文字），**判定逻辑与 needle 一个字符未动**——`git diff` 可逐行核对，或直接看 `TOTAL 0` / rc=0 与 CI 的 `Desensitize scan` success。
+- 处置：**`v0.1.1` 不重打**。重打会换 tag 对象与附件 sha256，而发布物**行为**不变（docstring 不进任何判据），代价 > 收益；`v0.1.0` 的先例是「tag 忠实记录发布物，缺陷在留档里登记，不回填」。
+- 下轮纪律建议：**口径变更的同一次提交里，`plan/00` 决策行 + `plan/01` 摘录与 `data/README.md` 一起改**，别留到收尾。本轮就是这么漏的。
+
 
 ## 三、阶段 7 覆盖对账表
 
