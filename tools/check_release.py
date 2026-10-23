@@ -26,10 +26,51 @@ import tarfile
 import tempfile
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-TAG = "v0.1.0"
 ARTIFACT_DIR = os.path.join("dist", "release")
-ARTIFACT_NAME = "mojibake-forensics-0.1.0.tar.gz"
 SUMS_NAME = "SHA256SUMS"
+
+
+def _project_version():
+    """Read ``version`` from pyproject.toml (single source for tag + artifact)."""
+    full = os.path.join(ROOT, "pyproject.toml")
+    if not os.path.exists(full):
+        return None
+    with open(full, "r", encoding="utf-8", errors="replace") as handle:
+        text = handle.read()
+    match = re.search(r"^version\s*=\s*[\"']([^\"']+)[\"']", text, re.MULTILINE)
+    return match.group(1) if match else None
+
+
+def _release_tag():
+    version = _project_version()
+    return "v" + version if version else None
+
+
+def _release_doc():
+    """Pick the release note that documents the current tag.
+
+    Several ``plan/RELEASE-*.md`` coexist across versions (M6, M6.1, ...); the
+    one for this tag is the file that names it. Resolving beats hard-coding so a
+    version bump does not silently leave the gate pointing at the old note.
+    """
+    tag = _release_tag()
+    plan_dir = os.path.join(ROOT, "plan")
+    if not tag or not os.path.isdir(plan_dir):
+        return "plan/RELEASE-M6.md"
+    names = sorted(
+        name for name in os.listdir(plan_dir)
+        if name.startswith("RELEASE-") and name.endswith(".md")
+    )
+    for name in reversed(names):
+        with open(os.path.join(plan_dir, name), "r", encoding="utf-8", errors="replace") as handle:
+            if tag in handle.read():
+                return "plan/" + name
+    return "plan/" + names[-1] if names else "plan/RELEASE-M6.md"
+
+
+TAG = _release_tag() or "v0.1.0"
+ARTIFACT_NAME = "mojibake-forensics-%s.tar.gz" % (_project_version() or "0.1.0")
+RELEASE_DOC = _release_doc()
 
 CHECKS = []
 
@@ -104,7 +145,7 @@ def check_version_consistency():
 
 
 def check_release_doc(pre_tag):
-    rel = "plan/RELEASE-M6.md"
+    rel = RELEASE_DOC
     text = read_text(rel)
     if text is None:
         add("RELEASE_DOC", "FAIL", "缺 %s（发布未达成）" % rel)
@@ -166,9 +207,9 @@ def check_tag(pre_tag):
         )
         return
 
-    code, _out, _err = git("cat-file", "-e", "%s:plan/RELEASE-M6.md" % TAG)
+    code, _out, _err = git("cat-file", "-e", "%s:%s" % (TAG, RELEASE_DOC))
     if code != 0:
-        add("TAG", "FAIL", "tag 树缺 plan/RELEASE-M6.md")
+        add("TAG", "FAIL", "tag 树缺 %s" % RELEASE_DOC)
         return
 
     add("TAG", "PASS", "%s annotated；tagger=%s <%s>；tag 树含发布留档" % (
@@ -233,7 +274,7 @@ def check_artifacts(pre_tag):
             mismatches = []
             for member in members:
                 name = member.name
-                if not name.startswith("mojibake-forensics-0.1.0/"):
+                if not name.startswith("mojibake-forensics-%s/" % (_project_version() or "0.1.0")):
                     mismatches.append("根前缀异常: %s" % name)
                     continue
                 rel = name.split("/", 1)[1]
@@ -248,8 +289,8 @@ def check_artifacts(pre_tag):
             missing = sorted(set(tree) - set(names))
             if missing:
                 mismatches.append("附件缺文件: %s" % ",".join(missing[:5]))
-            if "plan/RELEASE-M6.md" not in names:
-                mismatches.append("附件缺 plan/RELEASE-M6.md")
+            if RELEASE_DOC not in names:
+                mismatches.append("附件缺 %s" % RELEASE_DOC)
     except Exception as exc:
         add("ARTIFACTS", "FAIL", "解包失败: %s" % exc)
         return

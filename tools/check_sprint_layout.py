@@ -260,6 +260,31 @@ def check_stale_gaps(root, done):
     )
 
 
+def _pick_release_doc(root):
+    """Return the release note that documents the newest shipped tag.
+
+    Several ``plan/RELEASE-*.md`` coexist across versions (M6, M6.1, ...).
+    ``RELEASE-M6.md`` is the original; the highest-suffixed one wins so a patch
+    release is judged by its own note instead of the frozen original. Falls back
+    to ``RELEASE-M6.md``, then ``None``.
+    """
+    plan_dir = os.path.join(root, "plan")
+    if not os.path.isdir(plan_dir):
+        return None
+    names = [
+        name for name in os.listdir(plan_dir)
+        if re.match(r"^RELEASE-M\d+(?:\.\d+)?\.md$", name)
+    ]
+    if not names:
+        return None
+
+    def sort_key(name):
+        match = re.match(r"^RELEASE-M(\d+)(?:\.(\d+))?\.md$", name)
+        return (int(match.group(1)), int(match.group(2) or 0))
+
+    return os.path.join(plan_dir, sorted(names, key=sort_key)[-1])
+
+
 def check_release_doc(root, done):
     if RELEASE_MILESTONE not in done:
         add(
@@ -269,7 +294,8 @@ def check_release_doc(root, done):
             % (RELEASE_MILESTONE, sorted(done)),
         )
         return
-    release = read(os.path.join(root, "plan/RELEASE-M6.md"))
+    release_path = _pick_release_doc(root)
+    release = read(release_path) if release_path else None
     wrapup = read(os.path.join(root, "plan/WRAPUP-M6.md"))
     if release is None and wrapup is None:
         add("LAYOUT.RELEASE", False, "缺 plan/RELEASE-M6.md 或 plan/WRAPUP-M6.md")
@@ -286,7 +312,8 @@ def check_release_doc(root, done):
         add(
             "LAYOUT.RELEASE",
             columns and coverage and rows >= 3,
-            "两栏:%s 覆盖对账小节:%s 三态行数:%d" % (columns, coverage, rows),
+            "%s 两栏:%s 覆盖对账小节:%s 三态行数:%d"
+            % (os.path.basename(release_path), columns, coverage, rows),
         )
         return
     add("LAYOUT.RELEASE", True, "WRAPUP 形态")

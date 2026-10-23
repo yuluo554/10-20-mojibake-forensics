@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mojibake-forensics"
-version = "0.1.0"
+version = "0.1.1"
 description = "Proof-carrying mojibake attribution for already-decoded strings (CJK-first, local-only)"
 readme = "README.md"
 requires-python = ">=3.8"
